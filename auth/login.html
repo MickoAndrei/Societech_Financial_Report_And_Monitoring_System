@@ -11,17 +11,45 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 2rem;
+            position: relative;
+        }
+        
+        .login-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('../assets/images/d6d628d6-1548-4d35-8176-5656c91409f5.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(8px);
+            z-index: 0;
+        }
+        
+        .login-container::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%);
+            z-index: 1;
         }
         
         .login-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             border-radius: var(--radius-xl);
             padding: 3rem;
             width: 100%;
             max-width: 400px;
             box-shadow: var(--shadow-xl);
+            position: relative;
+            z-index: 2;
         }
         
         .login-header {
@@ -120,6 +148,7 @@
     </style>
 </head>
 <body>
+    <div class="login-background"></div>
     <div class="login-container">
         <div class="login-card">
             <div class="login-header">
@@ -164,13 +193,6 @@
                 </button>
             </form>
             
-            <div class="divider">
-                <span>or</span>
-            </div>
-            
-            <div class="register-link">
-                Don't have an account? <a href="register.html">Register here</a>
-            </div>
         </div>
     </div>
     
