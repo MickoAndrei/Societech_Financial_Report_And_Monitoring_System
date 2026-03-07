@@ -1,0 +1,17 @@
+# Ignore everything except project files
+*
+
+# But include project files
+!.gitignore
+!*.html
+!*.css
+!*.png
+!*.jpg
+!*.jpeg
+!*.js
+!*.json
+!*.md
+!*.txt
+!*.xml
+!README.md
+!LICENSE
