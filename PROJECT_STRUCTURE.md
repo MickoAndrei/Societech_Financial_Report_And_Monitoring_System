@@ -2,74 +2,80 @@
 
 ## Directory Structure
 
+**Note:** Pages marked **(WIP placeholder)** currently exist as simple placeholder HTML files that display a **WORK IN PROGRESS** message. This helps prevent broken links while the full pages are still being built.
+
 ```
 Societech Financial And Monitoring/
 │
 ├── public/                          # Public-facing pages
 │   ├── index.html                  # Home page
-│   ├── about.html                  # About the system
-│   ├── contact.html                # Contact information
-│   └── help.html                   # System guide/help
+│   ├── about.html                  # About the system (WIP placeholder)
+│   ├── contact.html                # Contact information (WIP placeholder)
+│   ├── help.html                   # System guide/help (WIP placeholder)
+│   └── assets/                     # Assets when serving `public/` as web root
+│       └── images/
+│           └── d6d628d6-1548-4d35-8176-5656c91409f5.jpg  # Background image copy
 │
 ├── auth/                           # Authentication pages
 │   ├── login.html                  # Login page
-│   ├── register.html               # Registration page
-│   ├── verify-email.html           # Email verification
-│   ├── forgot-password.html        # Forgot password
-│   └── reset-password.html         # Reset password
+│   ├── register.html               # Registration page (WIP placeholder)
+│   ├── verify-email.html           # Email verification (WIP placeholder)
+│   ├── forgot-password.html        # Forgot password (WIP placeholder)
+│   └── reset-password.html         # Reset password (WIP placeholder)
 │
 ├── student/                        # Student dashboard
-│   ├── index.html                  # Student dashboard home
-│   ├── financial-records.html      # My Financial Records
-│   ├── contributions.html          # Cash Contributions
-│   ├── notifications.html          # Notifications
-│   └── profile.html                # Profile settings
+│   ├── index.html                  # Student dashboard home (WIP placeholder)
+│   ├── financial-records.html      # My Financial Records (WIP placeholder)
+│   ├── contributions.html          # Cash Contributions (WIP placeholder)
+│   ├── notifications.html          # Notifications (WIP placeholder)
+│   └── profile.html                # Profile settings (WIP placeholder)
 │
 ├── treasurer/                      # Classroom Treasurer
-│   ├── index.html                  # Treasurer dashboard
-│   ├── payments.html               # Student Payments
-│   ├── cash-flow.html              # Class Cash Flow
-│   ├── reports.html                # Class Reports
-│   └── verification.html           # Payment Verification
+│   ├── index.html                  # Treasurer dashboard (WIP placeholder)
+│   ├── payments.html               # Student Payments (WIP placeholder)
+│   ├── cash-flow.html              # Class Cash Flow (WIP placeholder)
+│   ├── reports.html                # Class Reports (WIP placeholder)
+│   └── verification.html           # Payment Verification (WIP placeholder)
 │
 ├── admin/                          # Admin/Moderator Dashboard
 │   ├── index.html                  # Admin dashboard (existing)
-│   ├── classes.html                # All Classes
-│   ├── payments.html               # Payment Records
-│   ├── verify.html                 # Verify Records
-│   ├── cash-flow.html              # Cash Flow Management
-│   ├── reports.html                # Reports
-│   ├── users.html                  # User Management
-│   ├── fees.html                   # Fee Configuration
-│   ├── announcements.html          # Announcements
-│   ├── audit-logs.html             # Audit Logs
-│   └── settings.html               # System Settings
+│   ├── classes.html                # All Classes (WIP placeholder)
+│   ├── payments.html               # Payment Records (WIP placeholder)
+│   ├── verify.html                 # Verify Records (WIP placeholder)
+│   ├── cash-flow.html              # Cash Flow Management (WIP placeholder)
+│   ├── reports.html                # Reports (WIP placeholder)
+│   ├── users.html                  # User Management (WIP placeholder)
+│   ├── fees.html                   # Fee Configuration (WIP placeholder)
+│   ├── announcements.html          # Announcements (WIP placeholder)
+│   ├── audit-logs.html             # Audit Logs (WIP placeholder)
+│   └── settings.html               # System Settings (WIP placeholder)
 │
 ├── super-admin/                    # Super Admin
-│   ├── index.html                  # Super Admin Dashboard
-│   ├── organizations.html          # Organization Management
-│   ├── admins.html                 # Admin Management
-│   ├── monitoring.html             # System Monitoring
-│   ├── backup.html                 # Backup and Recovery
-│   └── global-settings.html        # Global Settings
+│   ├── index.html                  # Super Admin Dashboard (WIP placeholder)
+│   ├── organizations.html          # Organization Management (WIP placeholder)
+│   ├── admins.html                 # Admin Management (WIP placeholder)
+│   ├── monitoring.html             # System Monitoring (WIP placeholder)
+│   ├── backup.html                 # Backup and Recovery (WIP placeholder)
+│   └── global-settings.html        # Global Settings (WIP placeholder)
 │
 ├── reports/                        # Reports Module
-│   ├── financial-summary.html      # Financial Summary
-│   ├── cash-flow.html              # Cash Flow Reports
-│   ├── collections.html            # Collection Reports
-│   ├── outstanding.html            # Outstanding Balances
-│   └── contributions.html          # Class Contribution Reports
+│   ├── financial-summary.html      # Financial Summary (WIP placeholder)
+│   ├── cash-flow.html              # Cash Flow Reports (WIP placeholder)
+│   ├── collections.html            # Collection Reports (WIP placeholder)
+│   ├── outstanding.html            # Outstanding Balances (WIP placeholder)
+│   └── contributions.html          # Class Contribution Reports (WIP placeholder)
 │
 └── assets/                         # Shared assets
     ├── css/
+    │   ├── background.css          # Background-specific styles
     │   ├── main.css                # Main stylesheet
-    │   ├── components.css          # Component styles
-    │   └── utilities.css           # Utility classes
+    │   ├── components.css          # Component styles (WIP placeholder)
+    │   └── utilities.css           # Utility classes (WIP placeholder)
     ├── js/
-    │   ├── main.js                 # Main JavaScript
-    │   ├── auth.js                 # Authentication logic
-    │   ├── dashboard.js            # Dashboard functionality
-    │   └── charts.js               # Chart configurations
+    │   ├── main.js                 # Main JavaScript (WIP placeholder)
+    │   ├── auth.js                 # Authentication logic (WIP placeholder)
+    │   ├── dashboard.js            # Dashboard functionality (WIP placeholder)
+    │   └── charts.js               # Chart configurations (WIP placeholder)
     └── images/
         ├── societech_logo.png      # Logo
         └── [other images]
