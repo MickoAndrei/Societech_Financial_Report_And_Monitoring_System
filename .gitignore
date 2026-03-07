@@ -1,17 +1,34 @@
-# Ignore everything except project files
-*
+# Ignore system files
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
 
-# But include project files
-!.gitignore
+# Ignore editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Ignore node modules (if using npm)
+node_modules/
+
+# Ignore build files
+dist/
+build/
+
+# Allow all project files
 !*.html
 !*.css
-!*.png
-!*.jpg
-!*.jpeg
 !*.js
 !*.json
 !*.md
 !*.txt
+!*.png
+!*.jpg
+!*.jpeg
+!*.gif
+!*.svg
+!*.ico
 !*.xml
-!README.md
-!LICENSE

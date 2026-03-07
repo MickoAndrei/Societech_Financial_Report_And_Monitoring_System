@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Societech Financial System</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <style>
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+        }
+        
+        .login-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 3rem;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .login-header img {
+            height: 60px;
+            margin-bottom: 1rem;
+        }
+        
+        .login-header h1 {
+            font-size: 1.75rem;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+        }
+        
+        .login-header p {
+            color: var(--gray-600);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: var(--font-size-sm);
+        }
+        
+        .form-options label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .form-options a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .form-options a:hover {
+            text-decoration: underline;
+        }
+        
+        .btn-login {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: var(--font-size-base);
+            margin-bottom: 1rem;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 1.5rem 0;
+            position: relative;
+            color: var(--gray-500);
+        }
+        
+        .divider::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 1px;
+            background: var(--gray-200);
+        }
+        
+        .divider span {
+            background: white;
+            padding: 0 1rem;
+            position: relative;
+        }
+        
+        .register-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--gray-600);
+        }
+        
+        .register-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <img src="../assets/images/societech_logo.png" alt="Societech Logo">
+                <h1>Welcome Back</h1>
+                <p>Sign in to your account</p>
+            </div>
+            
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        class="form-input" 
+                        placeholder="Enter your email"
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        class="form-input" 
+                        placeholder="Enter your password"
+                        required
+                    >
+                </div>
+                
+                <div class="form-options">
+                    <label>
+                        <input type="checkbox" id="remember">
+                        Remember me
+                    </label>
+                    <a href="forgot-password.html">Forgot password?</a>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-login">
+                    Sign In
+                </button>
+            </form>
+            
+            <div class="divider">
+                <span>or</span>
+            </div>
+            
+            <div class="register-link">
+                Don't have an account? <a href="register.html">Register here</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const remember = document.getElementById('remember').checked;
+            
+            // TODO: Implement actual authentication logic
+            console.log('Login attempt:', { email, remember });
+            
+            // Simulate login - redirect based on user role
+            // In production, this would check user role from API response
+            alert('Login functionality will be implemented with backend integration.');
+            
+            // Example redirect (uncomment when backend is ready):
+            // window.location.href = '../student/index.html';
+        }
+    </script>
+</body>
+</html>
