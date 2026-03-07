@@ -1,0 +1,34 @@
+# Ignore system files
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+
+# Ignore editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Ignore node modules (if using npm)
+node_modules/
+
+# Ignore build files
+dist/
+build/
+
+# Allow all project files
+!*.html
+!*.css
+!*.js
+!*.json
+!*.md
+!*.txt
+!*.png
+!*.jpg
+!*.jpeg
+!*.gif
+!*.svg
+!*.ico
+!*.xml
