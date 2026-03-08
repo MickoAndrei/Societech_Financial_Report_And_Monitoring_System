@@ -104,8 +104,10 @@ body {
 
 /* Button Styles */
 .btn {
-    display: inline-block;
-    padding: var(--spacing-sm) var(--spacing-lg);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1.5rem;
     border: none;
     border-radius: var(--radius-md);
     font-size: var(--font-size-base);
@@ -114,6 +116,8 @@ body {
     transition: all 0.2s ease;
     text-decoration: none;
     text-align: center;
+    line-height: 1.2;          /* keep text vertically centered */
+    white-space: nowrap;       /* prevent awkward line breaks */
 }
 
 .btn-primary {
