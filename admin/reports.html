@@ -3,86 +3,147 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Work in Progress</title>
-  <link rel="stylesheet" href="../assets/css/main.css" />
-  <style>
-    body {
-      min-height: 100vh;
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%);
-    }
-    .wip-shell {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem 1rem;
-    }
-    .wip-card {
-      width: 100%;
-      max-width: 720px;
-      background: rgba(255, 255, 255, 0.98);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-xl);
-      padding: 2rem;
-      border: 1px solid var(--gray-200);
-    }
-    .wip-badge {
-      display: inline-block;
-      padding: 0.35rem 0.65rem;
-      border-radius: 999px;
-      background: rgba(245, 158, 11, 0.15);
-      color: #92400e;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      font-size: 0.85rem;
-      border: 1px solid rgba(245, 158, 11, 0.35);
-      margin-bottom: 0.75rem;
-    }
-    .wip-title {
-      font-size: 1.75rem;
-      margin: 0 0 0.5rem 0;
-      color: var(--gray-900);
-    }
-    .wip-desc {
-      margin: 0 0 1.25rem 0;
-      color: var(--gray-700);
-      font-size: 1.05rem;
-    }
-    .wip-links {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      margin-top: 1rem;
-    }
-    .wip-note {
-      margin-top: 1.25rem;
-      padding: 0.9rem 1rem;
-      background: var(--gray-50);
-      border-left: 4px solid var(--primary-color);
-      border-radius: var(--radius-md);
-      color: var(--gray-700);
-    }
-  </style>
+  <title>Reports • Societech Admin</title>
+  <link rel="stylesheet" type="text/css" href="admin-dashboard.css" />
 </head>
 <body>
-  <div class="wip-shell">
-    <div class="wip-card">
-      <div class="wip-badge">WORK IN PROGRESS</div>
-      <h1 class="wip-title">This page is under construction</h1>
-      <p class="wip-desc">
-        Content and functionality for this page are still being built. Please check back soon.
-      </p>
-
-      <div class="wip-links">
-        <a class="btn btn-outline" href="index.html">Back to this section</a>
-        <a class="btn" href="../public/index.html" style="background: var(--primary-color); color: white;">Go to Home</a>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img class="societech_logo" src="../assets/images/societech_logo.png" alt="societech_logo" />
+        <div class="sidebar-title">Societech Admin Dashboard</div>
       </div>
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-item">
+          <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+          </svg>
+          Dashboard
+        </a>
+        <a href="classes.html" class="nav-item">
+          <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+          All Classes
+        </a>
+        <a href="payments.html" class="nav-item">
+          <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          Payment Records
+        </a>
+        <a href="reports.html" class="nav-item active">
+          <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          Reports
+        </a>
+        <a href="verify.html" class="nav-item">
+          <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          Verify Records
+        </a>
+        <a href="cash-flow.html" class="nav-item">
+          <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          Cash Flow
+        </a>
+        <a href="../auth/login.html" class="nav-item">
+          <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+          </svg>
+          Logout
+        </a>
+      </nav>
+    </aside>
 
-      <div class="wip-note">
-        If you reached this page from a link, it may not be finished yet.
+    <main class="main-content">
+      <div class="content-overlay">
+        <header class="header">
+          <div class="header-title">
+            <h1>Reports</h1>
+            <p class="header-subtitle">Generate and download financial reports</p>
+          </div>
+          <div class="header-actions">
+            <button class="notification-btn" onclick="toggleNotifications()">
+              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+              </svg>
+              <span class="notification-badge">1</span>
+            </button>
+            <div class="profile" onclick="alert('Profile settings coming soon!')">
+              <div class="profile-img">AD</div>
+            </div>
+          </div>
+        </header>
+
+        <div class="notification-dropdown" id="notificationDropdown">
+          <div class="notification-header">Notifications</div>
+          <div class="notification-item" onclick="alert('Notification: New report is available')">
+            <div class="notification-title">Monthly Report Ready</div>
+            <div class="notification-text">Download the latest collection summary.</div>
+            <div class="notification-time">Just now</div>
+          </div>
+        </div>
+
+        <div class="page-card">
+          <div class="card-header">
+            <h2 class="chart-title">Report Library</h2>
+          </div>
+          <div class="card-body">
+            <p class="subtle">This section will list generated reports. For now, it shows sample entries.</p>
+            <div class="table-card" style="margin-top: 16px;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Report Name</th>
+                    <th>Type</th>
+                    <th>Created On</th>
+                    <th>Created By</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Monthly Collection Summary</td>
+                    <td>PDF</td>
+                    <td>2026-03-01</td>
+                    <td>Admin</td>
+                    <td><span class="status-badge status-paid">Download</span></td>
+                  </tr>
+                  <tr>
+                    <td>Outstanding Balances</td>
+                    <td>Excel</td>
+                    <td>2026-02-28</td>
+                    <td>Admin</td>
+                    <td><span class="status-badge status-pending">Generate</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </main>
   </div>
+
+  <script>
+    function toggleNotifications() {
+      const dropdown = document.getElementById('notificationDropdown');
+      dropdown.classList.toggle('show');
+    }
+
+    document.addEventListener('click', function (event) {
+      const dropdown = document.getElementById('notificationDropdown');
+      const notifBtn = document.querySelector('.notification-btn');
+      if (!notifBtn || !dropdown) return;
+      if (!notifBtn.contains(event.target) && !dropdown.contains(event.target)) {
+        dropdown.classList.remove('show');
+      }
+    });
+  </script>
 </body>
 </html>
 

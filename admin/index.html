@@ -62,7 +62,6 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <div class="background-image"></div>
             <div class="content-overlay">
                 <!-- Header -->
                 <header class="header">
@@ -71,10 +70,6 @@
                         <p class="header-subtitle">Overview of organization finances</p>
                     </div>
                     <div class="header-actions">
-                        <select class="semester-dropdown">
-                            <option>1st Semester</option>
-                            <option>2nd Semester</option>
-                        </select>
                         <button class="notification-btn" onclick="toggleNotifications()">
                             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
@@ -148,21 +143,24 @@
                 <div class="table-card">
                     <div class="table-header">
                         <h2 class="chart-title">Recent Payments</h2>
-                        <select class="sort-dropdown">
-                            <option>Sort by: Newest Date</option>
-                            <option>Sort by: Oldest Date</option>
-                            <option>Sort by: Amount (High to Low)</option>
-                            <option>Sort by: Amount (Low to High)</option>
-                        </select>
+                        <div class="sort-control">
+                            <span class="sort-label">Sort by</span>
+                            <select class="sort-dropdown">
+                                <option>Newest Date</option>
+                                <option>Oldest Date</option>
+                                <option>Amount (High to Low)</option>
+                                <option>Amount (Low to High)</option>
+                            </select>
+                        </div>
                     </div>
                     <table id="paymentTable">
                         <thead>
                             <tr>
                                 <th>Student</th>
-                                <th>Student</th>
-                                <th>Student</th>
-                                <th>Student</th>
-                                <th>Student</th>
+                                <th>Class</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Date</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -301,7 +299,7 @@
                             font: {
                                 size: 12
                             },
-                            color: 'rgba(255, 255, 255, 0.9)'
+                            color: '#000000'
                         }
                     },
                     tooltip: {
