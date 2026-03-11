@@ -4,59 +4,552 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Societech Admin Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="admin-dashboard.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+            background-color: #f6f7fb;
+            color: #0f172a;
+            overflow-x: hidden;
+            background-image: url('../public/assets/images/d6d628d6-1548-4d35-8176-5656c91409f5.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            padding: 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            padding: 24px;
+            background: rgba(96, 165, 250, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .societech_logo {
+            display: block;
+            margin: 0 auto 14px;
+            height: 56px;
+            width: auto;
+            background: rgba(255, 255, 255, 0.94);
+            padding: 8px 12px;
+            border-radius: 14px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+        }
+
+        .sidebar-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #60a5fa;
+            letter-spacing: -0.5px;
+        }
+
+        .sidebar-subtitle {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        .sidebar-nav {
+            padding: 16px 0;
+        }
+
+        .nav-section {
+            margin-bottom: 24px;
+        }
+
+        .nav-section-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #64748b;
+            padding: 8px 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 24px;
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            font-size: 14px;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover {
+            background-color: rgba(51, 65, 85, 0.5);
+            color: white;
+        }
+
+        .nav-item.active {
+            background-color: rgba(96, 165, 250, 0.15);
+            color: #60a5fa;
+            border-left: 3px solid #60a5fa;
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            position: relative;
+            min-height: 100vh;
+            background: #f6f7fb;
+        }
+
+        .content-overlay {
+            padding: 22px 22px 34px;
+            min-height: 100vh;
+            background: rgba(246, 247, 251, 0.78);
+            backdrop-filter: blur(8px);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            background: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-title h1 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1f2937;
+        }
+
+        .header-breadcrumb {
+            font-size: 14px;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .notification-btn {
+            position: relative;
+            background: #f3f4f6;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .notification-btn:hover {
+            background: #e5e7eb;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: #ef4444;
+            color: white;
+            font-size: 10px;
+            padding: 2px 5px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .profile:hover {
+            background: #f3f4f6;
+        }
+
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .profile-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: #1f2937;
+        }
+
+        .profile-role {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-left: 4px solid transparent;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card.blue { border-left-color: #3b82f6; }
+        .stat-card.green { border-left-color: #10b981; }
+        .stat-card.orange { border-left-color: #f59e0b; }
+        .stat-card.purple { border-left-color: #8b5cf6; }
+        .stat-card.red { border-left-color: #ef4444; }
+        .stat-card.indigo { border-left-color: #6366f1; }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 16px;
+        }
+
+        .stat-title {
+            font-size: 14px;
+            color: #6b7280;
+            font-weight: 600;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+
+        .stat-trend {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 14px;
+        }
+
+        .trend-up { color: #10b981; }
+        .trend-down { color: #ef4444; }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 24px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #f3f4f6;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+        }
+
+        .btn-outline {
+            background: white;
+            color: #3b82f6;
+            border: 2px solid #3b82f6;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #f9fafb;
+        }
+
+        th {
+            text-align: left;
+            padding: 14px 16px;
+            font-weight: 700;
+            font-size: 13px;
+            color: #374151;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        td {
+            padding: 16px;
+            font-size: 14px;
+            border-bottom: 1px solid #f3f4f6;
+            color: #1f2937;
+        }
+
+        tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .badge {
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .badge-paid { background: #d1fae5; color: #065f46; }
+        .badge-pending { background: #fef3c7; color: #92400e; }
+        .badge-approved { background: #dbeafe; color: #1e40af; }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        .class-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid #e5e7eb;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .class-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .class-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 12px;
+        }
+
+        .class-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .alert {
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .alert-warning {
+            background: #fef3c7;
+            color: #92400e;
+            border-left: 4px solid #f59e0b;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="dashboard-container">
         <!-- Sidebar -->
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <img class="societech_logo" src="../assets/images/societech_logo.png" alt="societech_logo">
-                <div class="sidebar-title">Societech Admin Dashboard</div>
+                <div class="sidebar-title">SOCIETECH</div>
+                <div class="sidebar-subtitle">Admin Dashboard</div>
             </div>
             <nav class="sidebar-nav">
-                <a href="index.html" class="nav-item active">
-                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-                    </svg>
-                    Dashboard
-                </a>
-                <a href="classes.html" class="nav-item">
-                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                    </svg>
-                    All Classes
-                </a>
-                <a href="payments.html" class="nav-item">
-                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                    </svg>
-                    Payment Records
-                </a>
-                <a href="reports.html" class="nav-item">
-                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                    </svg>
-                    Reports
-                </a>
-                <a href="verify.html" class="nav-item">
-                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                    Verify Records
-                </a>
-                <a href="cash-flow.html" class="nav-item">
-                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                    </svg>
-                    Cash Flow
-                </a>
-                <a href="../auth/login.html" class="nav-item">
-                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-                    </svg>
-                    Logout
-                </a>
+                <div class="nav-section">
+                    <div class="nav-section-title">Main</div>
+                    <a href="#" class="nav-item active" data-section="dashboard">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                        </svg>
+                        Dashboard
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Financial Management</div>
+                    <a href="#" class="nav-item" data-section="all-classes">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                        All Classes
+                    </a>
+                    <a href="#" class="nav-item" data-section="payment-records">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                        </svg>
+                        Payment Records
+                    </a>
+                    <a href="#" class="nav-item" data-section="verify-records">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Verify Records
+                    </a>
+                    <a href="cash-flow.html" class="nav-item">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path>
+                        </svg>
+                        Cash Flow
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Administration</div>
+                    <a href="#" class="nav-item" data-section="user-management">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                        User Management
+                    </a>
+                    <a href="#" class="nav-item" data-section="announcements">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path>
+                        </svg>
+                        Announcements
+                    </a>
+                </div>
             </nav>
         </aside>
 
@@ -66,259 +559,424 @@
                 <!-- Header -->
                 <header class="header">
                     <div class="header-title">
-                        <h1>Dashboard</h1>
-                        <p class="header-subtitle">Overview of organization finances</p>
+                        <h1 id="pageTitle">Dashboard</h1>
+                        <div class="header-breadcrumb" id="breadcrumb">Home / Dashboard</div>
                     </div>
                     <div class="header-actions">
-                        <button class="notification-btn" onclick="toggleNotifications()">
+                        <button class="notification-btn">
                             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
                             </svg>
-                            <span class="notification-badge">1</span>
+                            <span class="notification-badge">5</span>
                         </button>
-                        <div class="profile" onclick="alert('Profile settings coming soon!')">
-                            <div class="profile-img">AD</div>
+                        <div class="profile">
+                            <div class="profile-img">MA</div>
+                            <div>
+                                <div class="profile-name">Moderator Admin</div>
+                                <div class="profile-role">Administrator</div>
+                            </div>
                         </div>
                     </div>
                 </header>
 
-                <!-- Notification Dropdown -->
-                <div class="notification-dropdown" id="notificationDropdown">
-                    <div class="notification-header">Notifications</div>
-                    <div class="notification-item" onclick="alert('Notification: New payment received')">
-                        <div class="notification-title">New Payment Received</div>
-                        <div class="notification-text">Rico Torres paid ₱80 for BSIT 2C</div>
-                        <div class="notification-time">5 minutes ago</div>
+                <!-- Dashboard Section -->
+                <div id="dashboard" class="content-section active">
+                    <div class="stats-grid">
+                        <div class="stat-card blue">
+                            <div class="stat-header">
+                                <div class="stat-title">Total Collections</div>
+                                <div class="stat-icon" style="background: #dbeafe; color: #2563eb;">
+                                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="stat-value">₱845,250</div>
+                            <div class="stat-trend trend-up">
+                                <span>↑ 15.3%</span>
+                                <span style="color: #6b7280;">vs last semester</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card red">
+                            <div class="stat-header">
+                                <div class="stat-title">Total Expenses</div>
+                                <div class="stat-icon" style="background: #fee2e2; color: #dc2626;">
+                                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="stat-value">₱324,180</div>
+                            <div class="stat-trend trend-down">
+                                <span>↓ 8.2%</span>
+                                <span style="color: #6b7280;">vs last month</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card green">
+                            <div class="stat-header">
+                                <div class="stat-title">Net Balance</div>
+                                <div class="stat-icon" style="background: #dcfce7; color: #16a34a;">
+                                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="stat-value">₱521,070</div>
+                            <div class="stat-trend trend-up">
+                                <span>↑ 23.5%</span>
+                                <span style="color: #6b7280;">growth rate</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card orange">
+                            <div class="stat-header">
+                                <div class="stat-title">Pending Verifications</div>
+                                <div class="stat-icon" style="background: #fef3c7; color: #d97706;">
+                                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="stat-value">12</div>
+                            <div class="stat-trend trend-up">
+                                <span>+3</span>
+                                <span style="color: #6b7280;">new submissions</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card purple">
+                            <div class="stat-header">
+                                <div class="stat-title">Active Classes</div>
+                                <div class="stat-icon" style="background: #f3e8ff; color: #7c3aed;">
+                                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="stat-value">24</div>
+                            <div class="stat-trend" style="color: #6b7280;">
+                                <span>across all years</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card indigo">
+                            <div class="stat-header">
+                                <div class="stat-title">Total Students</div>
+                                <div class="stat-icon" style="background: #e0e7ff; color: #4f46e5;">
+                                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="stat-value">986</div>
+                            <div class="stat-trend trend-up">
+                                <span>↑ 5.2%</span>
+                                <span style="color: #6b7280;">enrollment rate</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">Recent Activities</div>
+                                <div class="card-subtitle">Latest organization transactions and updates</div>
+                            </div>
+                            <button class="btn btn-outline">View All</button>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Activity</th>
+                                        <th>Class</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Mar 10, 2026</td>
+                                        <td>Class Fee Collection</td>
+                                        <td>Grade 11 - STEM A</td>
+                                        <td>₱15,500</td>
+                                        <td><span class="badge badge-paid">Verified</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mar 9, 2026</td>
+                                        <td>Event Expense</td>
+                                        <td>Organization</td>
+                                        <td>-₱8,200</td>
+                                        <td><span class="badge badge-approved">Approved</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mar 9, 2026</td>
+                                        <td>Class Fee Submission</td>
+                                        <td>Grade 12 - ABM B</td>
+                                        <td>₱12,300</td>
+                                        <td><span class="badge badge-pending">Pending</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mar 8, 2026</td>
+                                        <td>Organizational Fee</td>
+                                        <td>All Classes</td>
+                                        <td>₱98,500</td>
+                                        <td><span class="badge badge-paid">Collected</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Stats Cards -->
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-title">Total Organization Funds</div>
-                        <div class="stat-value">₱215,000</div>
-                        <div class="stat-trend trend-down">
-                            <span>-12%</span>
+                <!-- All Classes Section -->
+                <div id="all-classes" class="content-section">
+                    <div class="grid-3">
+                        <div class="class-card">
+                            <div class="class-name">Grade 11 - STEM A</div>
+                            <div class="class-info">
+                                <span>Students:</span>
+                                <span style="font-weight: 600;">42</span>
+                            </div>
+                            <div class="class-info">
+                                <span>Collections:</span>
+                                <span style="color: #10b981; font-weight: 600;">₱35,200</span>
+                            </div>
+                            <div class="class-info">
+                                <span>Balance:</span>
+                                <span style="color: #3b82f6; font-weight: 600;">₱28,450</span>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="stat-card">
-                        <div class="stat-title">Total Collected Today</div>
-                        <div class="stat-value">₱215,000</div>
-                    </div>
+                        <div class="class-card">
+                            <div class="class-name">Grade 11 - ABM A</div>
+                            <div class="class-info">
+                                <span>Students:</span>
+                                <span style="font-weight: 600;">38</span>
+                            </div>
+                            <div class="class-info">
+                                <span>Collections:</span>
+                                <span style="color: #10b981; font-weight: 600;">₱31,800</span>
+                            </div>
+                            <div class="class-info">
+                                <span>Balance:</span>
+                                <span style="color: #3b82f6; font-weight: 600;">₱25,100</span>
+                            </div>
+                        </div>
 
-                    <div class="stat-card">
-                        <div class="stat-title">Total Outstanding</div>
-                        <div class="stat-value">₱70,000</div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-title">Active Class</div>
-                        <div class="stat-value">12</div>
+                        <div class="class-card">
+                            <div class="class-name">Grade 12 - STEM B</div>
+                            <div class="class-info">
+                                <span>Students:</span>
+                                <span style="font-weight: 600;">40</span>
+                            </div>
+                            <div class="class-info">
+                                <span>Collections:</span>
+                                <span style="color: #10b981; font-weight: 600;">₱42,500</span>
+                            </div>
+                            <div class="class-info">
+                                <span>Balance:</span>
+                                <span style="color: #3b82f6; font-weight: 600;">₱35,750</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Charts -->
-                <div class="charts-grid">
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <h2 class="chart-title">Monthly Collection Trend</h2>
+                <!-- Payment Records Section -->
+                <div id="payment-records" class="content-section">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Payment Records</div>
                         </div>
-                        <div class="chart-container">
-                            <canvas id="revenueChart"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <h2 class="chart-title">Payment Status Distribution</h2>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="paymentChart"></canvas>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Class</th>
+                                        <th>Type</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Mar 10, 2026</td>
+                                        <td>Grade 11 - STEM A</td>
+                                        <td>Collection</td>
+                                        <td style="color: #10b981; font-weight: 600;">₱15,500</td>
+                                        <td><span class="badge badge-paid">Verified</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mar 9, 2026</td>
+                                        <td>Grade 12 - ABM B</td>
+                                        <td>Collection</td>
+                                        <td style="color: #10b981; font-weight: 600;">₱12,300</td>
+                                        <td><span class="badge badge-pending">Pending</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mar 8, 2026</td>
+                                        <td>All Classes</td>
+                                        <td>Organizational Fee</td>
+                                        <td style="color: #10b981; font-weight: 600;">₱98,500</td>
+                                        <td><span class="badge badge-paid">Collected</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
 
-                <!-- Payment Records Table -->
-                <div class="table-card">
-                    <div class="table-header">
-                        <h2 class="chart-title">Recent Payments</h2>
-                        <div class="sort-control">
-                            <span class="sort-label">Sort by</span>
-                            <select class="sort-dropdown">
-                                <option>Newest Date</option>
-                                <option>Oldest Date</option>
-                                <option>Amount (High to Low)</option>
-                                <option>Amount (Low to High)</option>
-                            </select>
+                <!-- Verify Records Section -->
+                <div id="verify-records" class="content-section">
+                    <div class="alert alert-warning">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                        </svg>
+                        You have <strong>12 pending submissions</strong> awaiting verification
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Pending Treasurer Submissions</div>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Submitted</th>
+                                        <th>Treasurer</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>2 hours ago</td>
+                                        <td>Juan Dela Cruz</td>
+                                        <td style="color: #10b981; font-weight: 600;">₱15,500</td>
+                                        <td>
+                                            <button class="btn btn-success" style="padding: 6px 12px; font-size: 12px;">Approve</button>
+                                            <button class="btn btn-danger" style="padding: 6px 12px; font-size: 12px;">Reject</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>5 hours ago</td>
+                                        <td>Maria Santos</td>
+                                        <td style="color: #ef4444; font-weight: 600;">-₱3,200</td>
+                                        <td>
+                                            <button class="btn btn-success" style="padding: 6px 12px; font-size: 12px;">Approve</button>
+                                            <button class="btn btn-danger" style="padding: 6px 12px; font-size: 12px;">Reject</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <table id="paymentTable">
-                        <thead>
-                            <tr>
-                                <th>Student</th>
-                                <th>Class</th>
-                                <th>Amount</th>
-                                <th>Status</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Rico Torres</td>
-                                <td>BSIT 2C</td>
-                                <td>₱80</td>
-                                <td><span class="status-badge status-paid">Paid</span></td>
-                                <td>2026-03-01</td>
-                            </tr>
-                            <tr>
-                                <td>Rico Torres</td>
-                                <td>BSIT 4A</td>
-                                <td>₱100</td>
-                                <td><span class="status-badge status-paid">Paid</span></td>
-                                <td>2026-02-28</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                </div>
+
+                <!-- User Management Section -->
+                <div id="user-management" class="content-section">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">User Management</div>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Juan Dela Cruz</td>
+                                        <td>juan@example.com</td>
+                                        <td><span class="badge badge-approved">Treasurer</span></td>
+                                        <td><span class="badge badge-approved">Active</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Maria Santos</td>
+                                        <td>maria@example.com</td>
+                                        <td><span class="badge badge-approved">Treasurer</span></td>
+                                        <td><span class="badge badge-approved">Active</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Announcements Section -->
+                <div id="announcements" class="content-section">
+                    <div style="margin-bottom: 24px;">
+                        <button class="btn btn-primary">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            Post New Announcement
+                        </button>
+                    </div>
+
+                    <div class="card">
+                        <div style="padding: 20px; border-bottom: 2px solid #f3f4f6;">
+                            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 8px;">Upcoming Organization Event</h3>
+                            <div style="font-size: 14px; color: #6b7280; margin-bottom: 12px;">
+                                Posted: Mar 9, 2026 • By: Admin User
+                            </div>
+                            <p style="color: #374151; line-height: 1.6;">
+                                Join us for the annual SOCIATECH Summit on March 25, 2026. All students are required to attend.
+                            </p>
+                        </div>
+
+                        <div style="padding: 20px;">
+                            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 8px;">Fee Payment Deadline</h3>
+                            <div style="font-size: 14px; color: #6b7280; margin-bottom: 12px;">
+                                Posted: Mar 7, 2026 • By: Admin User
+                            </div>
+                            <p style="color: #374151; line-height: 1.6;">
+                                The deadline for March class fee payments has been extended to March 15, 2026.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
     </div>
 
-    <!-- Chart.js Library -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    
     <script>
-        // Toggle Notifications
-        function toggleNotifications() {
-            const dropdown = document.getElementById('notificationDropdown');
-            dropdown.classList.toggle('show');
-        }
-
-        // Close notifications when clicking outside
-        document.addEventListener('click', function(event) {
-            const dropdown = document.getElementById('notificationDropdown');
-            const notifBtn = document.querySelector('.notification-btn');
-            if (!notifBtn.contains(event.target) && !dropdown.contains(event.target)) {
-                dropdown.classList.remove('show');
-            }
-        });
-
-        // Monthly Collection Trend Chart
-        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
-        new Chart(revenueCtx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                datasets: [{
-                    label: 'Collection (₱)',
-                    data: [40000, 45000, 50000, 48000, 55000, 60000],
-                    borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                    tension: 0.4,
-                    fill: true,
-                    pointBackgroundColor: '#3b82f6',
-                    pointBorderColor: '#fff',
-                    pointBorderWidth: 2,
-                    pointRadius: 5,
-                    pointHoverRadius: 7
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                        padding: 12,
-                        titleColor: '#fff',
-                        bodyColor: '#fff',
-                        borderColor: '#374151',
-                        borderWidth: 1,
-                        displayColors: false,
-                        callbacks: {
-                            label: function(context) {
-                                return '₱' + context.parsed.y.toLocaleString();
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return '₱' + (value / 1000) + 'K';
-                            }
-                        },
-                        grid: {
-                            color: 'rgba(255, 255, 255, 0.1)'
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        },
-                        ticks: {
-                            color: 'rgba(255, 255, 255, 0.7)'
-                        }
+        // Navigation functionality
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                const sectionId = this.getAttribute('data-section');
+                if (href && href !== '#') {
+                    // external navigation
+                    return; // allow default behavior
+                }
+                e.preventDefault();
+                
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+                
+                document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
+                
+                if (sectionId) {
+                    const section = document.getElementById(sectionId);
+                    if (section) {
+                        section.classList.add('active');
+                        const title = this.textContent.trim();
+                        document.getElementById('pageTitle').textContent = title;
+                        document.getElementById('breadcrumb').textContent = `Home / ${title}`;
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
                     }
                 }
-            }
-        });
-
-        // Payment Status Distribution Chart
-        const paymentCtx = document.getElementById('paymentChart').getContext('2d');
-        new Chart(paymentCtx, {
-            type: 'pie',
-            data: {
-                labels: ['Paid', 'Pending', 'Overdue', 'Not Paid'],
-                datasets: [{
-                    data: [650, 180, 85, 120],
-                    backgroundColor: [
-                        '#10b981',
-                        '#f59e0b',
-                        '#ef4444',
-                        '#9ca3af'
-                    ],
-                    borderWidth: 0,
-                    hoverOffset: 10
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            padding: 20,
-                            font: {
-                                size: 12
-                            },
-                            color: '#000000'
-                        }
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                        padding: 12,
-                        titleColor: '#fff',
-                        bodyColor: '#fff',
-                        borderColor: '#374151',
-                        borderWidth: 1,
-                        callbacks: {
-                            label: function(context) {
-                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                const percentage = ((context.parsed / total) * 100).toFixed(1);
-                                return `${context.label}: ${context.parsed} (${percentage}%)`;
-                            }
-                        }
-                    }
-                }
-            }
+            });
         });
     </script>
 </body>
