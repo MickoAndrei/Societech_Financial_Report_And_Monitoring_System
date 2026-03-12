@@ -1,13 +1,43 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOCIATECH Moderator Dashboard - Cash Flow</title>
-    <link rel="stylesheet" href="../assets/css/main.css">
+    <title>Societech Admin Dashboard - Cash Flow</title>
+    <link rel="stylesheet" href="shared.css">
 </head>
 <body>
-    <div id="cash-flow" class="content-section">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside id="sidebar-container"></aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-overlay">
+                <!-- Header -->
+                <header class="header">
+                    <div class="header-title">
+                        <h1>Cash Flow Analysis</h1>
+                        <div class="header-breadcrumb">Financial Management / Cash Flow</div>
+                    </div>
+                    <div class="header-actions">
+                        <button class="notification-btn">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                            </svg>
+                            <span class="notification-badge">5</span>
+                        </button>
+                        <div class="profile">
+                            <div class="profile-img">MA</div>
+                            <div>
+                                <div class="profile-name">Moderator Admin</div>
+                                <div class="profile-role">Administrator</div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <div id="cash-flow" class="content-section active">
         <div class="stats-grid">
             <div class="stat-card green">
                 <div class="stat-header">
@@ -132,6 +162,10 @@
                 </table>
             </div>
         </div>
+                </div>
+            </div>
+        </main>
     </div>
-</body>
+<script src="sidebar.js" defer></script>`n</body>
 </html>
+
