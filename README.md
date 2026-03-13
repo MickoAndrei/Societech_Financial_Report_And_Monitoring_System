@@ -56,7 +56,7 @@ Societech Financial And Monitoring/
 - **Class Reports**: Payment Summary, Collection Report, Student Balance List
 - **Payment Verification**: Submit Records for Approval, View Verification Status
 
-### 6. SOCIATECH MODERATOR / ADMIN DASHBOARD
+### 6. SOCIETECH MODERATOR / ADMIN DASHBOARD
 - **Dashboard**: Organization Financial Overview, Total Collections, Total Expenses, Financial Statistics
 - **All Classes**: View Classes, Class Financial Status, Class Balance Summary
 - **Payment Records**: All Transactions, Filter by Class, Filter by Date, Payment Logs
