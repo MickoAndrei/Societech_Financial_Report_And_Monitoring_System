@@ -5,15 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Payment Records • Societech Admin</title>
   <link rel="stylesheet" type="text/css" href="admin-shared-styles.css" />
+  <link rel="stylesheet" type="text/css" href="../assets/css/background.css" />
 </head>
 <body>
+  <div class="page-background"></div>
+  <div class="page-content">
   <div class="dashboard-container">
     <aside id="sidebar-container" class="sidebar"></aside>
     <main class="main-content">
       <header class="header">
         <div class="header-title">
           <h1>Payment Records</h1>
-          <div class="header-breadcrumb">Home / Payment Records</div>
+          <div class="header-breadcrumb">Track membership and event collections</div>
         </div>
         <div class="header-actions">
           <button class="notification-btn" type="button" onclick="alert('5 new notifications')">
@@ -41,8 +44,9 @@
                     </div>
                     <select class="filter-select">
                         <option>All Classes</option>
-                        <option>Grade 11 - STEM A</option>
-                        <option>Grade 12 - ABM B</option>
+                        <option>Societech 1A</option>
+                        <option>Societech 2B</option>
+                        <option>Societech 3A</option>
                     </select>
                     <select class="filter-select">
                         <option>All Types</option>
@@ -75,51 +79,51 @@
                             <tbody>
                                 <tr>
                                     <td>Mar 10, 2026</td>
-                                    <td>#TXN-2026-0345</td>
-                                    <td>Grade 11 - STEM A</td>
+                                    <td>#TXN-2026-0401</td>
+                                    <td>BSocietech 1A</td>
                                     <td>Collection</td>
-                                    <td>Class Fee - March</td>
-                                    <td style="color: #10b981; font-weight: 600;">+₱15,500</td>
+                                    <td>Membership Fee</td>
+                                    <td style="color: #10b981; font-weight: 600;">+₱80</td>
                                     <td><span class="badge badge-paid">Verified</span></td>
                                     <td><button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">View</button></td>
                                 </tr>
                                 <tr>
                                     <td>Mar 9, 2026</td>
-                                    <td>#TXN-2026-0344</td>
-                                    <td>Organization</td>
-                                    <td>Expense</td>
-                                    <td>Event Supplies</td>
-                                    <td style="color: #ef4444; font-weight: 600;">-₱8,200</td>
+                                    <td>#TXN-2026-0400</td>
+                                    <td>Societech 2B</td>
+                                    <td>Collection</td>
+                                    <td>IT Days Registration</td>
+                                    <td style="color: #10b981; font-weight: 600;">+₱280</td>
                                     <td><span class="badge badge-approved">Approved</span></td>
                                     <td><button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">View</button></td>
                                 </tr>
                                 <tr>
                                     <td>Mar 9, 2026</td>
-                                    <td>#TXN-2026-0343</td>
-                                    <td>Grade 12 - ABM B</td>
+                                    <td>#TXN-2026-0399</td>
+                                    <td>Societech 3A</td>
                                     <td>Collection</td>
-                                    <td>Class Fee - March</td>
-                                    <td style="color: #10b981; font-weight: 600;">+₱12,300</td>
+                                    <td>Society Shirt Order</td>
+                                    <td style="color: #10b981; font-weight: 600;">+₱150</td>
                                     <td><span class="badge badge-pending">Pending</span></td>
                                     <td><button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">View</button></td>
                                 </tr>
                                 <tr>
                                     <td>Mar 8, 2026</td>
-                                    <td>#TXN-2026-0342</td>
-                                    <td>All Classes</td>
-                                    <td>Collection</td>
-                                    <td>Organizational Fee</td>
-                                    <td style="color: #10b981; font-weight: 600;">+₱98,500</td>
-                                    <td><span class="badge badge-paid">Collected</span></td>
+                                    <td>#TXN-2026-0398</td>
+                                    <td>Societech Officers</td>
+                                    <td>Expense</td>
+                                    <td>Event Supplies</td>
+                                    <td style="color: #ef4444; font-weight: 600;">-₱1,200</td>
+                                    <td><span class="badge badge-approved">Approved</span></td>
                                     <td><button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">View</button></td>
                                 </tr>
                                 <tr>
                                     <td>Mar 7, 2026</td>
-                                    <td>#TXN-2026-0341</td>
-                                    <td>Grade 11 - HUMSS A</td>
+                                    <td>#TXN-2026-0397</td>
+                                    <td>Societech 1B</td>
                                     <td>Collection</td>
-                                    <td>Class Project Fund</td>
-                                    <td style="color: #10b981; font-weight: 600;">+₱9,450</td>
+                                    <td>Membership Fee</td>
+                                    <td style="color: #10b981; font-weight: 600;">+₱80</td>
                                     <td><span class="badge badge-paid">Verified</span></td>
                                     <td><button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">View</button></td>
                                 </tr>
@@ -131,7 +135,6 @@
     </main>
   </div>
   <script src="sidebar.js"></script>
+  </div>
 </body>
 </html>
-
-

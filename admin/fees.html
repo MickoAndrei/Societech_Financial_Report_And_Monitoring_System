@@ -5,15 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fee Configuration • Societech Admin</title>
   <link rel="stylesheet" type="text/css" href="admin-shared-styles.css" />
+  <link rel="stylesheet" type="text/css" href="../assets/css/background.css" />
 </head>
 <body>
+  <div class="page-background"></div>
+  <div class="page-content">
   <div class="dashboard-container">
     <aside id="sidebar-container" class="sidebar"></aside>
     <main class="main-content">
       <header class="header">
         <div class="header-title">
           <h1>Fee Configuration</h1>
-          <div class="header-breadcrumb">Home / Fee Configuration</div>
+          <div class="header-breadcrumb">Configure membership and event fees</div>
         </div>
         <div class="header-actions">
           <button class="notification-btn" type="button" onclick="alert('5 new notifications')">
@@ -39,15 +42,15 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Organizational Fee (Per Student)</label>
-                            <input type="number" class="form-input" value="100" placeholder="Enter amount">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Event Fee</label>
                             <input type="number" class="form-input" value="50" placeholder="Enter amount">
                         </div>
                         <div class="form-group">
+                            <label class="form-label">Event Fee</label>
+                            <input type="number" class="form-input" value="280" placeholder="Enter amount">
+                        </div>
+                        <div class="form-group">
                             <label class="form-label">Membership Fee</label>
-                            <input type="number" class="form-input" value="150" placeholder="Enter amount">
+                            <input type="number" class="form-input" value="80" placeholder="Enter amount">
                         </div>
                         <button class="btn btn-primary">Update Organization Fees</button>
                     </div>
@@ -58,15 +61,15 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Default Class Fee</label>
-                            <input type="number" class="form-input" value="500" placeholder="Enter amount">
+                            <input type="number" class="form-input" value="80" placeholder="Enter amount">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Project Fund</label>
-                            <input type="number" class="form-input" value="200" placeholder="Enter amount">
+                            <input type="number" class="form-input" value="150" placeholder="Enter amount">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Activity Fund</label>
-                            <input type="number" class="form-input" value="150" placeholder="Enter amount">
+                            <input type="number" class="form-input" value="100" placeholder="Enter amount">
                         </div>
                         <button class="btn btn-primary">Update Class Fee Template</button>
                     </div>
@@ -89,24 +92,24 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Grade 11 - STEM A</td>
-                                    <td>₱500</td>
-                                    <td>₱350</td>
-                                    <td style="font-weight: 600;">₱850</td>
+                                    <td>Societech 1A</td>
+                                    <td>₱80</td>
+                                    <td>₱280</td>
+                                    <td style="font-weight: 600;">₱360</td>
                                     <td><button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">Edit</button></td>
                                 </tr>
                                 <tr>
-                                    <td>Grade 11 - ABM A</td>
-                                    <td>₱500</td>
-                                    <td>₱300</td>
-                                    <td style="font-weight: 600;">₱800</td>
+                                    <td>Societech 1B</td>
+                                    <td>₱80</td>
+                                    <td>₱250</td>
+                                    <td style="font-weight: 600;">₱330</td>
                                     <td><button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">Edit</button></td>
                                 </tr>
                                 <tr>
-                                    <td>Grade 12 - STEM B</td>
-                                    <td>₱600</td>
-                                    <td>₱450</td>
-                                    <td style="font-weight: 600;">₱1,050</td>
+                                    <td>Societech 2A</td>
+                                    <td>₱90</td>
+                                    <td>₱280</td>
+                                    <td style="font-weight: 600;">₱370</td>
                                     <td><button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">Edit</button></td>
                                 </tr>
                             </tbody>
@@ -117,7 +120,6 @@
     </main>
   </div>
   <script src="sidebar.js"></script>
+  </div>
 </body>
 </html>
-
-
