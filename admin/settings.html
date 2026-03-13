@@ -1,88 +1,138 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Work in Progress</title>
-  <link rel="stylesheet" href="../assets/css/main.css" />
-  <style>
-    body {
-      min-height: 100vh;
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%);
-    }
-    .wip-shell {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem 1rem;
-    }
-    .wip-card {
-      width: 100%;
-      max-width: 720px;
-      background: rgba(255, 255, 255, 0.98);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-xl);
-      padding: 2rem;
-      border: 1px solid var(--gray-200);
-    }
-    .wip-badge {
-      display: inline-block;
-      padding: 0.35rem 0.65rem;
-      border-radius: 999px;
-      background: rgba(245, 158, 11, 0.15);
-      color: #92400e;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      font-size: 0.85rem;
-      border: 1px solid rgba(245, 158, 11, 0.35);
-      margin-bottom: 0.75rem;
-    }
-    .wip-title {
-      font-size: 1.75rem;
-      margin: 0 0 0.5rem 0;
-      color: var(--gray-900);
-    }
-    .wip-desc {
-      margin: 0 0 1.25rem 0;
-      color: var(--gray-700);
-      font-size: 1.05rem;
-    }
-    .wip-links {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      margin-top: 1rem;
-    }
-    .wip-note {
-      margin-top: 1.25rem;
-      padding: 0.9rem 1rem;
-      background: var(--gray-50);
-      border-left: 4px solid var(--primary-color);
-      border-radius: var(--radius-md);
-      color: var(--gray-700);
-    }
-  </style>
+  <title>System Settings • Societech Admin</title>
+  <link rel="stylesheet" type="text/css" href="admin-shared-styles.css" />
 </head>
 <body>
-  <div class="wip-shell">
-    <div class="wip-card">
-      <div class="wip-badge">WORK IN PROGRESS</div>
-      <h1 class="wip-title">This page is under construction</h1>
-      <p class="wip-desc">
-        Content and functionality for this page are still being built. Please check back soon.
-      </p>
+  <div class="dashboard-container">
+    <aside id="sidebar-container" class="sidebar"></aside>
+    <main class="main-content">
+      <header class="header">
+        <div class="header-title">
+          <h1>System Settings</h1>
+          <div class="header-breadcrumb">Home / System Settings</div>
+        </div>
+        <div class="header-actions">
+          <button class="notification-btn" type="button" onclick="alert('5 new notifications')">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+            </svg>
+            <span class="notification-badge">5</span>
+          </button>
+          <div class="profile" onclick="alert('Profile settings')">
+            <div class="profile-img">MA</div>
+            <div class="profile-info">
+              <div class="profile-name">Moderator Admin</div>
+              <div class="profile-role">Administrator</div>
+            </div>
+          </div>
+        </div>
+      </header>
+<div id="settings" class="content-section active">
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Organization Information</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Organization Name</label>
+                            <input type="text" class="form-input" value="SOCIATECH" placeholder="Enter organization name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Organization Description</label>
+                            <textarea class="form-textarea" placeholder="Enter description">Technology and Innovation Student Organization</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Contact Email</label>
+                            <input type="email" class="form-input" value="admin@sociatech.org" placeholder="Enter email">
+                        </div>
+                        <button class="btn btn-primary">Save Organization Info</button>
+                    </div>
 
-      <div class="wip-links">
-        <a class="btn btn-outline" href="index.html">Back to this section</a>
-        <a class="btn" href="../public/index.html" style="background: var(--primary-color); color: white;">Go to Home</a>
-      </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Academic Year Setup</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Current Academic Year</label>
+                            <select class="form-input">
+                                <option>Academic Year 2025-2026</option>
+                                <option>Academic Year 2024-2025</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">First Semester Start</label>
+                            <input type="date" class="form-input" value="2025-08-01">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Second Semester Start</label>
+                            <input type="date" class="form-input" value="2026-01-01">
+                        </div>
+                        <button class="btn btn-primary">Update Academic Year</button>
+                    </div>
+                </div>
 
-      <div class="wip-note">
-        If you reached this page from a link, it may not be finished yet.
-      </div>
-    </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Notification Settings</div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 16px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background: #f9fafb; border-radius: 8px;">
+                            <div>
+                                <div style="font-weight: 600; margin-bottom: 4px;">Email Notifications</div>
+                                <div style="font-size: 14px; color: #6b7280;">Receive email alerts for important activities</div>
+                            </div>
+                            <input type="checkbox" checked style="width: 20px; height: 20px; cursor: pointer;">
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background: #f9fafb; border-radius: 8px;">
+                            <div>
+                                <div style="font-weight: 600; margin-bottom: 4px;">Payment Submission Alerts</div>
+                                <div style="font-size: 14px; color: #6b7280;">Get notified when treasurers submit payments</div>
+                            </div>
+                            <input type="checkbox" checked style="width: 20px; height: 20px; cursor: pointer;">
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background: #f9fafb; border-radius: 8px;">
+                            <div>
+                                <div style="font-weight: 600; margin-bottom: 4px;">Weekly Reports</div>
+                                <div style="font-size: 14px; color: #6b7280;">Receive weekly financial summary reports</div>
+                            </div>
+                            <input type="checkbox" checked style="width: 20px; height: 20px; cursor: pointer;">
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background: #f9fafb; border-radius: 8px;">
+                            <div>
+                                <div style="font-weight: 600; margin-bottom: 4px;">Deadline Reminders</div>
+                                <div style="font-size: 14px; color: #6b7280;">Remind about upcoming payment deadlines</div>
+                            </div>
+                            <input type="checkbox" checked style="width: 20px; height: 20px; cursor: pointer;">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" style="margin-top: 20px;">Save Notification Settings</button>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Security Settings</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Session Timeout (minutes)</label>
+                        <input type="number" class="form-input" value="30" placeholder="Enter timeout duration">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password Reset</label>
+                        <button class="btn btn-outline">Change Password</button>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Two-Factor Authentication</label>
+                        <button class="btn btn-outline">Enable 2FA</button>
+                    </div>
+                </div>
+            </div>
+    </main>
   </div>
+  <script src="sidebar.js"></script>
 </body>
 </html>
 

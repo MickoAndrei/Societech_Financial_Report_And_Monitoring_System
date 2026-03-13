@@ -1,140 +1,132 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Societech Admin Dashboard - Reports</title>
-    <link rel="stylesheet" href="shared.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reports • Societech Admin</title>
+  <link rel="stylesheet" type="text/css" href="admin-shared-styles.css" />
 </head>
 <body>
-    <div class="dashboard-container">
-        <!-- Sidebar -->
-        <aside id="sidebar-container"></aside>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <div class="content-overlay">
-                <!-- Header -->
-                <header class="header">
-                    <div class="header-title">
-                        <h1>Reports</h1>
-                        <div class="header-breadcrumb">Financial Management / Reports</div>
-                    </div>
-                    <div class="header-actions">
-                        <button class="notification-btn">
-                            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
-                            </svg>
-                            <span class="notification-badge">5</span>
-                        </button>
-                        <div class="profile">
-                            <div class="profile-img">MA</div>
+  <div class="dashboard-container">
+    <aside id="sidebar-container" class="sidebar"></aside>
+    <main class="main-content">
+      <header class="header">
+        <div class="header-title">
+          <h1>Reports</h1>
+          <div class="header-breadcrumb">Home / Reports</div>
+        </div>
+        <div class="header-actions">
+          <button class="notification-btn" type="button" onclick="alert('5 new notifications')">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+            </svg>
+            <span class="notification-badge">5</span>
+          </button>
+          <div class="profile" onclick="alert('Profile settings')">
+            <div class="profile-img">MA</div>
+            <div class="profile-info">
+              <div class="profile-name">Moderator Admin</div>
+              <div class="profile-role">Administrator</div>
+            </div>
+          </div>
+        </div>
+      </header>
+<div id="reports" class="content-section active">
+                <div class="grid-2">
+                    <div class="card" style="cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <div style="display: flex; align-items: center; gap: 16px;">
+                            <div style="width: 60px; height: 60px; background: #dbeafe; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <svg width="32" height="32" fill="none" stroke="#3b82f6" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                            </div>
                             <div>
-                                <div class="profile-name">Moderator Admin</div>
-                                <div class="profile-role">Administrator</div>
+                                <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 4px;">Financial Summary Report</h3>
+                                <p style="font-size: 14px; color: #6b7280;">Complete financial overview</p>
                             </div>
                         </div>
+                        <button class="btn btn-primary" style="margin-top: 16px; width: 100%;">Generate Report</button>
                     </div>
-                </header>
 
-                <!-- Reports Section -->
-                <div id="reports" class="content-section">
-            <div class="grid-2">
-                <div class="card" style="cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
-                    <div style="display: flex; align-items: center; gap: 16px;">
-                        <div style="width: 60px; height: 60px; background: #dbeafe; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                            <svg width="32" height="32" fill="none" stroke="#3b82f6" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                            </svg>
+                    <div class="card" style="cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <div style="display: flex; align-items: center; gap: 16px;">
+                            <div style="width: 60px; height: 60px; background: #dcfce7; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <svg width="32" height="32" fill="none" stroke="#10b981" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 4px;">Collection Reports</h3>
+                                <p style="font-size: 14px; color: #6b7280;">All collections by class/period</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 4px;">Financial Summary Report</h3>
-                            <p style="font-size: 14px; color: #6b7280;">Complete financial overview</p>
-                        </div>
+                        <button class="btn btn-primary" style="margin-top: 16px; width: 100%;">Generate Report</button>
                     </div>
-                    <button class="btn btn-primary" style="margin-top: 16px; width: 100%;">Generate Report</button>
-                </div>
 
-                <div class="card" style="cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
-                    <div style="display: flex; align-items: center; gap: 16px;">
-                        <div style="width: 60px; height: 60px; background: #dcfce7; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                            <svg width="32" height="32" fill="none" stroke="#10b981" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
+                    <div class="card" style="cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <div style="display: flex; align-items: center; gap: 16px;">
+                            <div style="width: 60px; height: 60px; background: #fee2e2; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <svg width="32" height="32" fill="none" stroke="#ef4444" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 4px;">Expense Reports</h3>
+                                <p style="font-size: 14px; color: #6b7280;">Detailed expense breakdown</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 4px;">Collection Reports</h3>
-                            <p style="font-size: 14px; color: #6b7280;">All collections by class/period</p>
-                        </div>
+                        <button class="btn btn-primary" style="margin-top: 16px; width: 100%;">Generate Report</button>
                     </div>
-                    <button class="btn btn-primary" style="margin-top: 16px; width: 100%;">Generate Report</button>
-                </div>
 
-                <div class="card" style="cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
-                    <div style="display: flex; align-items: center; gap: 16px;">
-                        <div style="width: 60px; height: 60px; background: #fee2e2; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                            <svg width="32" height="32" fill="none" stroke="#ef4444" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path>
-                            </svg>
+                    <div class="card" style="cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <div style="display: flex; align-items: center; gap: 16px;">
+                            <div style="width: 60px; height: 60px; background: #f3e8ff; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <svg width="32" height="32" fill="none" stroke="#8b5cf6" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 4px;">Class Performance Report</h3>
+                                <p style="font-size: 14px; color: #6b7280;">Compare class financials</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 4px;">Expense Reports</h3>
-                            <p style="font-size: 14px; color: #6b7280;">Detailed expense breakdown</p>
-                        </div>
+                        <button class="btn btn-primary" style="margin-top: 16px; width: 100%;">Generate Report</button>
                     </div>
-                    <button class="btn btn-primary" style="margin-top: 16px; width: 100%;">Generate Report</button>
-                </div>
 
-                <div class="card" style="cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
-                    <div style="display: flex; align-items: center; gap: 16px;">
-                        <div style="width: 60px; height: 60px; background: #f3e8ff; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                            <svg width="32" height="32" fill="none" stroke="#8b5cf6" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                            </svg>
+                    <div class="card" style="cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <div style="display: flex; align-items: center; gap: 16px;">
+                            <div style="width: 60px; height: 60px; background: #fef3c7; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <svg width="32" height="32" fill="none" stroke="#f59e0b" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 4px;">Pending Transactions Report</h3>
+                                <p style="font-size: 14px; color: #6b7280;">Outstanding verifications</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 4px;">Class Performance Report</h3>
-                            <p style="font-size: 14px; color: #6b7280;">Compare class financials</p>
-                        </div>
+                        <button class="btn btn-primary" style="margin-top: 16px; width: 100%;">Generate Report</button>
                     </div>
-                    <button class="btn btn-primary" style="margin-top: 16px; width: 100%;">Generate Report</button>
-                </div>
 
-                <div class="card" style="cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
-                    <div style="display: flex; align-items: center; gap: 16px;">
-                        <div style="width: 60px; height: 60px; background: #fef3c7; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                            <svg width="32" height="32" fill="none" stroke="#f59e0b" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
+                    <div class="card" style="cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <div style="display: flex; align-items: center; gap: 16px;">
+                            <div style="width: 60px; height: 60px; background: #e0e7ff; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <svg width="32" height="32" fill="none" stroke="#6366f1" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 4px;">Cash Flow Statement</h3>
+                                <p style="font-size: 14px; color: #6b7280;">Detailed cash flow analysis</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 4px;">Pending Transactions Report</h3>
-                            <p style="font-size: 14px; color: #6b7280;">Outstanding verifications</p>
-                        </div>
+                        <button class="btn btn-primary" style="margin-top: 16px; width: 100%;">Generate Report</button>
                     </div>
-                    <button class="btn btn-primary" style="margin-top: 16px; width: 100%;">Generate Report</button>
-                </div>
-
-                <div class="card" style="cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
-                    <div style="display: flex; align-items: center; gap: 16px;">
-                        <div style="width: 60px; height: 60px; background: #e0e7ff; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                            <svg width="32" height="32" fill="none" stroke="#6366f1" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 4px;">Cash Flow Statement</h3>
-                            <p style="font-size: 14px; color: #6b7280;">Detailed cash flow analysis</p>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary" style="margin-top: 16px; width: 100%;">Generate Report</button>
                 </div>
             </div>
-                </div>
-            </div>
-        </main>
-    </div>
-<script src="sidebar.js" defer></script>`n</body>
+    </main>
+  </div>
+  <script src="sidebar.js"></script>
+</body>
 </html>
-
 
