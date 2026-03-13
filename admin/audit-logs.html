@@ -1,88 +1,123 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Work in Progress</title>
-  <link rel="stylesheet" href="../assets/css/main.css" />
-  <style>
-    body {
-      min-height: 100vh;
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%);
-    }
-    .wip-shell {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem 1rem;
-    }
-    .wip-card {
-      width: 100%;
-      max-width: 720px;
-      background: rgba(255, 255, 255, 0.98);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-xl);
-      padding: 2rem;
-      border: 1px solid var(--gray-200);
-    }
-    .wip-badge {
-      display: inline-block;
-      padding: 0.35rem 0.65rem;
-      border-radius: 999px;
-      background: rgba(245, 158, 11, 0.15);
-      color: #92400e;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      font-size: 0.85rem;
-      border: 1px solid rgba(245, 158, 11, 0.35);
-      margin-bottom: 0.75rem;
-    }
-    .wip-title {
-      font-size: 1.75rem;
-      margin: 0 0 0.5rem 0;
-      color: var(--gray-900);
-    }
-    .wip-desc {
-      margin: 0 0 1.25rem 0;
-      color: var(--gray-700);
-      font-size: 1.05rem;
-    }
-    .wip-links {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      margin-top: 1rem;
-    }
-    .wip-note {
-      margin-top: 1.25rem;
-      padding: 0.9rem 1rem;
-      background: var(--gray-50);
-      border-left: 4px solid var(--primary-color);
-      border-radius: var(--radius-md);
-      color: var(--gray-700);
-    }
-  </style>
+  <title>Audit Logs • Societech Admin</title>
+  <link rel="stylesheet" type="text/css" href="admin-shared-styles.css" />
 </head>
 <body>
-  <div class="wip-shell">
-    <div class="wip-card">
-      <div class="wip-badge">WORK IN PROGRESS</div>
-      <h1 class="wip-title">This page is under construction</h1>
-      <p class="wip-desc">
-        Content and functionality for this page are still being built. Please check back soon.
-      </p>
+  <div class="dashboard-container">
+    <aside id="sidebar-container" class="sidebar"></aside>
+    <main class="main-content">
+      <header class="header">
+        <div class="header-title">
+          <h1>Audit Logs</h1>
+          <div class="header-breadcrumb">Home / Audit Logs</div>
+        </div>
+        <div class="header-actions">
+          <button class="notification-btn" type="button" onclick="alert('5 new notifications')">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+            </svg>
+            <span class="notification-badge">5</span>
+          </button>
+          <div class="profile" onclick="alert('Profile settings')">
+            <div class="profile-img">MA</div>
+            <div class="profile-info">
+              <div class="profile-name">Moderator Admin</div>
+              <div class="profile-role">Administrator</div>
+            </div>
+          </div>
+        </div>
+      </header>
+<div id="audit-logs" class="content-section active">
+                <div class="search-filter-bar">
+                    <div class="search-box">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        <input type="text" placeholder="Search logs...">
+                    </div>
+                    <select class="filter-select">
+                        <option>All Activities</option>
+                        <option>User Login</option>
+                        <option>Payment Changes</option>
+                        <option>Verification</option>
+                        <option>User Management</option>
+                    </select>
+                    <select class="filter-select">
+                        <option>Last 7 Days</option>
+                        <option>Last 30 Days</option>
+                        <option>Last 3 Months</option>
+                    </select>
+                    <button class="btn btn-outline">Export Logs</button>
+                </div>
 
-      <div class="wip-links">
-        <a class="btn btn-outline" href="index.html">Back to this section</a>
-        <a class="btn" href="../public/index.html" style="background: var(--primary-color); color: white;">Go to Home</a>
-      </div>
-
-      <div class="wip-note">
-        If you reached this page from a link, it may not be finished yet.
-      </div>
-    </div>
+                <div class="card">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>User</th>
+                                    <th>Action</th>
+                                    <th>Details</th>
+                                    <th>IP Address</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Mar 10, 2026 2:45 PM</td>
+                                    <td>Admin User</td>
+                                    <td>Approved Transaction</td>
+                                    <td>#TXN-2026-0345 - Grade 11 STEM A</td>
+                                    <td>192.168.1.100</td>
+                                </tr>
+                                <tr>
+                                    <td>Mar 10, 2026 2:30 PM</td>
+                                    <td>Juan Dela Cruz</td>
+                                    <td>Submitted Payment</td>
+                                    <td>Class Fee ₱15,500</td>
+                                    <td>192.168.1.105</td>
+                                </tr>
+                                <tr>
+                                    <td>Mar 10, 2026 1:15 PM</td>
+                                    <td>Admin User</td>
+                                    <td>Updated Fee Configuration</td>
+                                    <td>Organization Fee changed to ₱100</td>
+                                    <td>192.168.1.100</td>
+                                </tr>
+                                <tr>
+                                    <td>Mar 10, 2026 11:20 AM</td>
+                                    <td>Admin User</td>
+                                    <td>Assigned Role</td>
+                                    <td>Maria Santos - Treasurer (Grade 11 ABM A)</td>
+                                    <td>192.168.1.100</td>
+                                </tr>
+                                <tr>
+                                    <td>Mar 10, 2026 10:05 AM</td>
+                                    <td>Admin User</td>
+                                    <td>User Login</td>
+                                    <td>Successful login</td>
+                                    <td>192.168.1.100</td>
+                                </tr>
+                                <tr>
+                                    <td>Mar 9, 2026 4:50 PM</td>
+                                    <td>Admin User</td>
+                                    <td>Rejected Transaction</td>
+                                    <td>#TXN-2026-0343 - Insufficient documentation</td>
+                                    <td>192.168.1.100</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+    </main>
   </div>
+  <script src="sidebar.js"></script>
 </body>
 </html>
+
 

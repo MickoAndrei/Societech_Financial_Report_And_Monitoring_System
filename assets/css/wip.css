@@ -1,0 +1,56 @@
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%);
+}
+.wip-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+.wip-card {
+  width: 100%;
+  max-width: 720px;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  padding: 2rem;
+  border: 1px solid var(--gray-200);
+}
+.wip-badge {
+  display: inline-block;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(245, 158, 11, 0.15);
+  color: #92400e;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  font-size: 0.85rem;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  margin-bottom: 0.75rem;
+}
+.wip-title {
+  font-size: 1.75rem;
+  margin: 0 0 0.5rem 0;
+  color: var(--gray-900);
+}
+.wip-desc {
+  margin: 0 0 1.25rem 0;
+  color: var(--gray-700);
+  font-size: 1.05rem;
+}
+.wip-links {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+.wip-note {
+  margin-top: 1.25rem;
+  padding: 0.9rem 1rem;
+  background: var(--gray-50);
+  border-left: 4px solid var(--primary-color);
+  border-radius: var(--radius-md);
+  color: var(--gray-700);
+}

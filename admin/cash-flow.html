@@ -1,171 +1,168 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Societech Admin Dashboard - Cash Flow</title>
-    <link rel="stylesheet" href="shared.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cash Flow • Societech Admin</title>
+  <link rel="stylesheet" type="text/css" href="admin-shared-styles.css" />
 </head>
 <body>
-    <div class="dashboard-container">
-        <!-- Sidebar -->
-        <aside id="sidebar-container"></aside>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <div class="content-overlay">
-                <!-- Header -->
-                <header class="header">
-                    <div class="header-title">
-                        <h1>Cash Flow Analysis</h1>
-                        <div class="header-breadcrumb">Financial Management / Cash Flow</div>
-                    </div>
-                    <div class="header-actions">
-                        <button class="notification-btn">
-                            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
-                            </svg>
-                            <span class="notification-badge">5</span>
-                        </button>
-                        <div class="profile">
-                            <div class="profile-img">MA</div>
-                            <div>
-                                <div class="profile-name">Moderator Admin</div>
-                                <div class="profile-role">Administrator</div>
+  <div class="dashboard-container">
+    <aside id="sidebar-container" class="sidebar"></aside>
+    <main class="main-content">
+      <header class="header">
+        <div class="header-title">
+          <h1>Cash Flow</h1>
+          <div class="header-breadcrumb">Home / Cash Flow</div>
+        </div>
+        <div class="header-actions">
+          <button class="notification-btn" type="button" onclick="alert('5 new notifications')">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+            </svg>
+            <span class="notification-badge">5</span>
+          </button>
+          <div class="profile" onclick="alert('Profile settings')">
+            <div class="profile-img">MA</div>
+            <div class="profile-info">
+              <div class="profile-name">Moderator Admin</div>
+              <div class="profile-role">Administrator</div>
+            </div>
+          </div>
+        </div>
+      </header>
+<div id="cash-flow" class="content-section active">
+                <div class="stats-grid">
+                    <div class="stat-card green">
+                        <div class="stat-header">
+                            <div class="stat-title">Total Cash Inflows</div>
+                            <div class="stat-icon" style="background: #dcfce7; color: #16a34a;">
+                                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
+                                </svg>
                             </div>
                         </div>
+                        <div class="stat-value">₱845,250</div>
+                        <div class="stat-trend trend-up">
+                            <span>↑ 15.3%</span>
+                            <span style="color: #6b7280;">from last month</span>
+                        </div>
                     </div>
-                </header>
 
-                <div id="cash-flow" class="content-section active">
-        <div class="stats-grid">
-            <div class="stat-card green">
-                <div class="stat-header">
-                    <div class="stat-title">Total Cash Inflows</div>
-                    <div class="stat-icon" style="background: #dcfce7; color: #16a34a;">
-                        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
-                        </svg>
+                    <div class="stat-card red">
+                        <div class="stat-header">
+                            <div class="stat-title">Total Cash Outflows</div>
+                            <div class="stat-icon" style="background: #fee2e2; color: #dc2626;">
+                                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 13l-5 5m0 0l-5-5m5 5V6"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="stat-value">₱324,180</div>
+                        <div class="stat-trend trend-down">
+                            <span>↓ 8.2%</span>
+                            <span style="color: #6b7280;">from last month</span>
+                        </div>
                     </div>
-                </div>
-                <div class="stat-value">845,250</div>
-                <div class="stat-trend trend-up">
-                    <span> 15.3%</span>
-                    <span style="color: #6b7280;">from last month</span>
-                </div>
-            </div>
 
-            <div class="stat-card red">
-                <div class="stat-header">
-                    <div class="stat-title">Total Cash Outflows</div>
-                    <div class="stat-icon" style="background: #fee2e2; color: #dc2626;">
-                        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 13l-5 5m0 0l-5-5m5 5V6"></path>
-                        </svg>
-                    </div>
-                </div>
-                <div class="stat-value">324,180</div>
-                <div class="stat-trend trend-down">
-                    <span> 8.2%</span>
-                    <span style="color: #6b7280;">from last month</span>
-                </div>
-            </div>
-
-            <div class="stat-card blue">
-                <div class="stat-header">
-                    <div class="stat-title">Net Cash Flow</div>
-                    <div class="stat-icon" style="background: #dbeafe; color: #2563eb;">
-                        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                        </svg>
+                    <div class="stat-card blue">
+                        <div class="stat-header">
+                            <div class="stat-title">Net Cash Flow</div>
+                            <div class="stat-icon" style="background: #dbeafe; color: #2563eb;">
+                                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="stat-value">₱521,070</div>
+                        <div class="stat-trend trend-up">
+                            <span>Positive flow</span>
+                        </div>
                     </div>
                 </div>
-                <div class="stat-value">521,070</div>
-                <div class="stat-trend trend-up">
-                    <span>Positive flow</span>
-                </div>
-            </div>
-        </div>
 
-        <div class="grid-2">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">Cash Inflows Breakdown</div>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Source</th>
-                            <th>Amount</th>
-                            <th>Percentage</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Class Fees</td>
-                            <td style="color: #10b981; font-weight: 600;">485,200</td>
-                            <td>57.4%</td>
-                        </tr>
-                        <tr>
-                            <td>Organizational Fees</td>
-                            <td style="color: #10b981; font-weight: 600;">285,500</td>
-                            <td>33.8%</td>
-                        </tr>
-                        <tr>
-                            <td>Event Income</td>
-                            <td style="color: #10b981; font-weight: 600;">52,350</td>
-                            <td>6.2%</td>
-                        </tr>
-                        <tr>
-                            <td>Other Sources</td>
-                            <td style="color: #10b981; font-weight: 600;">22,200</td>
-                            <td>2.6%</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Cash Inflows Breakdown</div>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Source</th>
+                                    <th>Amount</th>
+                                    <th>Percentage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Class Fees</td>
+                                    <td style="color: #10b981; font-weight: 600;">₱485,200</td>
+                                    <td>57.4%</td>
+                                </tr>
+                                <tr>
+                                    <td>Organizational Fees</td>
+                                    <td style="color: #10b981; font-weight: 600;">₱285,500</td>
+                                    <td>33.8%</td>
+                                </tr>
+                                <tr>
+                                    <td>Event Income</td>
+                                    <td style="color: #10b981; font-weight: 600;">₱52,350</td>
+                                    <td>6.2%</td>
+                                </tr>
+                                <tr>
+                                    <td>Other Sources</td>
+                                    <td style="color: #10b981; font-weight: 600;">₱22,200</td>
+                                    <td>2.6%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">Organizational Expenses</div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Organizational Expenses</div>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Amount</th>
+                                    <th>Percentage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Events & Activities</td>
+                                    <td style="color: #ef4444; font-weight: 600;">₱145,800</td>
+                                    <td>45.0%</td>
+                                </tr>
+                                <tr>
+                                    <td>Supplies & Materials</td>
+                                    <td style="color: #ef4444; font-weight: 600;">₱89,200</td>
+                                    <td>27.5%</td>
+                                </tr>
+                                <tr>
+                                    <td>Infrastructure</td>
+                                    <td style="color: #ef4444; font-weight: 600;">₱58,900</td>
+                                    <td>18.2%</td>
+                                </tr>
+                                <tr>
+                                    <td>Administrative</td>
+                                    <td style="color: #ef4444; font-weight: 600;">₱30,280</td>
+                                    <td>9.3%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Category</th>
-                            <th>Amount</th>
-                            <th>Percentage</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Events & Activities</td>
-                            <td style="color: #ef4444; font-weight: 600;">145,800</td>
-                            <td>45.0%</td>
-                        </tr>
-                        <tr>
-                            <td>Supplies & Materials</td>
-                            <td style="color: #ef4444; font-weight: 600;">89,200</td>
-                            <td>27.5%</td>
-                        </tr>
-                        <tr>
-                            <td>Infrastructure</td>
-                            <td style="color: #ef4444; font-weight: 600;">58,900</td>
-                            <td>18.2%</td>
-                        </tr>
-                        <tr>
-                            <td>Administrative</td>
-                            <td style="color: #ef4444; font-weight: 600;">30,280</td>
-                            <td>9.3%</td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
-        </div>
-                </div>
-            </div>
-        </main>
-    </div>
-<script src="sidebar.js" defer></script>`n</body>
+    </main>
+  </div>
+  <script src="sidebar.js"></script>
+</body>
 </html>
+
+
+
 
