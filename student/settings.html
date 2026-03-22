@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings • Student Portal</title>
+  <!-- Global base styles shared across the app -->
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <!-- Student-specific layout and component styles -->
+  <link rel="stylesheet" href="student.css" />
+</head>
+<body class="student-layout" data-page="settings">
+
+  <!-- ============================================================
+       SHELL: Outer wrapper that holds the sidebar + main content
+       in a side-by-side flex layout
+  ============================================================ -->
+  <div class="student-shell">
+
+    <!-- Sidebar: Empty on load, populated by student-bar.js -->
+    <aside id="sidebar-container" class="sidebar"></aside>
+
+    <!-- ============================================================
+         MAIN CONTENT: Everything to the right of the sidebar
+    ============================================================ -->
+    <div class="student-content">
+
+      <!-- ── Top Bar ──────────────────────────────────────────────
+           Sticky header with notification bell and profile menu
+      ──────────────────────────────────────────────────────────── -->
+      <header class="student-topbar">
+        <div class="header-actions">
+
+          <!-- Notification bell with unread badge -->
+          <button class="notification-btn" type="button" onclick="alert('5 new notifications')">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+            </svg>
+            <span class="notification-badge">5</span>
+          </button>
+
+          <!-- Profile avatar — toggles the dropdown menu on click -->
+          <div class="profile" onclick="toggleProfileMenu()">
+            <div class="profile-img">SU</div>
+            <div class="profile-info">
+              <div class="profile-name">Student User</div>
+              <div class="profile-role">Student</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Profile dropdown menu (hidden by default, toggled via JS) -->
+        <div class="profile-menu" id="profileMenu">
+          <button type="button" onclick="window.location.href='settings.html'">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            Settings
+          </button>
+          <button type="button" onclick="logout()">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+            </svg>
+            Logout
+          </button>
+        </div>
+      </header>
+      <!-- ── End Top Bar ─────────────────────────────────────── -->
+
+      <!-- ── Page Body ────────────────────────────────────────────
+           Scrollable content area with frosted glass overlay card
+      ──────────────────────────────────────────────────────────── -->
+      <main class="student-main">
+        <div class="student-content-overlay">
+
+          <!-- ── Section: Settings ──────────────────────────────
+               Three settings cards in a responsive grid:
+               Notification preferences, password change,
+               and personal information update
+          ──────────────────────────────────────────────────────── -->
+          <section class="student-section">
+            <h2 class="section-title">Settings</h2>
+            <p class="section-subtitle">Manage your account preferences and personal information</p>
+
+            <div class="settings-grid">
+
+              <!-- ── Card: Notification Settings ───────────────
+                   Checkboxes for toggling notification types.
+                   Saved via saveNotificationSettings() in settings.js
+              ──────────────────────────────────────────────────── -->
+              <div class="settings-card">
+                <div class="card-header">
+                  <h3>Notification Settings</h3>
+                  <p>Choose what notifications you want to receive</p>
+                </div>
+                <div class="card-content">
+                  <div class="form-group">
+                    <label class="checkbox-label">
+                      <input type="checkbox" id="paymentReminders" checked>
+                      <span class="checkmark"></span>
+                      Payment Reminders
+                    </label>
+                  </div>
+                  <div class="form-group">
+                    <label class="checkbox-label">
+                      <input type="checkbox" id="systemUpdates" checked>
+                      <span class="checkmark"></span>
+                      System Updates
+                    </label>
+                  </div>
+                  <div class="form-group">
+                    <label class="checkbox-label">
+                      <input type="checkbox" id="classAnnouncements">
+                      <span class="checkmark"></span>
+                      Class Announcements
+                    </label>
+                  </div>
+                  <div class="form-group">
+                    <label class="checkbox-label">
+                      <input type="checkbox" id="financialAlerts" checked>
+                      <span class="checkmark"></span>
+                      Financial Alerts
+                    </label>
+                  </div>
+                  <button class="btn btn-primary" onclick="saveNotificationSettings()">Save Preferences</button>
+                </div>
+              </div>
+              <!-- ── End Notification Settings ──────────────── -->
+
+              <!-- ── Card: Change Password ──────────────────────
+                   Three password fields validated and submitted
+                   via changePassword() in settings.js
+              ──────────────────────────────────────────────────── -->
+              <div class="settings-card">
+                <div class="card-header">
+                  <h3>Change Password</h3>
+                  <p>Update your account password</p>
+                </div>
+                <div class="card-content">
+                  <div class="form-group">
+                    <label class="form-label">Current Password</label>
+                    <input type="password" class="form-input" id="currentPassword" placeholder="Enter current password">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">New Password</label>
+                    <input type="password" class="form-input" id="newPassword" placeholder="Enter new password">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Confirm New Password</label>
+                    <input type="password" class="form-input" id="confirmPassword" placeholder="Confirm new password">
+                  </div>
+                  <button class="btn btn-primary" onclick="changePassword()">Change Password</button>
+                </div>
+              </div>
+              <!-- ── End Change Password ────────────────────── -->
+
+              <!-- ── Card: Personal Information ─────────────────
+                   Editable profile fields including a file input
+                   for profile picture preview via settings.js
+              ──────────────────────────────────────────────────── -->
+              <div class="settings-card">
+                <div class="card-header">
+                  <h3>Personal Information</h3>
+                  <p>Update your personal details</p>
+                </div>
+                <div class="card-content">
+                  <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" id="fullName" placeholder="Enter your full name">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" id="email" placeholder="Enter your email">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" class="form-input" id="phone" placeholder="Enter your phone number">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Program / Year</label>
+                    <input type="text" class="form-input" id="program" placeholder="e.g., BS Computer Science - 3rd Year">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Profile Picture</label>
+                    <!-- onchange triggers a live preview via previewProfilePicture() in settings.js -->
+                    <input type="file" class="form-input" id="profilePicture" accept="image/*" onchange="previewProfilePicture()">
+                    <div class="profile-preview">
+                      <img id="profilePreview" src="" alt="Profile Preview" style="display: none; width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-top: 10px;">
+                    </div>
+                  </div>
+                  <button class="btn btn-primary" onclick="savePersonalInfo()">Save Information</button>
+                </div>
+              </div>
+              <!-- ── End Personal Information ───────────────── -->
+
+            </div>
+          </section>
+          <!-- ── End Settings ────────────────────────────────── -->
+
+        </div>
+      </main>
+      <!-- ── End Page Body ───────────────────────────────────── -->
+
+    </div>
+    <!-- ── End Main Content ──────────────────────────────────── -->
+
+  </div>
+  <!-- ── End Shell ─────────────────────────────────────────── -->
+
+  <!-- student.js: Handles search, profile menu toggle, logout -->
+  <script src="student.js"></script>
+  <!-- settings.js: Handles save/change password/profile picture preview -->
+  <script src="settings.js"></script>
+  <!-- student-bar.js: Dynamically injects the student sidebar -->
+  <script src="student-bar.js"></script>
+
+</body>
+</html>

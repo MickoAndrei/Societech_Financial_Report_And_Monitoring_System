@@ -17,6 +17,7 @@ node_modules/
 # Ignore build files
 dist/
 build/
+new-files/
 
 # Allow all project files
 !*.html
