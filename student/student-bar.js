@@ -1,16 +1,39 @@
-document.addEventListener('DOMContentLoaded', function() {
+/* ============================================================
+   student-bar.js
+   Dynamically injects the student sidebar into any student
+   page that has <aside id="sidebar-container" class="sidebar">
+   Mirrors the structure of bar.js (admin sidebar) but with
+   student-specific navigation links and labeling.
+============================================================ */
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  /* Target the empty <aside> placeholder in the HTML */
   const sidebarContainer = document.getElementById('sidebar-container');
   if (!sidebarContainer) return;
 
+  /* Detect the current page filename to highlight the active nav link */
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';
 
+  /* ── Sidebar HTML Template ──────────────────────────────────
+     Built as a template literal so currentPath comparisons
+     can set the 'active' class dynamically on the correct link
+  ──────────────────────────────────────────────────────────── */
   const sidebarHTML = `
+
+    <!-- Sidebar header: logo, app name, role label -->
     <div class="sidebar-header">
       <img class="societech_logo" src="../assets/images/societech_logo.png" alt="Societech Logo">
       <div class="sidebar-title">SOCIETECH</div>
       <div class="sidebar-subtitle">Student Dashboard</div>
     </div>
+
+    <!-- Sidebar navigation -->
     <nav class="sidebar-nav">
+
+      <!-- ── Main ─────────────────────────────────────────────
+           Primary landing page for the student portal
+      ──────────────────────────────────────────────────────── -->
       <div class="nav-section">
         <div class="nav-section-title">Main</div>
         <a href="index.html" class="nav-item ${currentPath === 'index.html' || currentPath === '' ? 'active' : ''}">
@@ -21,6 +44,9 @@ document.addEventListener('DOMContentLoaded', function() {
         </a>
       </div>
 
+      <!-- ── Finance ───────────────────────────────────────────
+           Financial records and cash contribution pages
+      ──────────────────────────────────────────────────────── -->
       <div class="nav-section">
         <div class="nav-section-title">Finance</div>
         <a href="financial-records.html" class="nav-item ${currentPath === 'financial-records.html' ? 'active' : ''}">
@@ -37,6 +63,9 @@ document.addEventListener('DOMContentLoaded', function() {
         </a>
       </div>
 
+      <!-- ── Account ───────────────────────────────────────────
+           Notification inbox and account settings
+      ──────────────────────────────────────────────────────── -->
       <div class="nav-section">
         <div class="nav-section-title">Account</div>
         <a href="notifications.html" class="nav-item ${currentPath === 'notifications.html' ? 'active' : ''}">
@@ -53,8 +82,12 @@ document.addEventListener('DOMContentLoaded', function() {
           Settings
         </a>
       </div>
+
     </nav>
   `;
+  /* ── End Sidebar HTML Template ──────────────────────────── */
 
+  /* Inject the sidebar HTML into the placeholder <aside> */
   sidebarContainer.innerHTML = sidebarHTML;
+
 });
