@@ -3,86 +3,110 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Work in Progress</title>
+  <title>Profile</title>
   <link rel="stylesheet" href="../assets/css/main.css" />
-  <style>
-    body {
-      min-height: 100vh;
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%);
-    }
-    .wip-shell {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem 1rem;
-    }
-    .wip-card {
-      width: 100%;
-      max-width: 720px;
-      background: rgba(255, 255, 255, 0.98);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-xl);
-      padding: 2rem;
-      border: 1px solid var(--gray-200);
-    }
-    .wip-badge {
-      display: inline-block;
-      padding: 0.35rem 0.65rem;
-      border-radius: 999px;
-      background: rgba(245, 158, 11, 0.15);
-      color: #92400e;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      font-size: 0.85rem;
-      border: 1px solid rgba(245, 158, 11, 0.35);
-      margin-bottom: 0.75rem;
-    }
-    .wip-title {
-      font-size: 1.75rem;
-      margin: 0 0 0.5rem 0;
-      color: var(--gray-900);
-    }
-    .wip-desc {
-      margin: 0 0 1.25rem 0;
-      color: var(--gray-700);
-      font-size: 1.05rem;
-    }
-    .wip-links {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      margin-top: 1rem;
-    }
-    .wip-note {
-      margin-top: 1.25rem;
-      padding: 0.9rem 1rem;
-      background: var(--gray-50);
-      border-left: 4px solid var(--primary-color);
-      border-radius: var(--radius-md);
-      color: var(--gray-700);
-    }
-  </style>
+  <link rel="stylesheet" href="student.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
-<body>
-  <div class="wip-shell">
-    <div class="wip-card">
-      <div class="wip-badge">WORK IN PROGRESS</div>
-      <h1 class="wip-title">This page is under construction</h1>
-      <p class="wip-desc">
-        Content and functionality for this page are still being built. Please check back soon.
-      </p>
-
-      <div class="wip-links">
-        <a class="btn btn-outline" href="index.html">Back to this section</a>
-        <a class="btn" href="../public/index.html" style="background: var(--primary-color); color: white;">Go to Home</a>
+<body class="student-layout" data-page="profile">
+  <div class="student-shell">
+    <aside class="student-sidebar">
+      <div class="student-brand">
+        <div class="student-avatar">S</div>
+        <div>
+          <h2>Student Portal</h2>
+          <p>Financial Overview</p>
+        </div>
       </div>
+      <nav>
+        <ul class="student-nav">
+          <li><a href="index.html" data-page="dashboard"><i class="fa fa-table-columns"></i>Dashboard</a></li>
+          <li><a href="financial-records.html" data-page="records"><i class="fa fa-wallet"></i>My Financial Records</a></li>
+          <li><a href="contributions.html" data-page="contributions"><i class="fa fa-coins"></i>Cash Contributions</a></li>
+          <li><a href="notifications.html" data-page="notifications"><i class="fa fa-bell"></i>Notifications</a></li>
+          <li><a href="profile.html" data-page="profile"><i class="fa fa-user"></i>Profile</a></li>
+        </ul>
+      </nav>
+    </aside>
 
-      <div class="wip-note">
-        If you reached this page from a link, it may not be finished yet.
-      </div>
+    <div class="student-content">
+      <header class="student-topbar">
+        <div class="student-user">
+          <button class="student-user-toggle" type="button">
+            <i class="fa fa-user"></i>
+            Username
+            <i class="fa fa-chevron-down"></i>
+          </button>
+          <div class="student-user-menu">
+            <button type="button"><i class="fa fa-key"></i>Change Password</button>
+            <button type="button"><i class="fa fa-right-from-bracket"></i>Logout</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="student-main">
+        <section class="student-section">
+          <h2 class="section-title">Personal Information</h2>
+          <div class="student-card">
+            <div class="form-group">
+              <label class="form-label" for="studentName">Full Name</label>
+              <input class="form-input" id="studentName" type="text" value="Micko Andrei M. Medina" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="studentEmail">Email</label>
+              <input class="form-input" id="studentEmail" type="email" value="student@example.com" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="studentPhone">Phone</label>
+              <input class="form-input" id="studentPhone" type="tel" value="+63 912 345 6789" />
+            </div>
+            <button class="btn btn-primary" type="button">Save Changes</button>
+          </div>
+        </section>
+
+        <section class="student-section">
+          <h2 class="section-title">Change Password</h2>
+          <div class="student-card">
+            <div class="form-group">
+              <label class="form-label" for="currentPassword">Current Password</label>
+              <input class="form-input" id="currentPassword" type="password" placeholder="Enter current password" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="newPassword">New Password</label>
+              <input class="form-input" id="newPassword" type="password" placeholder="Enter new password" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="confirmPassword">Confirm Password</label>
+              <input class="form-input" id="confirmPassword" type="password" placeholder="Confirm new password" />
+            </div>
+            <button class="btn btn-primary" type="button">Update Password</button>
+          </div>
+        </section>
+
+        <section class="student-section">
+          <h2 class="section-title">Notification Settings</h2>
+          <div class="student-card">
+            <div class="form-group">
+              <label class="form-label" for="emailNotif">Email Notifications</label>
+              <select class="form-select" id="emailNotif">
+                <option>Enabled</option>
+                <option>Disabled</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="smsNotif">SMS Notifications</label>
+              <select class="form-select" id="smsNotif">
+                <option>Enabled</option>
+                <option>Disabled</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" type="button">Save Preferences</button>
+          </div>
+        </section>
+      </main>
     </div>
   </div>
+
+  <script src="student.js"></script>
 </body>
 </html>
-
