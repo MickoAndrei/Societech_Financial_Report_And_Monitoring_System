@@ -1,7 +1,42 @@
 (function () {
   const body = document.body;
   const page = body.getAttribute('data-page');
+  const pageMeta = {
+    dashboard: {
+      title: 'Dashboard',
+      breadcrumb: 'Overview of your balances, payments, and updates'
+    },
+    records: {
+      title: 'My Financial Records',
+      breadcrumb: 'Track your balances, payment history, and fee breakdown'
+    },
+    contributions: {
+      title: 'Cash Contributions',
+      breadcrumb: 'View class and organizational contribution requirements'
+    },
+    notifications: {
+      title: 'Notifications',
+      breadcrumb: 'Stay updated on reminders, announcements, and verification status'
+    },
+    settings: {
+      title: 'Settings',
+      breadcrumb: 'Manage your account preferences and personal information'
+    },
+    profile: {
+      title: 'Profile',
+      breadcrumb: 'Review and update your personal and account details'
+    }
+  };
   const navLinks = document.querySelectorAll('.student-nav a');
+  const topbar = document.querySelector('.student-topbar');
+
+  if (topbar && !topbar.querySelector('.header-title')) {
+    const meta = pageMeta[page] || { title: 'Student Portal', breadcrumb: 'Manage your account information and finances' };
+    const heading = document.createElement('div');
+    heading.className = 'header-title';
+    heading.innerHTML = `<h1>${meta.title}</h1><div class="header-breadcrumb">${meta.breadcrumb}</div>`;
+    topbar.prepend(heading);
+  }
 
   navLinks.forEach((link) => {
     if (link.dataset.page === page) {

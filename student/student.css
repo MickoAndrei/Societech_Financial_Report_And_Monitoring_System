@@ -22,6 +22,11 @@
 ──────────────────────────────────────────────────────────── */
 body.student-layout {
   background: var(--gray-100);
+  background-image: url('../assets/images/d6d628d6-1548-4d35-8176-5656c91409f5.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .student-shell {
@@ -80,7 +85,7 @@ body.student-layout {
   font-weight: 500;
 }
 
-/* Nav wrapper with top/bottom padding */
+/* Nav wrapper with top/bottom padding */ 
 .sidebar-nav {
   padding: 16px 0;
 }
@@ -153,10 +158,16 @@ body.student-layout {
   border-bottom: 1px solid var(--student-border);
   padding: 0.9rem 1.5rem;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   position: sticky;
   top: 0;
   z-index: 10;
+}
+
+.header-title {
+  margin-right: auto;
+  text-align: left;
 }
 
 .header-actions {
@@ -280,12 +291,18 @@ body.student-layout {
 
 /* Frosted glass card that wraps all content sections */
 .student-content-overlay {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: 1rem;
-  padding: 2rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0;
+}
+
+.student-content-overlay > .student-section + .student-section {
+  margin-top: 0.75rem;
+}
+
+.student-dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  align-items: stretch;
 }
 
 
@@ -293,17 +310,34 @@ body.student-layout {
    Each dashboard block (Uncleared, Cleared, Overview, etc.)
 ──────────────────────────────────────────────────────────── */
 .student-section {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
+  background: #ffffff;
+  border: 1px solid var(--student-border);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  height: 100%;
+}
+
+.student-section-wide {
+  grid-column: 1 / -1;
+}
+
+.student-section-half {
+  grid-column: 1 / -1;
 }
 
 .section-title {
   font-size: 1.25rem;
-  margin-bottom: 0.75rem;
+  margin: 0;
 }
 
 .section-subtitle {
   color: var(--student-muted);
-  margin-bottom: 1rem;
+  margin: -0.25rem 0 0;
 }
 
 
@@ -322,6 +356,35 @@ body.student-layout {
   border-radius: 0.9rem;
   padding: 1rem;
   box-shadow: var(--shadow-sm);
+}
+
+.student-section > .student-card + .student-card {
+  margin-top: 1rem;
+}
+
+.student-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.student-list-item {
+  padding: 0.9rem 0;
+}
+
+.student-list-item:first-child {
+  padding-top: 0;
+}
+
+.student-list-item:last-child {
+  padding-bottom: 0;
+}
+
+.student-list-item + .student-list-item {
+  border-top: 1px solid #e5e7eb;
+}
+
+.student-list-item h4 {
+  margin: 0 0 0.25rem 0;
 }
 
 .student-card h4 {
@@ -416,6 +479,17 @@ body.student-layout {
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 1.5rem;
   margin-top: 2rem;
+}
+
+body[data-page="settings"] .student-section {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+body[data-page="settings"] .settings-grid {
+  margin-top: 0;
 }
 
 .settings-card {
@@ -570,6 +644,19 @@ body.student-layout {
 }
 
 @media (max-width: 768px) {
+  .student-content-overlay {
+    padding: 1.25rem;
+  }
+
+  .student-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .student-section-wide,
+  .student-section-half {
+    grid-column: auto;
+  }
+
   .settings-grid {
     grid-template-columns: 1fr;
   }

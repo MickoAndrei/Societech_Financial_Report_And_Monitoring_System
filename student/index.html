@@ -4,34 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Student Dashboard</title>
-  <!-- Global base styles shared across the app -->
   <link rel="stylesheet" href="../assets/css/main.css" />
-  <!-- Student-specific layout and component styles -->
   <link rel="stylesheet" href="student.css" />
 </head>
 <body class="student-layout" data-page="dashboard">
-
-  <!-- ============================================================
-       SHELL: Outer wrapper that holds the sidebar + main content
-       in a side-by-side flex layout
-  ============================================================ -->
   <div class="student-shell">
-
-    <!-- Sidebar: Empty on load, populated by student-bar.js -->
     <aside id="sidebar-container" class="sidebar"></aside>
 
-    <!-- ============================================================
-         MAIN CONTENT: Everything to the right of the sidebar
-    ============================================================ -->
     <div class="student-content">
-
-      <!-- ── Top Bar ──────────────────────────────────────────────
-           Sticky header with notification bell and profile menu
-      ──────────────────────────────────────────────────────────── -->
       <header class="student-topbar">
         <div class="header-actions">
-
-          <!-- Notification bell with unread badge -->
           <button class="notification-btn" type="button" onclick="alert('5 new notifications')">
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
@@ -39,7 +21,6 @@
             <span class="notification-badge">5</span>
           </button>
 
-          <!-- Profile avatar — toggles the dropdown menu on click -->
           <div class="profile" onclick="toggleProfileMenu()">
             <div class="profile-img">SU</div>
             <div class="profile-info">
@@ -47,10 +28,8 @@
               <div class="profile-role">Student</div>
             </div>
           </div>
-
         </div>
 
-        <!-- Profile dropdown menu (hidden by default, toggled via JS) -->
         <div class="profile-menu" id="profileMenu">
           <button type="button" onclick="window.location.href='settings.html'">
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -67,199 +46,157 @@
           </button>
         </div>
       </header>
-      <!-- ── End Top Bar ─────────────────────────────────────── -->
 
-      <!-- ── Page Body ────────────────────────────────────────────
-           Scrollable content area with frosted glass overlay card
-      ──────────────────────────────────────────────────────────── -->
       <main class="student-main">
         <div class="student-content-overlay">
-
-          <!-- ── Section: Uncleared Items ───────────────────────
-               Shows outstanding/overdue liabilities with search
-          ──────────────────────────────────────────────────────── -->
-          <section class="student-section">
-            <h2 class="section-title">Uncleared Items</h2>
-            <p class="section-subtitle">First view on load: outstanding liabilities</p>
-
-            <!-- Live search filters rows in #unclearedTable via student.js -->
-            <div class="student-search">
-              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-              </svg>
-              <input type="text" id="unclearedSearch" placeholder="Search liabilities..." onkeyup="studentSearchTable('unclearedTable','unclearedSearch')" />
-            </div>
-
-            <table class="student-table" id="unclearedTable">
-              <thead>
-                <tr>
-                  <th>Liability</th>
-                  <th>Deadline</th>
-                  <th>Amount</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Tuition Fee - Semester 2</td>
-                  <td>2026-05-20</td>
-                  <td>₱12,000.00</td>
-                  <td><span class="status-pill status-pending">Pending</span></td>
-                </tr>
-                <tr>
-                  <td>Library Card Replacement</td>
-                  <td>2026-04-10</td>
-                  <td>₱350.00</td>
-                  <td><span class="status-pill status-warning">Overdue</span></td>
-                </tr>
-                <tr>
-                  <td>Laboratory Fee</td>
-                  <td>2026-04-30</td>
-                  <td>₱1,500.00</td>
-                  <td><span class="status-pill status-pending">Pending</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </section>
-          <!-- ── End Uncleared Items ─────────────────────────── -->
-
-          <!-- ── Section: Cleared Items ─────────────────────────
-               Shows fees that have already been paid/cleared
-          ──────────────────────────────────────────────────────── -->
-          <section class="student-section">
-            <h2 class="section-title">Cleared Items</h2>
-            <p class="section-subtitle">Recently cleared liabilities</p>
-            <table class="student-table">
-              <thead>
-                <tr>
-                  <th>Liability</th>
-                  <th>Paid</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Sports Fee</td>
-                  <td>₱800.00</td>
-                  <td><span class="status-pill status-cleared">Cleared</span></td>
-                </tr>
-                <tr>
-                  <td>Registration Fee</td>
-                  <td>₱1,200.00</td>
-                  <td><span class="status-pill status-cleared">Cleared</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </section>
-          <!-- ── End Cleared Items ───────────────────────────── -->
-
-          <!-- ── Section: Overview ──────────────────────────────
-               Summary cards: total balance, next due date,
-               and total payments made this term
-          ──────────────────────────────────────────────────────── -->
-          <section class="student-section">
-            <h2 class="section-title">Overview</h2>
-            <div class="student-grid">
-              <div class="student-card">
-                <h4>Total Balance</h4>
-                <p class="student-meta">₱14,650.00 remaining</p>
+          <div class="student-dashboard-grid">
+            <section class="student-section student-section-wide">
+              <h2 class="section-title">Overview</h2>
+              <div class="student-grid">
+                <div class="student-card">
+                  <h4>Total Balance</h4>
+                  <p class="student-meta">P14,650.00 remaining</p>
+                </div>
+                <div class="student-card">
+                  <h4>Next Due Date</h4>
+                  <p class="student-meta">April 10, 2026</p>
+                </div>
+                <div class="student-card">
+                  <h4>Payments This Term</h4>
+                  <p class="student-meta">P9,300.00</p>
+                </div>
               </div>
-              <div class="student-card">
-                <h4>Next Due Date</h4>
-                <p class="student-meta">April 10, 2026</p>
-              </div>
-              <div class="student-card">
-                <h4>Payments This Term</h4>
-                <p class="student-meta">₱9,300.00</p>
-              </div>
-            </div>
-          </section>
-          <!-- ── End Overview ────────────────────────────────── -->
+            </section>
 
-          <!-- ── Section: Balance Summary ───────────────────────
-               Breakdown of tuition, fees, and scholarship applied
-          ──────────────────────────────────────────────────────── -->
-          <section class="student-section">
-            <h2 class="section-title">Balance Summary</h2>
-            <div class="student-grid">
-              <div class="student-card">
-                <h4>Tuition</h4>
-                <p class="student-meta">₱12,000.00</p>
+            <section class="student-section student-section-wide">
+              <h2 class="section-title">Uncleared Items</h2>
+              <p class="section-subtitle">First view on load: outstanding liabilities</p>
+              <div class="student-search">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                <input type="text" id="unclearedSearch" placeholder="Search liabilities..." onkeyup="studentSearchTable('unclearedTable','unclearedSearch')" />
               </div>
-              <div class="student-card">
-                <h4>Fees</h4>
-                <p class="student-meta">₱2,650.00</p>
+              <table class="student-table" id="unclearedTable">
+                <thead>
+                  <tr>
+                    <th>Liability</th>
+                    <th>Deadline</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Tuition Fee - Semester 2</td>
+                    <td>2026-05-20</td>
+                    <td>P12,000.00</td>
+                    <td><span class="status-pill status-pending">Pending</span></td>
+                  </tr>
+                  <tr>
+                    <td>Library Card Replacement</td>
+                    <td>2026-04-10</td>
+                    <td>P350.00</td>
+                    <td><span class="status-pill status-warning">Overdue</span></td>
+                  </tr>
+                  <tr>
+                    <td>Laboratory Fee</td>
+                    <td>2026-04-30</td>
+                    <td>P1,500.00</td>
+                    <td><span class="status-pill status-pending">Pending</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+
+            <section class="student-section student-section-wide">
+              <h2 class="section-title">Cleared Items</h2>
+              <p class="section-subtitle">Recently cleared liabilities</p>
+              <table class="student-table">
+                <thead>
+                  <tr>
+                    <th>Liability</th>
+                    <th>Paid</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Sports Fee</td>
+                    <td>P800.00</td>
+                    <td><span class="status-pill status-cleared">Cleared</span></td>
+                  </tr>
+                  <tr>
+                    <td>Registration Fee</td>
+                    <td>P1,200.00</td>
+                    <td><span class="status-pill status-cleared">Cleared</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+
+            <section class="student-section student-section-wide">
+              <h2 class="section-title">Balance Summary</h2>
+              <div class="student-grid">
+                <div class="student-card">
+                  <h4>Tuition</h4>
+                  <p class="student-meta">P12,000.00</p>
+                </div>
+                <div class="student-card">
+                  <h4>Fees</h4>
+                  <p class="student-meta">P2,650.00</p>
+                </div>
               </div>
-              <div class="student-card">
-                <h4>Scholarship Applied</h4>
-                <p class="student-meta">₱3,000.00</p>
+            </section>
+
+            <section class="student-section student-section-wide">
+              <h2 class="section-title">Recent Transactions</h2>
+              <table class="student-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>2026-03-15</td>
+                    <td>Tuition Partial Payment</td>
+                    <td>P5,000.00</td>
+                    <td><span class="status-pill status-cleared">Posted</span></td>
+                  </tr>
+                  <tr>
+                    <td>2026-03-02</td>
+                    <td>Lab Fee</td>
+                    <td>P1,500.00</td>
+                    <td><span class="status-pill status-cleared">Posted</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+
+            <section class="student-section student-section-wide">
+              <h2 class="section-title">Announcements</h2>
+              <div class="student-list">
+                <div class="student-list-item">
+                  <h4>Payment Assistance Window</h4>
+                  <p class="student-meta">Apply for installment plans until April 25, 2026.</p>
+                </div>
+                <div class="student-list-item">
+                  <h4>System Maintenance</h4>
+                  <p class="student-meta">Student portal scheduled for maintenance on March 30, 2026.</p>
+                </div>
               </div>
-            </div>
-          </section>
-          <!-- ── End Balance Summary ─────────────────────────── -->
-
-          <!-- ── Section: Recent Transactions ──────────────────
-               Latest posted payment records for this student
-          ──────────────────────────────────────────────────────── -->
-          <section class="student-section">
-            <h2 class="section-title">Recent Transactions</h2>
-            <table class="student-table">
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Description</th>
-                  <th>Amount</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>2026-03-15</td>
-                  <td>Tuition Partial Payment</td>
-                  <td>₱5,000.00</td>
-                  <td><span class="status-pill status-cleared">Posted</span></td>
-                </tr>
-                <tr>
-                  <td>2026-03-02</td>
-                  <td>Lab Fee</td>
-                  <td>₱1,500.00</td>
-                  <td><span class="status-pill status-cleared">Posted</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </section>
-          <!-- ── End Recent Transactions ────────────────────── -->
-
-          <!-- ── Section: Announcements ─────────────────────────
-               System-wide notices posted by admin/moderators
-          ──────────────────────────────────────────────────────── -->
-          <section class="student-section">
-            <h2 class="section-title">Announcements</h2>
-            <div class="student-card">
-              <h4>Payment Assistance Window</h4>
-              <p class="student-meta">Apply for installment plans until April 25, 2026.</p>
-            </div>
-            <div class="student-card">
-              <h4>System Maintenance</h4>
-              <p class="student-meta">Student portal scheduled for maintenance on March 30, 2026.</p>
-            </div>
-          </section>
-          <!-- ── End Announcements ───────────────────────────── -->
-
+            </section>
+          </div>
         </div>
       </main>
-      <!-- ── End Page Body ───────────────────────────────────── -->
-
     </div>
-    <!-- ── End Main Content ──────────────────────────────────── -->
-
   </div>
-  <!-- ── End Shell ─────────────────────────────────────────── -->
 
-  <!-- student.js: Handles search, profile menu toggle, logout -->
   <script src="student.js"></script>
-  <!-- student-bar.js: Dynamically injects the student sidebar -->
   <script src="student-bar.js"></script>
-
 </body>
 </html>
