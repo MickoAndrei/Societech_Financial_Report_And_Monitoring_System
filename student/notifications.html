@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Notifications</title>
+  <title>Notifications • Societech Student</title>
   <!-- Global base styles shared across the app -->
   <link rel="stylesheet" href="../assets/css/main.css" />
   <!-- Student-specific layout and component styles -->
@@ -32,26 +32,26 @@
       <header class="student-topbar">
         <div class="header-title">
           <h1>Notifications</h1>
-          <div class="header-breadcrumb">Stay updated on reminders, announcements, and verifications</div>
+          <div class="header-breadcrumb">Treasurer deadlines, Societech posts, and admin verifications</div>
         </div>
 
         <div class="header-actions">
 
           <!-- Notification bell with unread badge -->
-          <button class="notification-btn" type="button" onclick="alert('5 new notifications')">
+          <button class="notification-btn" type="button" onclick="alert('You have 3 new Societech notifications')">
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
             </svg>
-            <span class="notification-badge">5</span>
+            <span class="notification-badge">3</span>
           </button>
 
           <!-- Profile avatar — toggles the dropdown menu on click -->
           <div class="profile-wrapper">
             <div class="profile" onclick="toggleProfileMenu()">
-              <div class="profile-img">SU</div>
+              <div class="profile-img">AC</div>
               <div class="profile-info">
-                <div class="profile-name">Student User</div>
-                <div class="profile-role">Student</div>
+                <div class="profile-name">Alyssa Cruz</div>
+                <div class="profile-role">BSIT 1A · Societech</div>
               </div>
             </div>
             <div class="profile-menu" id="profileMenu">
@@ -81,6 +81,51 @@
       <main class="student-main">
         <div class="student-content-overlay">
 
+          <!-- ── Stat Summary Cards ─────────────────────────────
+               At-a-glance notification counts with admin-style icons
+          ──────────────────────────────────────────────────────── -->
+          <div class="stats-grid" style="margin-bottom:24px;">
+            <!-- Unread reminders stat card -->
+            <div class="stat-card orange">
+              <div class="stat-header">
+                <div class="stat-title">Payment Reminders</div>
+                <div class="stat-icon">
+                  <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="stat-value">2</div>
+              <div class="stat-trend trend-down">↓ Upcoming deadlines</div>
+            </div>
+            <!-- Announcements stat card -->
+            <div class="stat-card blue">
+              <div class="stat-header">
+                <div class="stat-title">Announcements</div>
+                <div class="stat-icon">
+                  <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="stat-value">1</div>
+              <div class="stat-trend">New system notice</div>
+            </div>
+            <!-- Verification status stat card -->
+            <div class="stat-card green">
+              <div class="stat-header">
+                <div class="stat-title">Verifications</div>
+                <div class="stat-icon">
+                  <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="stat-value">2</div>
+              <div class="stat-trend">Active verification items</div>
+            </div>
+          </div>
+
           <!-- ── Section: Payment Reminders ────────────────────
                Upcoming fee deadlines the student needs to act on
           ──────────────────────────────────────────────────────── -->
@@ -88,12 +133,12 @@
             <h2 class="section-title">Payment Reminders</h2>
             <div class="student-list">
               <div class="student-list-item">
-                <h4>Laboratory Fee Due</h4>
-                <p class="student-meta">Deadline: April 30, 2026</p>
+                <h4>Daily dues &amp; IT Days (Panagmaya)</h4>
+                <p class="student-meta">Deadline: April 5, 2026 · post proof to BSIT 1A treasurer</p>
               </div>
               <div class="student-list-item">
-                <h4>Tuition Balance Reminder</h4>
-                <p class="student-meta">Deadline: May 20, 2026</p>
+                <h4>Societech membership fee</h4>
+                <p class="student-meta">Deadline: March 28, 2026</p>
               </div>
             </div>
           </section>
@@ -105,8 +150,8 @@
           <section class="student-section">
             <h2 class="section-title">Announcements</h2>
             <div class="student-card">
-              <h4>Payment Channels Update</h4>
-              <p class="student-meta">New online payment options available starting April 1, 2026.</p>
+              <h4>Treasurer receipt upload reminder</h4>
+              <p class="student-meta">Societech moderators now require GCash reference on all IT Days payments (effective March 20, 2026).</p>
             </div>
           </section>
           <!-- ── End Announcements ───────────────────────────── -->
@@ -127,12 +172,12 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>Scholarship Verification</td>
-                  <td><span class="status-pill status-pending">In Review</span></td>
-                  <td>2026-03-12</td>
+                  <td>Treasurer payment verification</td>
+                  <td><span class="status-pill status-pending">In review</span></td>
+                  <td>2026-03-14</td>
                 </tr>
                 <tr>
-                  <td>Enrollment Clearance</td>
+                  <td>Societech membership clearance</td>
                   <td><span class="status-pill status-cleared">Verified</span></td>
                   <td>2026-03-05</td>
                 </tr>

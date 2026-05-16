@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Financial Records</title>
+  <title>Financial Records • Societech Student</title>
   <!-- Global base styles shared across the app -->
   <link rel="stylesheet" href="../assets/css/main.css" />
   <!-- Student-specific layout and component styles -->
@@ -32,26 +32,26 @@
       <header class="student-topbar">
         <div class="header-title">
           <h1>Financial Records</h1>
-          <div class="header-breadcrumb">Review balances, payments, and fee breakdown details</div>
+          <div class="header-breadcrumb">Membership, dues, IT Days (Panagmaya), and treasurer-posted payments</div>
         </div>
 
         <div class="header-actions">
 
           <!-- Notification bell with unread badge -->
-          <button class="notification-btn" type="button" onclick="alert('5 new notifications')">
+          <button class="notification-btn" type="button" onclick="alert('You have 3 new Societech notifications')">
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
             </svg>
-            <span class="notification-badge">5</span>
+            <span class="notification-badge">3</span>
           </button>
 
           <!-- Profile avatar — toggles the dropdown menu on click -->
           <div class="profile-wrapper">
             <div class="profile" onclick="toggleProfileMenu()">
-              <div class="profile-img">SU</div>
+              <div class="profile-img">AC</div>
               <div class="profile-info">
-                <div class="profile-name">Student User</div>
-                <div class="profile-role">Student</div>
+                <div class="profile-name">Alyssa Cruz</div>
+                <div class="profile-role">BSIT 1A · Societech</div>
               </div>
             </div>
             <div class="profile-menu" id="profileMenu">
@@ -87,14 +87,32 @@
           ──────────────────────────────────────────────────────── -->
           <section class="student-section">
             <h2 class="section-title">Current Balance</h2>
-            <div class="student-grid">
-              <div class="student-card">
-                <h4>Total Outstanding</h4>
-                <p class="student-meta">₱14,650.00</p>
+            <div class="stats-grid">
+              <!-- Outstanding balance stat card with money icon -->
+              <div class="stat-card red">
+                <div class="stat-header">
+                  <div class="stat-title">Total Outstanding</div>
+                  <div class="stat-icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="stat-value">₱850</div>
+                <div class="stat-trend trend-down">↓ Societech &amp; class assessments</div>
               </div>
-              <div class="student-card">
-                <h4>Next Due</h4>
-                <p class="student-meta">April 10, 2026</p>
+              <!-- Next due date stat card with calendar icon -->
+              <div class="stat-card orange">
+                <div class="stat-header">
+                  <div class="stat-title">Next Due Date</div>
+                  <div class="stat-icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="stat-value" style="font-size:22px;">March 28, 2026</div>
+                <div class="stat-trend">Societech membership &amp; dues</div>
               </div>
             </div>
           </section>
@@ -111,7 +129,7 @@
               <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
               </svg>
-              <input type="text" id="paymentSearch" placeholder="Search payments..." onkeyup="studentSearchTable('paymentTable','paymentSearch')" />
+              <input type="text" id="paymentSearch" placeholder="Search Societech payments…" onkeyup="studentSearchTable('paymentTable','paymentSearch')" />
             </div>
 
             <table class="student-table" id="paymentTable">
@@ -125,15 +143,15 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>2026-03-15</td>
-                  <td>Tuition Partial</td>
-                  <td>₱5,000.00</td>
+                  <td>2026-03-12</td>
+                  <td>Daily Dues — partial (BSIT 1A)</td>
+                  <td>₱200.00</td>
                   <td><span class="status-pill status-cleared">Posted</span></td>
                 </tr>
                 <tr>
-                  <td>2026-02-28</td>
-                  <td>Registration Fee</td>
-                  <td>₱1,200.00</td>
+                  <td>2026-03-05</td>
+                  <td>Society Shirt — Societech</td>
+                  <td>₱150.00</td>
                   <td><span class="status-pill status-cleared">Posted</span></td>
                 </tr>
               </tbody>
@@ -156,19 +174,19 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>Tuition</td>
-                  <td>₱12,000.00</td>
+                  <td>Societech Membership Fee</td>
+                  <td>₱80.00</td>
                   <td><span class="status-pill status-pending">Pending</span></td>
                 </tr>
                 <tr>
-                  <td>Laboratory</td>
-                  <td>₱1,500.00</td>
-                  <td><span class="status-pill status-pending">Pending</span></td>
+                  <td>Daily Dues (semester)</td>
+                  <td>₱400.00</td>
+                  <td><span class="status-pill status-pending">Partial</span></td>
                 </tr>
                 <tr>
-                  <td>Library</td>
-                  <td>₱350.00</td>
-                  <td><span class="status-pill status-warning">Overdue</span></td>
+                  <td>IT Days / Panagmaya</td>
+                  <td>₱280.00</td>
+                  <td><span class="status-pill status-pending">Pending</span></td>
                 </tr>
               </tbody>
             </table>
@@ -186,7 +204,7 @@
               <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
               </svg>
-              <input type="text" id="pendingSearch" placeholder="Search pending..." onkeyup="studentSearchTable('pendingTable','pendingSearch')" />
+              <input type="text" id="pendingSearch" placeholder="Search pending Societech items…" onkeyup="studentSearchTable('pendingTable','pendingSearch')" />
             </div>
 
             <table class="student-table" id="pendingTable">
@@ -200,15 +218,15 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>Tuition Balance</td>
-                  <td>2026-05-20</td>
-                  <td>₱7,000.00</td>
+                  <td>Societech Membership Fee</td>
+                  <td>2026-03-28</td>
+                  <td>₱80.00</td>
                   <td><span class="status-pill status-pending">Pending</span></td>
                 </tr>
                 <tr>
-                  <td>Laboratory Fee</td>
-                  <td>2026-04-30</td>
-                  <td>₱1,500.00</td>
+                  <td>Daily Dues (balance)</td>
+                  <td>2026-04-15</td>
+                  <td>₱200.00</td>
                   <td><span class="status-pill status-pending">Pending</span></td>
                 </tr>
               </tbody>

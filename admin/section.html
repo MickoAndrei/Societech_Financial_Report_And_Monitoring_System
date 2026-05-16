@@ -3,28 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>All Classes • Societech Admin</title>
+  <title>Section • Societech Admin</title>
   <link rel="stylesheet" type="text/css" href="admin-shared-styles.css" />
   <link rel="stylesheet" type="text/css" href="../assets/css/background.css" />
 </head>
-
 <body>
   <div class="page-background"></div>
   <div class="page-content">
-  <div class="dashboard-container">
+    <div class="dashboard-container">
 
-    <aside id="sidebar-container" class="sidebar"></aside>
+      <aside id="sidebar-container" class="sidebar"></aside>
 
-    <main class="main-content">
-      <div class="content-overlay">
-
+      <main class="main-content">
         <header class="header">
           <div class="header-title">
-            <h1>All Classes</h1>
+            <h1 id="pageMainTitle">Section</h1>
+            <div class="header-breadcrumb">Student roster and clearance status for this class</div>
           </div>
 
           <div class="header-actions">
-            <button class="notification-btn" type="button" onclick="toggleNotifications()" aria-label="Notifications">
+            <button class="notification-btn" type="button" onclick="alert('1 new notification')" aria-label="Notifications">
               <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
@@ -33,10 +31,13 @@
               <span class="notification-badge">1</span>
             </button>
 
-            <!-- Profile wrapper with dropdown -->
             <div class="profile-wrapper">
-              <div class="profile" onclick="toggleProfileMenu()" role="button" tabindex="0">
+              <div class="profile" onclick="toggleProfileMenu()">
                 <div class="profile-img" aria-label="Admin profile">AD</div>
+                <div class="profile-info">
+                  <div class="profile-name">Admin</div>
+                  <div class="profile-role">Administrator</div>
+                </div>
               </div>
 
               <div class="profile-menu" id="profileMenu">
@@ -59,19 +60,19 @@
           </div>
         </header>
 
-        <div class="notification-dropdown" id="notificationDropdown">
-          <div class="notification-header">Notifications</div>
-          <div class="notification-item" onclick="alert('Notification: New payment received')">
-            <div class="notification-title">New Payment Received</div>
-            <div class="notification-text">Rico Torres paid ₱80 for BSocietech 2C</div>
-            <div class="notification-time">5 minutes ago</div>
+        <div class="content-section active">
+          <div class="alert alert-info">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path fill-rule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                clip-rule="evenodd">
+              </path>
+            </svg>
+            <span>Membership clearance for this section. Search filters the table; totals below update to match visible rows.</span>
           </div>
-        </div>
 
-        <div class="page-card">
-          <div class="card-body">
-
-            <div class="breadcrumbs">
+          <div class="card section-roster-card">
+            <div class="breadcrumbs roster-breadcrumbs">
               <a class="breadcrumb-link" href="all-classes.html" aria-label="Go to Class Section">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -82,93 +83,86 @@
               </a>
             </div>
 
-            <div class="class-head">
+            <div class="card-header">
               <div>
-                <div class="class-title">Societech 1A</div>
-                <div class="class-meta" aria-label="Class summary">
-                  <span class="meta-item">Total Students: <strong id="totalStudents">5</strong></span>
-                  <span class="meta-item">Cleared: <strong id="clearedCount" style="color: var(--success-fg);">3</strong></span>
-                  <span class="meta-item">Not Cleared: <strong id="notClearedCount" style="color: var(--danger-fg);">2</strong></span>
+                <div class="card-title" id="sectionTitle">Section</div>
+                <div class="card-subtitle">
+                  <span>Total Students: <strong id="totalStudents">5</strong></span>
+                  <span aria-hidden="true" style="color: #d1d5db;"> · </span>
+                  <span>Cleared: <strong id="clearedCount" class="amount-positive">3</strong></span>
+                  <span aria-hidden="true" style="color: #d1d5db;"> · </span>
+                  <span>Not Cleared: <strong id="notClearedCount" class="amount-negative">2</strong></span>
                 </div>
               </div>
-            </div>
-
-            <div class="search-row">
-              <div class="search">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <div class="search-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="18" height="18" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z">
                   </path>
                 </svg>
-                <input id="studentSearch" type="search" placeholder="Search by name or school ID..." autocomplete="off" />
+                <input id="studentSearch" type="search" placeholder="Search by name…" autocomplete="off" />
               </div>
-              <div class="subtle" id="resultCount">Showing 5 students</div>
             </div>
 
-            <div class="table-card" style="padding: 0;">
+            <p class="roster-result-meta" id="resultCount">Showing 5 students</p>
+
+            <div class="table-container">
               <table id="studentsTable" aria-label="Students list">
                 <thead>
                   <tr>
-                    <th style="padding-left: 18px;">Name</th>
-                    <th>School ID</th>
-                    <th style="padding-right: 18px;">Status</th>
+                    <th>Student</th>
+                    <th style="text-align: right; padding-right: 16px;">Status</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr data-name="Alyssa Cruz" data-id="2024-001234" data-status="cleared">
-                    <td style="padding-left: 18px;">Alyssa Cruz</td>
-                    <td>2024-001234</td>
-                    <td style="padding-right: 18px;">
-                      <span class="status-badge status-paid">Cleared</span>
-                    </td>
-                  </tr>
-                  <tr class="row-not-cleared" data-name="Mark Santos" data-id="2024-001235" data-status="not-cleared">
-                    <td style="padding-left: 18px;">Mark Santos</td>
-                    <td>2024-001235</td>
-                    <td style="padding-right: 18px;">
-                      <span class="status-badge status-overdue">Not Cleared</span>
-                    </td>
-                  </tr>
-                  <tr data-name="Kevin Dela Rosa" data-id="2024-001236" data-status="cleared">
-                    <td style="padding-left: 18px;">Kevin Dela Rosa</td>
-                    <td>2024-001236</td>
-                    <td style="padding-right: 18px;">
-                      <span class="status-badge status-paid">Cleared</span>
-                    </td>
-                  </tr>
-                  <tr data-name="Janelle Reyes" data-id="2024-001237" data-status="cleared">
-                    <td style="padding-left: 18px;">Janelle Reyes</td>
-                    <td>2024-001237</td>
-                    <td style="padding-right: 18px;">
-                      <span class="status-badge status-paid">Cleared</span>
-                    </td>
-                  </tr>
-                  <tr class="row-not-cleared" data-name="Paolo Lim" data-id="2024-001238" data-status="not-cleared">
-                    <td style="padding-left: 18px;">Paolo Lim</td>
-                    <td>2024-001238</td>
-                    <td style="padding-right: 18px;">
-                      <span class="status-badge status-overdue">Not Cleared</span>
-                    </td>
-                  </tr>
-                </tbody>
+                <tbody></tbody>
               </table>
             </div>
-
           </div>
         </div>
+      </main>
 
+    </div>
+
+    <div class="modal-overlay" id="studentPaymentsModal" role="dialog" aria-modal="true" aria-labelledby="studentPaymentsTitle">
+      <div class="modal modal-wide">
+        <div class="modal-header">
+          <h2 class="modal-title" id="studentPaymentsTitle">Student</h2>
+          <p class="modal-subtitle" id="studentPaymentsSubtitle"></p>
+        </div>
+        <div class="table-container">
+          <table id="studentPaymentsTable" aria-label="Student fee payments">
+            <thead>
+              <tr>
+                <th>Fee / assessment</th>
+                <th>Amount due</th>
+                <th>Amount paid</th>
+                <th>Balance</th>
+                <th style="text-align: right;">Status</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-close-modal>Close</button>
+        </div>
       </div>
-    </main>
+    </div>
 
-  </div>
-
-  <script src="shared.js"></script>
-  <script src="table-filters.js"></script>
-  <script src="sidebar.js"></script>
-  <script>
-    setupTableFilters('studentSearch', 'studentsTable', 'resultCount', 'totalStudents', 'clearedCount', 'notClearedCount');
-  </script>
-
+    <script src="sidebar.js"></script>
+    <script src="shared.js"></script>
+    <script src="table-filters.js"></script>
+    <script src="section-roster.js"></script>
+    <script>
+      initSectionPage({
+        searchInputId: 'studentSearch',
+        tableId: 'studentsTable',
+        resultCountId: 'resultCount',
+        totalId: 'totalStudents',
+        clearedId: 'clearedCount',
+        notClearedId: 'notClearedCount'
+      });
+    </script>
   </div>
 </body>
 </html>

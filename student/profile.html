@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Profile</title>
+  <title>Profile • Societech Student</title>
   <link rel="stylesheet" href="../assets/css/main.css" />
   <link rel="stylesheet" href="student.css" />
 </head>
@@ -16,23 +16,23 @@
       <header class="student-topbar">
         <div class="header-title">
           <h1>Profile</h1>
-          <div class="header-breadcrumb">Manage your account information and notification preferences</div>
+          <div class="header-breadcrumb">Societech membership and BSIT class account details</div>
         </div>
 
         <div class="header-actions">
-          <button class="notification-btn" type="button" onclick="alert('5 new notifications')">
+          <button class="notification-btn" type="button" onclick="alert('You have 3 new Societech notifications')">
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
             </svg>
-            <span class="notification-badge">5</span>
+            <span class="notification-badge">3</span>
           </button>
 
           <div class="profile-wrapper">
             <div class="profile" onclick="toggleProfileMenu()">
-              <div class="profile-img">SU</div>
+              <div class="profile-img">AC</div>
               <div class="profile-info">
-                <div class="profile-name">Student User</div>
-                <div class="profile-role">Student</div>
+                <div class="profile-name">Alyssa Cruz</div>
+                <div class="profile-role">BSIT 1A · Societech</div>
               </div>
             </div>
 
@@ -59,26 +59,30 @@
         <div class="student-content-overlay">
           <section class="student-section">
             <h2 class="section-title">Personal Information</h2>
-            <p class="section-subtitle">Keep your basic contact details updated.</p>
+            <p class="section-subtitle">Details should match your registrar records and Societech roster.</p>
 
             <div class="settings-grid">
               <div class="settings-card">
                 <div class="card-header">
                   <h3>Account Details</h3>
-                  <p>Update the information shown on your student account.</p>
+                  <p>Shown on receipts and clearance checks for BSIT 1A.</p>
                 </div>
                 <div class="card-content">
                   <div class="form-group">
                     <label class="form-label" for="studentName">Full Name</label>
-                    <input class="form-input" id="studentName" type="text" value="Micko Andrei M. Medina" />
+                    <input class="form-input" id="studentName" type="text" value="Alyssa Cruz" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="studentId">School ID</label>
+                    <input class="form-input" id="studentId" type="text" value="2024-001234" readonly />
                   </div>
                   <div class="form-group">
                     <label class="form-label" for="studentEmail">Email</label>
-                    <input class="form-input" id="studentEmail" type="email" value="student@example.com" />
+                    <input class="form-input" id="studentEmail" type="email" value="alyssa.cruz.bsit1a@societech.demo" />
                   </div>
                   <div class="form-group">
                     <label class="form-label" for="studentPhone">Phone</label>
-                    <input class="form-input" id="studentPhone" type="tel" value="+63 912 345 6789" />
+                    <input class="form-input" id="studentPhone" type="tel" value="+63 917 555 0142" />
                   </div>
                   <button class="btn btn-primary" type="button">Save Changes</button>
                 </div>
@@ -87,7 +91,7 @@
               <div class="settings-card">
                 <div class="card-header">
                   <h3>Change Password</h3>
-                  <p>Refresh your login credentials when needed.</p>
+                  <p>Refresh your Societech Student Portal login.</p>
                 </div>
                 <div class="card-content">
                   <div class="form-group">
@@ -109,13 +113,13 @@
               <div class="settings-card">
                 <div class="card-header">
                   <h3>Notification Preferences</h3>
-                  <p>Choose how you want to receive account reminders.</p>
+                  <p>Fee reminders from your class treasurer and Societech moderators.</p>
                 </div>
                 <div class="card-content">
                   <div class="form-group">
                     <label class="form-label" for="emailNotif">Email Notifications</label>
                     <select class="form-select" id="emailNotif">
-                      <option>Enabled</option>
+                      <option selected>Enabled</option>
                       <option>Disabled</option>
                     </select>
                   </div>
@@ -123,7 +127,7 @@
                     <label class="form-label" for="smsNotif">SMS Notifications</label>
                     <select class="form-select" id="smsNotif">
                       <option>Enabled</option>
-                      <option>Disabled</option>
+                      <option selected>Disabled</option>
                     </select>
                   </div>
                   <button class="btn btn-primary" type="button">Save Preferences</button>

@@ -9,7 +9,7 @@ function loadNotificationSettings() {
   const settings = JSON.parse(localStorage.getItem('studentNotificationSettings') || '{}');
   document.getElementById('paymentReminders').checked = settings.paymentReminders !== false;
   document.getElementById('systemUpdates').checked = settings.systemUpdates !== false;
-  document.getElementById('classAnnouncements').checked = settings.classAnnouncements || false;
+  document.getElementById('classAnnouncements').checked = settings.classAnnouncements !== false;
   document.getElementById('financialAlerts').checked = settings.financialAlerts !== false;
 }
 
@@ -69,10 +69,10 @@ function changePassword() {
 // Personal Information
 function loadPersonalInfo() {
   const info = JSON.parse(localStorage.getItem('studentPersonalInfo') || '{}');
-  document.getElementById('fullName').value = info.fullName || '';
-  document.getElementById('email').value = info.email || '';
-  document.getElementById('phone').value = info.phone || '';
-  document.getElementById('program').value = info.program || '';
+  document.getElementById('fullName').value = info.fullName || 'Alyssa Cruz';
+  document.getElementById('email').value = info.email || 'alyssa.cruz.bsit1a@societech.demo';
+  document.getElementById('phone').value = info.phone || '+63 917 555 0142';
+  document.getElementById('program').value = info.program || 'BSIT 1A — Societech member';
 
   // Load profile picture
   const profilePicture = localStorage.getItem('studentProfilePicture');

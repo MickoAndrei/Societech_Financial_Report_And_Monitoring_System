@@ -4,34 +4,34 @@
   const pageMeta = {
     dashboard: {
       title: 'Dashboard',
-      breadcrumb: 'Overview of your balances, payments, and updates'
+      breadcrumb: 'Societech and BSIT class balances, dues, and updates'
     },
     records: {
       title: 'My Financial Records',
-      breadcrumb: 'Track your balances, payment history, and fee breakdown'
+      breadcrumb: 'Membership, dues, IT Days (Panagmaya), and Societech assessments'
     },
     contributions: {
       title: 'Cash Contributions',
-      breadcrumb: 'View class and organizational contribution requirements'
+      breadcrumb: 'BSIT class fund and Societech society assessments'
     },
     notifications: {
       title: 'Notifications',
-      breadcrumb: 'Stay updated on reminders, announcements, and verification status'
+      breadcrumb: 'Treasurer reminders, Societech news, and verification status'
     },
     settings: {
       title: 'Settings',
-      breadcrumb: 'Manage your account preferences and personal information'
+      breadcrumb: 'Societech Student Portal preferences and security'
     },
     profile: {
       title: 'Profile',
-      breadcrumb: 'Review and update your personal and account details'
+      breadcrumb: 'BSIT class roster and Societech contact details'
     }
   };
   const navLinks = document.querySelectorAll('.student-nav a');
   const topbar = document.querySelector('.student-topbar');
 
   if (topbar && !topbar.querySelector('.header-title')) {
-    const meta = pageMeta[page] || { title: 'Student Portal', breadcrumb: 'Manage your account information and finances' };
+    const meta = pageMeta[page] || { title: 'Societech Student', breadcrumb: 'Manage your Societech assessments and class finances' };
     const heading = document.createElement('div');
     heading.className = 'header-title';
     heading.innerHTML = `<h1>${meta.title}</h1><div class="header-breadcrumb">${meta.breadcrumb}</div>`;
