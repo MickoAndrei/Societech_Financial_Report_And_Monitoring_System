@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Student Dashboard</title>
+  <title>Dashboard • Societech Student</title>
   <link rel="stylesheet" href="../assets/css/main.css" />
   <link rel="stylesheet" href="student.css" />
 </head>
@@ -16,23 +16,23 @@
       <header class="student-topbar">
         <div class="header-title">
           <h1>Dashboard</h1>
-          <div class="header-breadcrumb">Overview of your balances, dues, and recent updates</div>
+          <div class="header-breadcrumb">Societech and BSIT class balances, dues, and updates</div>
         </div>
 
         <div class="header-actions">
-          <button class="notification-btn" type="button" onclick="alert('5 new notifications')">
+          <button class="notification-btn" type="button" onclick="alert('You have 3 new Societech notifications')">
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
             </svg>
-            <span class="notification-badge">5</span>
+            <span class="notification-badge">3</span>
           </button>
 
           <div class="profile-wrapper">
             <div class="profile" onclick="toggleProfileMenu()">
-              <div class="profile-img">SU</div>
+              <div class="profile-img">AC</div>
               <div class="profile-info">
-                <div class="profile-name">Student User</div>
-                <div class="profile-role">Student</div>
+                <div class="profile-name">Alyssa Cruz</div>
+                <div class="profile-role">BSIT 1A · Societech</div>
               </div>
             </div>
 
@@ -61,26 +61,26 @@
             <div class="student-grid student-grid-stats">
               <div class="student-card">
                 <h4>Total Balance</h4>
-                <p class="student-meta">P14,650.00 remaining</p>
+                <p class="student-meta">₱850.00 remaining (Societech assessments)</p>
               </div>
               <div class="student-card">
                 <h4>Next Due Date</h4>
-                <p class="student-meta">April 10, 2026</p>
+                <p class="student-meta">March 28, 2026</p>
               </div>
               <div class="student-card">
                 <h4>Payments This Term</h4>
-                <p class="student-meta">P9,300.00</p>
+                <p class="student-meta">₱430.00</p>
               </div>
             </div>
 
             <section class="student-section student-section-wide">
               <h2 class="section-title">Uncleared Items</h2>
-              <p class="section-subtitle">First view on load: outstanding liabilities</p>
+              <p class="section-subtitle">Outstanding Societech and class liabilities</p>
               <div class="student-search">
                 <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
-                <input type="text" id="unclearedSearch" placeholder="Search liabilities..." onkeyup="studentSearchTable('unclearedTable','unclearedSearch')" />
+                <input type="text" id="unclearedSearch" placeholder="Search fees (e.g. membership, Panagmaya)" onkeyup="studentSearchTable('unclearedTable','unclearedSearch')" />
               </div>
               <table class="student-table" id="unclearedTable">
                 <thead>
@@ -93,21 +93,21 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Tuition Fee - Semester 2</td>
-                    <td>2026-05-20</td>
-                    <td>P12,000.00</td>
+                    <td>Societech Membership Fee</td>
+                    <td>2026-03-28</td>
+                    <td>₱80.00</td>
                     <td><span class="status-pill status-pending">Pending</span></td>
                   </tr>
                   <tr>
-                    <td>Library Card Replacement</td>
-                    <td>2026-04-10</td>
-                    <td>P350.00</td>
+                    <td>Daily Dues (semester balance)</td>
+                    <td>2026-04-15</td>
+                    <td>₱200.00</td>
                     <td><span class="status-pill status-warning">Overdue</span></td>
                   </tr>
                   <tr>
-                    <td>Laboratory Fee</td>
-                    <td>2026-04-30</td>
-                    <td>P1,500.00</td>
+                    <td>IT Days / Panagmaya</td>
+                    <td>2026-04-05</td>
+                    <td>₱280.00</td>
                     <td><span class="status-pill status-pending">Pending</span></td>
                   </tr>
                 </tbody>
@@ -116,7 +116,7 @@
 
             <section class="student-section student-section-wide">
               <h2 class="section-title">Cleared Items</h2>
-              <p class="section-subtitle">Recently cleared liabilities</p>
+              <p class="section-subtitle">Posted to your Societech clearing record</p>
               <table class="student-table">
                 <thead>
                   <tr>
@@ -127,31 +127,17 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Sports Fee</td>
-                    <td>P800.00</td>
+                    <td>Society Shirt (Societech)</td>
+                    <td>₱150.00</td>
                     <td><span class="status-pill status-cleared">Cleared</span></td>
                   </tr>
                   <tr>
-                    <td>Registration Fee</td>
-                    <td>P1,200.00</td>
+                    <td>Community Project Share (partial)</td>
+                    <td>₱80.00</td>
                     <td><span class="status-pill status-cleared">Cleared</span></td>
                   </tr>
                 </tbody>
               </table>
-            </section>
-
-            <section class="student-section student-section-wide">
-              <h2 class="section-title">Balance Summary</h2>
-              <div class="student-grid">
-                <div class="student-card">
-                  <h4>Tuition</h4>
-                  <p class="student-meta">P12,000.00</p>
-                </div>
-                <div class="student-card">
-                  <h4>Fees</h4>
-                  <p class="student-meta">P2,650.00</p>
-                </div>
-              </div>
             </section>
 
             <section class="student-section student-section-wide">
@@ -167,15 +153,15 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>2026-03-15</td>
-                    <td>Tuition Partial Payment</td>
-                    <td>P5,000.00</td>
+                    <td>2026-03-12</td>
+                    <td>Daily Dues — partial (ref. DD-2026-0312)</td>
+                    <td>₱200.00</td>
                     <td><span class="status-pill status-cleared">Posted</span></td>
                   </tr>
                   <tr>
-                    <td>2026-03-02</td>
-                    <td>Lab Fee</td>
-                    <td>P1,500.00</td>
+                    <td>2026-03-05</td>
+                    <td>Society Shirt — treasurer verified</td>
+                    <td>₱150.00</td>
                     <td><span class="status-pill status-cleared">Posted</span></td>
                   </tr>
                 </tbody>
@@ -186,12 +172,12 @@
               <h2 class="section-title">Announcements</h2>
               <div class="student-list">
                 <div class="student-list-item">
-                  <h4>Payment Assistance Window</h4>
-                  <p class="student-meta">Apply for installment plans until April 25, 2026.</p>
+                  <h4>IT Days / Panagmaya payment window</h4>
+                  <p class="student-meta">Pay through your BSIT 1A class treasurer before April 5, 2026.</p>
                 </div>
                 <div class="student-list-item">
-                  <h4>System Maintenance</h4>
-                  <p class="student-meta">Student portal scheduled for maintenance on March 30, 2026.</p>
+                  <h4>Societech portal maintenance</h4>
+                  <p class="student-meta">Short downtime scheduled March 30, 2026 — clearance views may be delayed.</p>
                 </div>
               </div>
             </section>

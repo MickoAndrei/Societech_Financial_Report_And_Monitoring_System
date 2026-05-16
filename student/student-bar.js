@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="sidebar-header">
       <img class="societech_logo" src="../assets/images/societech_logo.png" alt="Societech Logo">
       <div class="sidebar-title">SOCIETECH</div>
-      <div class="sidebar-subtitle">Student Dashboard</div>
+      <div class="sidebar-subtitle">Societech Student Portal</div>
     </div>
 
     <!-- Sidebar navigation -->

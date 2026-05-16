@@ -444,6 +444,28 @@ body {
     margin-top: 4px;
 }
 
+/* Class roster (section.html): title block + search in card header */
+.section-roster-card .card-header {
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.section-roster-card .card-header .search-box {
+    flex: 0 1 280px;
+    margin-left: auto;
+}
+
+.section-roster-card .roster-breadcrumbs {
+    margin-bottom: 4px;
+}
+
+.section-roster-card .roster-result-meta {
+    font-size: 13px;
+    color: #6b7280;
+    margin: 0 0 16px;
+}
+
 
 /* =============================================================================
    BUTTONS
@@ -557,6 +579,7 @@ tbody tr:hover {
 .badge-paid     { background: #d1fae5; color: #065f46; }
 .badge-pending  { background: #fef3c7; color: #92400e; }
 .badge-approved { background: #dbeafe; color: #1e40af; }
+.badge-rejected { background: #fee2e2; color: #991b1b; }
 
 
 /* =============================================================================
@@ -626,6 +649,13 @@ tbody tr:hover {
     border-left: 4px solid #f59e0b;
 }
 
+/* Blue informational alert with left accent border */
+.alert-info {
+    background: #dbeafe;
+    color: #1e40af;
+    border-left: 4px solid #3b82f6;
+}
+
 
 /* =============================================================================
    RESPONSIVE — MOBILE BREAKPOINT
@@ -648,6 +678,16 @@ tbody tr:hover {
     .header {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .section-roster-card .card-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .section-roster-card .card-header .search-box {
+        margin-left: 0;
+        max-width: none;
     }
 }
 
@@ -1183,6 +1223,13 @@ tbody tr:hover {
     min-width: 250px;
 }
 
+/* Target the SVG inside the search container */
+.search-row .search svg {
+  width: 16px;       /* Adjust width as needed */
+  height: 16px;      /* Adjust height as needed */
+  stroke-width: 2;   /* Optional: change stroke thickness */
+}
+
 .search-box input {
     border: none;
     background: none;
@@ -1327,6 +1374,25 @@ tbody tr:hover {
     width: 90%;
     max-height: 90vh;
     overflow-y: auto;
+}
+
+.modal.modal-wide {
+    max-width: 760px;
+}
+
+.modal-subtitle {
+    font-size: 14px;
+    color: #6b7280;
+    margin-top: 6px;
+}
+
+.section-roster-card tbody tr[role="button"] {
+    cursor: pointer;
+}
+
+.section-roster-card tbody tr[role="button"]:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: -2px;
 }
 
 .modal-header {
