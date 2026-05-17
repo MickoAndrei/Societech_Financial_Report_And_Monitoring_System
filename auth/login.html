@@ -232,15 +232,44 @@
             const password = document.getElementById('password').value;
             const remember = document.getElementById('remember').checked;
             
-            // TODO: Implement actual authentication logic
-            console.log('Login attempt:', { email, remember });
-            
-            // Simulate login - redirect based on user role
-            // In production, this would check user role from API response
-            alert('Login functionality will be implemented with backend integration.');
-            
-            // Example redirect (uncomment when backend is ready):
-            window.location.href = '../student/index.html';
+            const emailLower = email.trim().toLowerCase();
+            const demoClassTreasurer = ['alyssa.cruz.bsit1a@societech.demo'];
+            const demoSocTreasurer = ['societech.treasurer@societech.demo'];
+
+            let role = 'student';
+            let classKey = 'BSIT1A';
+            let fullName = 'Student';
+            let program = 'BSIT 1A — Societech member';
+
+            if (demoSocTreasurer.includes(emailLower)) {
+              role = 'societech_treasurer';
+              classKey = 'BSIT2A';
+              fullName = 'Mark Santos';
+              program = 'BSIT 2A — Societech officer';
+            } else if (demoClassTreasurer.includes(emailLower)) {
+              role = 'class_treasurer';
+              classKey = 'BSIT1A';
+              fullName = 'Alyssa Cruz';
+              program = 'BSIT 1A — Societech member';
+            }
+
+            const session = { role, classKey, fullName, email: emailLower };
+
+            localStorage.setItem('studentSession', JSON.stringify(session));
+            localStorage.setItem('studentPersonalInfo', JSON.stringify({
+              fullName,
+              email: emailLower,
+              phone: '+63 917 555 0142',
+              program,
+            }));
+
+            console.log('Login attempt:', { email, remember, session });
+
+            if (role === 'societech_treasurer') {
+              window.location.href = '../student/societech-dashboard.html';
+            } else {
+              window.location.href = '../student/index.html';
+            }
         }
     </script>
 </body>

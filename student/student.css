@@ -908,3 +908,287 @@ body[data-page="settings"] .settings-grid {
 .student-topbar .header-title h1 {
   font-size: 28px;
 }
+
+/* ── Classroom treasurer: section class list ───────────────── */
+.treasurer-roster-section {
+  max-width: 100%;
+}
+
+.treasurer-roster-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 10px;
+  color: #1e40af;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.treasurer-roster-card {
+  background: var(--student-surface);
+  border: 1px solid var(--student-border);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+}
+
+.treasurer-roster-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.treasurer-roster-search {
+  min-width: 260px;
+  margin-bottom: 0;
+}
+
+.roster-result-meta {
+  font-size: 13px;
+  color: var(--student-muted);
+  margin: 0 0 12px;
+}
+
+.count-cleared { color: #059669; }
+.count-not-cleared { color: #dc2626; }
+
+.treasurer-roster-table tbody tr {
+  cursor: pointer;
+}
+
+.treasurer-roster-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.student-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.student-modal-overlay.show {
+  display: flex;
+}
+
+.student-modal {
+  background: #fff;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 720px;
+  max-height: 90vh;
+  overflow: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.student-modal-wide {
+  max-width: 900px;
+}
+
+.student-modal-header {
+  padding: 24px 24px 12px;
+  border-bottom: 1px solid var(--student-border);
+}
+
+.student-modal-header h2 {
+  margin: 0 0 4px;
+  font-size: 1.25rem;
+}
+
+.student-modal-header p {
+  margin: 0;
+  color: var(--student-muted);
+  font-size: 14px;
+}
+
+.student-modal-footer {
+  padding: 16px 24px 24px;
+  text-align: right;
+}
+
+/* ── Societech treasurer ───────────────────────────────────── */
+.st-dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.st-stat-card {
+  background: var(--student-surface);
+  border: 1px solid var(--student-border);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.st-stat-card h4 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--student-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.st-stat-card .st-stat-value {
+  font-size: 26px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.st-search-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.st-search-filter-bar .student-search {
+  flex: 1;
+  min-width: 220px;
+  margin-bottom: 0;
+}
+
+.st-filter-select {
+  padding: 10px 14px;
+  border: 1px solid var(--student-border);
+  border-radius: 10px;
+  font-size: 14px;
+  background: #fff;
+}
+
+.st-classes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.st-class-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.st-class-card {
+  background: var(--student-surface);
+  border: 1px solid var(--student-border);
+  border-radius: 12px;
+  padding: 20px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+}
+
+.st-class-card-link:hover .st-class-card {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.st-class-name {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #1e293b;
+}
+
+.st-class-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #4b5563;
+}
+
+.st-class-info .text-success { color: #059669; }
+.st-class-info .text-primary { color: #2563eb; }
+
+.roster-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+  color: #2563eb;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.roster-back-link:hover {
+  text-decoration: underline;
+}
+
+.st-page-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+.btn-danger {
+  background: #dc2626;
+  color: #fff;
+  border: none;
+}
+
+.btn-danger:hover {
+  background: #b91c1c;
+}
+
+.st-actions-cell {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+#sectionsQuickList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#sectionsQuickList li {
+  margin-bottom: 8px;
+}
+
+#sectionsQuickList a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+#sectionsQuickList a:hover {
+  text-decoration: underline;
+}
+
+.st-form-modal .student-modal {
+  max-width: 480px;
+}
+
+.st-form-modal .form-group {
+  margin-bottom: 1rem;
+}
+
+.st-form-modal label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 14px;
+}

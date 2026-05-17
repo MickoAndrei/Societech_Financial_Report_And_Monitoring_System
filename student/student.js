@@ -25,6 +25,26 @@
     profile: {
       title: 'Profile',
       breadcrumb: 'BSIT class roster and Societech contact details'
+    },
+    'class-roster': {
+      title: 'My Section Class List',
+      breadcrumb: 'Classroom treasurer view — your assigned section only'
+    },
+    'societech-dashboard': {
+      title: 'Societech Treasurer Dashboard',
+      breadcrumb: 'Society-wide collections, sections, and assessments'
+    },
+    'societech-all-classes': {
+      title: 'All Classes',
+      breadcrumb: 'Every BSIT section — view class lists and treasurers'
+    },
+    'societech-section-roster': {
+      title: 'Section Class List',
+      breadcrumb: 'Student roster for the selected section'
+    },
+    'societech-payments': {
+      title: 'Manage Payments',
+      breadcrumb: 'Add and edit Societech fees with amount and deadline'
     }
   };
   const navLinks = document.querySelectorAll('.student-nav a');
@@ -66,7 +86,9 @@
 
   // Logout function
   window.logout = function() {
-    // Simple logout - redirect to login page
+    if (window.StudentSession?.clearStudentSession) {
+      window.StudentSession.clearStudentSession();
+    }
     window.location.href = '../auth/login.html';
   };
 

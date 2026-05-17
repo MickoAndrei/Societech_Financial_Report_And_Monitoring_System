@@ -1,12 +1,7 @@
 /**
- * Section roster: URL ?class=BSIT1A → label "BSIT 1A", render students, payment modal.
+ * Classroom treasurer: section roster scoped to the treasurer's own class only.
  */
 (function () {
-  const DEFAULT_CLASS_KEY = 'BSIT1A';
-  const rosters = window.ClassRosters || {};
-  const CLASS_ROSTERS = rosters.CLASS_ROSTERS || {};
-
-  /** Optional overrides per school ID */
   const STUDENT_PAYMENTS = {
     '2024-001234': [
       { fee: 'Societech Membership Fee', due: 80, paid: 80 },
@@ -24,24 +19,6 @@
     ],
   };
 
-  const normalizeClassKey = rosters.normalizeClassKey || function (raw) {
-    if (!raw || typeof raw !== 'string') return '';
-    return raw.trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
-  };
-
-  const formatClassLabel = rosters.formatClassLabel || function (key) {
-    if (!key) return 'Section';
-    const m = key.match(/^([A-Z]+)(\d+)([A-Z])$/i);
-    if (m) return `${m[1].toUpperCase()} ${m[2]}${m[3].toUpperCase()}`;
-    return key;
-  };
-
-  function getClassKeyFromQuery() {
-    const p = new URLSearchParams(window.location.search);
-    const key = normalizeClassKey(p.get('class') || '');
-    return key || DEFAULT_CLASS_KEY;
-  }
-
   function peso(n) {
     return `₱${Number(n).toLocaleString('en-PH')}`;
   }
@@ -51,7 +28,6 @@
     const raw = [
       { fee: 'Societech Membership Fee', due: 80, paid: cleared ? 80 : 0 },
       { fee: 'Daily Dues (semester)', due: 400, paid: Math.round(400 * payFactor) },
-      /* IT Panagmaya – local name for IT Days */
       { fee: 'IT Days / Panagmaya', due: 280, paid: cleared ? 280 : Math.round(280 * payFactor) },
       { fee: 'Society Shirt', due: 150, paid: cleared ? 150 : 150 },
       { fee: 'Community Project Share', due: 120, paid: cleared ? 120 : Math.round(120 * payFactor) },
@@ -82,10 +58,10 @@
     return feeRowsFromTemplate(cleared);
   }
 
-  function statusBadgeClass(status) {
-    if (status === 'Paid') return 'badge badge-paid';
-    if (status === 'Partial') return 'badge badge-pending';
-    return 'badge badge-rejected';
+  function statusPillClass(status) {
+    if (status === 'Paid') return 'status-pill status-cleared';
+    if (status === 'Partial') return 'status-pill status-pending';
+    return 'status-pill status-warning';
   }
 
   function renderRosterTable(tbody, students) {
@@ -97,32 +73,68 @@
       tr.dataset.status = s.status;
       tr.setAttribute('role', 'button');
       tr.setAttribute('tabindex', '0');
-      tr.setAttribute(
-        'aria-label',
-        `View payment details for ${s.name}`
-      );
+      tr.setAttribute('aria-label', `View payment details for ${s.name}`);
 
       const tdName = document.createElement('td');
       tdName.textContent = s.name;
 
+      const tdId = document.createElement('td');
+      tdId.textContent = s.id;
+
       const tdStatus = document.createElement('td');
-      tdStatus.style.textAlign = 'right';
       const span = document.createElement('span');
-      span.className = s.status === 'cleared' ? 'badge badge-paid' : 'badge badge-rejected';
+      span.className = s.status === 'cleared' ? 'status-pill status-cleared' : 'status-pill status-warning';
       span.textContent = s.status === 'cleared' ? 'Cleared' : 'Not Cleared';
       tdStatus.appendChild(span);
 
       tr.appendChild(tdName);
+      tr.appendChild(tdId);
       tr.appendChild(tdStatus);
       tbody.appendChild(tr);
     });
   }
 
-  function fillStudentPaymentsModal(name, studentId, clearanceStatus) {
+  function updateCounts(table, resultCount, totalId, clearedId, notClearedId) {
+    const rows = Array.from(table.querySelectorAll('tbody tr')).filter((r) => r.style.display !== 'none');
+    const cleared = rows.filter((r) => r.dataset.status === 'cleared').length;
+    const notCleared = rows.filter((r) => r.dataset.status === 'not-cleared').length;
+
+    const totalEl = document.getElementById(totalId);
+    const clearedEl = document.getElementById(clearedId);
+    const notClearedEl = document.getElementById(notClearedId);
+    const resultEl = document.getElementById(resultCount);
+
+    if (totalEl) totalEl.textContent = String(rows.length);
+    if (clearedEl) clearedEl.textContent = String(cleared);
+    if (notClearedEl) notClearedEl.textContent = String(notCleared);
+    if (resultEl) {
+      resultEl.textContent = `Showing ${rows.length} student${rows.length === 1 ? '' : 's'}`;
+    }
+  }
+
+  function setupSearch(searchInputId, tableId, resultCountId, totalId, clearedId, notClearedId) {
+    const searchInput = document.getElementById(searchInputId);
+    const table = document.getElementById(tableId);
+    if (!searchInput || !table) return;
+
+    function applyFilter() {
+      const q = (searchInput.value || '').trim().toLowerCase();
+      table.querySelectorAll('tbody tr').forEach((row) => {
+        const name = (row.dataset.name || '').toLowerCase();
+        const id = (row.dataset.id || '').toLowerCase();
+        row.style.display = !q || name.includes(q) || id.includes(q) ? '' : 'none';
+      });
+      updateCounts(table, resultCountId, totalId, clearedId, notClearedId);
+    }
+
+    searchInput.addEventListener('input', applyFilter);
+    applyFilter();
+  }
+
+  function fillStudentPaymentsModal(name, studentId, clearanceStatus, classLabel) {
     const titleEl = document.getElementById('studentPaymentsTitle');
     const subEl = document.getElementById('studentPaymentsSubtitle');
     const payTbody = document.querySelector('#studentPaymentsTable tbody');
-    const classLabel = document.getElementById('sectionTitle')?.textContent?.trim() || '';
 
     if (titleEl) titleEl.textContent = name;
     if (subEl) {
@@ -134,24 +146,22 @@
     payTbody.textContent = '';
     rows.forEach((row) => {
       const tr = document.createElement('tr');
-      const tdFee = document.createElement('td');
-      tdFee.textContent = row.fee;
-      const tdDue = document.createElement('td');
-      tdDue.textContent = peso(row.due);
-      const tdPaid = document.createElement('td');
-      tdPaid.textContent = peso(row.paid);
-      const tdBal = document.createElement('td');
-      tdBal.textContent = peso(row.balance);
+      const cells = [
+        row.fee,
+        peso(row.due),
+        peso(row.paid),
+        peso(row.balance),
+      ];
+      cells.forEach((text) => {
+        const td = document.createElement('td');
+        td.textContent = text;
+        tr.appendChild(td);
+      });
       const tdStat = document.createElement('td');
-      tdStat.style.textAlign = 'right';
-      const badge = document.createElement('span');
-      badge.className = statusBadgeClass(row.status);
-      badge.textContent = row.status;
-      tdStat.appendChild(badge);
-      tr.appendChild(tdFee);
-      tr.appendChild(tdDue);
-      tr.appendChild(tdPaid);
-      tr.appendChild(tdBal);
+      const span = document.createElement('span');
+      span.className = statusPillClass(row.status);
+      span.textContent = row.status;
+      tdStat.appendChild(span);
       tr.appendChild(tdStat);
       payTbody.appendChild(tr);
     });
@@ -169,16 +179,30 @@
     document.body.style.overflow = '';
   }
 
-  function initSectionPage(options) {
-    const classKey = getClassKeyFromQuery();
-    const label = formatClassLabel(classKey);
-    const students = CLASS_ROSTERS[classKey] || CLASS_ROSTERS[DEFAULT_CLASS_KEY] || [];
+  function initTreasurerRosterPage() {
+    if (!window.StudentSession?.requireClassTreasurer('index.html')) {
+      return;
+    }
+
+    const classKey = window.StudentSession.getTreasurerClassKey();
+    const label = window.StudentSession.getTreasurerClassLabel();
+    const students = window.ClassRosters?.getRosterForClass(classKey) || [];
 
     const sectionTitle = document.getElementById('sectionTitle');
+    const rosterHeading = document.getElementById('rosterSectionHeading');
     const pageMainTitle = document.getElementById('pageMainTitle');
+    const profileRole = document.querySelector('.profile-role');
+    const session = window.StudentSession.getStudentSession();
+
     if (sectionTitle) sectionTitle.textContent = label;
-    if (pageMainTitle) pageMainTitle.textContent = label;
-    document.title = `${label} • Societech Admin`;
+    if (rosterHeading) rosterHeading.textContent = `${label} — class list`;
+    if (pageMainTitle) pageMainTitle.textContent = `${label} Class List`;
+    if (profileRole) profileRole.textContent = `${label} · Class Treasurer`;
+    if (session.fullName) {
+      const profileName = document.querySelector('.profile-name');
+      if (profileName) profileName.textContent = session.fullName;
+    }
+    document.title = `${label} Class List • Societech Student`;
 
     const table = document.getElementById('studentsTable');
     if (!table) return;
@@ -186,17 +210,7 @@
     if (!tbody) return;
 
     renderRosterTable(tbody, students);
-
-    if (typeof setupTableFilters === 'function' && options) {
-      setupTableFilters(
-        options.searchInputId,
-        options.tableId,
-        options.resultCountId,
-        options.totalId,
-        options.clearedId,
-        options.notClearedId
-      );
-    }
+    setupSearch('studentSearch', 'studentsTable', 'resultCount', 'totalStudents', 'clearedCount', 'notClearedCount');
 
     const overlay = document.getElementById('studentPaymentsModal');
     if (!overlay) return;
@@ -204,28 +218,22 @@
     overlay.querySelectorAll('[data-close-modal]').forEach((el) => {
       el.addEventListener('click', () => closeModal(overlay));
     });
-
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) closeModal(overlay);
     });
-
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && overlay.classList.contains('show')) {
-        closeModal(overlay);
-      }
+      if (e.key === 'Escape' && overlay.classList.contains('show')) closeModal(overlay);
     });
 
     function activateRow(tr) {
       if (!tr || tr.parentElement !== tbody) return;
-      fillStudentPaymentsModal(tr.dataset.name, tr.dataset.id, tr.dataset.status);
+      fillStudentPaymentsModal(tr.dataset.name, tr.dataset.id, tr.dataset.status, label);
       openModal(overlay);
     }
 
     tbody.addEventListener('click', (e) => {
-      const tr = e.target.closest('tr');
-      activateRow(tr);
+      activateRow(e.target.closest('tr'));
     });
-
     tbody.addEventListener('keydown', (e) => {
       if (e.key !== 'Enter' && e.key !== ' ') return;
       const tr = e.target.closest('tr');
@@ -236,6 +244,5 @@
     });
   }
 
-  window.initSectionPage = initSectionPage;
-  window.getSectionClassKey = getClassKeyFromQuery;
+  document.addEventListener('DOMContentLoaded', initTreasurerRosterPage);
 })();

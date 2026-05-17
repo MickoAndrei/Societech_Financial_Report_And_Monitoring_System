@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Section Class List</title>
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="student.css" />
+</head>
+<body class="student-layout" data-page="societech-section-roster">
+  <div class="page-background" aria-hidden="true"></div>
+  <div class="student-shell">
+    <aside id="sidebar-container" class="sidebar"></aside>
+    <div class="student-content">
+      <header class="student-topbar">
+        <div class="header-title">
+          <h1 id="pageMainTitle">Section Class List</h1>
+          <div class="header-breadcrumb">Student roster for the selected section</div>
+        </div>
+        <div class="header-actions">
+          <div class="profile-wrapper">
+            <div class="profile" onclick="toggleProfileMenu()">
+              <div class="profile-img">MS</div>
+              <div class="profile-info">
+                <div class="profile-name">Mark Santos</div>
+                <div class="profile-role">Societech Treasurer</div>
+              </div>
+            </div>
+            <div class="profile-menu" id="profileMenu">
+              <button type="button" onclick="window.location.href='settings.html'">Settings</button>
+              <button type="button" onclick="logout()">Logout</button>
+            </div>
+          </div>
+
+        </div>
+      </header>
+      <main class="student-main">
+        <div class="student-content-overlay">
+
+            <a href="societech-all-classes.html" class="roster-back-link">Back to All Classes</a>
+            <div class="treasurer-roster-alert">
+              <span>Viewing <strong id="sectionTitle">section</strong> — select a student for fee details.</span>
+            </div>
+            <div class="treasurer-roster-card">
+              <div class="treasurer-roster-header">
+                <div>
+                  <h2 class="section-title" id="rosterSectionHeading">Section roster</h2>
+                  <p class="section-subtitle">
+                    Total: <strong id="totalStudents">0</strong>
+                    · Cleared: <strong id="clearedCount" class="count-cleared">0</strong>
+                    · Not cleared: <strong id="notClearedCount" class="count-not-cleared">0</strong>
+                  </p>
+                </div>
+                <div class="student-search treasurer-roster-search">
+                  <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                  <input id="studentSearch" type="search" placeholder="Search by name or school ID" autocomplete="off" />
+                </div>
+              </div>
+              <p class="roster-result-meta" id="resultCount">Showing 0 students</p>
+              <div class="table-container">
+                <table id="studentsTable" class="student-table treasurer-roster-table">
+                  <thead><tr><th>Student</th><th>School ID</th><th>Clearance</th></tr></thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../assets/js/class-rosters.js"></script>
+  <script src="../assets/js/societech-payments.js"></script>
+  <script src="student-session.js"></script>
+  <script src="student.js"></script>
+  <script src="student-bar.js"></script>
+
+  <div class="student-modal-overlay" id="studentPaymentsModal" role="dialog" aria-modal="true">
+    <div class="student-modal student-modal-wide">
+      <div class="student-modal-header">
+        <h2 id="studentPaymentsTitle">Student</h2>
+        <p id="studentPaymentsSubtitle"></p>
+      </div>
+      <div class="table-container">
+        <table id="studentPaymentsTable" class="student-table">
+          <thead><tr><th>Fee</th><th>Due</th><th>Paid</th><th>Balance</th><th>Status</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="student-modal-footer">
+        <button type="button" class="btn btn-primary" data-close-modal>Close</button>
+      </div>
+    </div>
+  </div>
+  <script src="societech-section-roster.js"></script>
+</body>
+</html>
