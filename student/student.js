@@ -75,12 +75,20 @@
     }
   };
 
-  // Close profile menu when clicking outside
+  // Close profile menu and announcement dropdown when clicking outside
   document.addEventListener('click', (event) => {
-    const profile = document.querySelector('.profile');
+    const profileWrap = document.querySelector('.profile-wrapper');
     const menu = document.getElementById('profileMenu');
-    if (profile && menu && !profile.contains(event.target) && !menu.contains(event.target)) {
+    if (profileWrap && menu && !profileWrap.contains(event.target)) {
       menu.style.display = 'none';
+    }
+
+    const notifWrap = document.querySelector('.notification-wrapper');
+    const dropdown = document.getElementById('notificationDropdown');
+    if (notifWrap && dropdown && !notifWrap.contains(event.target)) {
+      dropdown.classList.remove('show');
+      const btn = notifWrap.querySelector('.notification-btn');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
     }
   });
 

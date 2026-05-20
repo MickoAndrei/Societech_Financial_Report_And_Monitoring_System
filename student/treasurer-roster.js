@@ -2,60 +2,8 @@
  * Classroom treasurer: section roster scoped to the treasurer's own class only.
  */
 (function () {
-  const STUDENT_PAYMENTS = {
-    '2024-001234': [
-      { fee: 'Societech Membership Fee', due: 80, paid: 80 },
-      { fee: 'Daily Dues (semester)', due: 400, paid: 400 },
-      { fee: 'IT Days / Panagmaya', due: 280, paid: 280 },
-      { fee: 'Society Shirt', due: 150, paid: 150 },
-      { fee: 'Community Project Share', due: 120, paid: 120 },
-    ],
-    '2024-001235': [
-      { fee: 'Societech Membership Fee', due: 80, paid: 0 },
-      { fee: 'Daily Dues (semester)', due: 400, paid: 200 },
-      { fee: 'IT Days / Panagmaya', due: 280, paid: 0 },
-      { fee: 'Society Shirt', due: 150, paid: 150 },
-      { fee: 'Community Project Share', due: 120, paid: 40 },
-    ],
-  };
-
-  function peso(n) {
-    return `₱${Number(n).toLocaleString('en-PH')}`;
-  }
-
-  function feeRowsFromTemplate(cleared) {
-    const payFactor = cleared ? 1 : 0.35;
-    const raw = [
-      { fee: 'Societech Membership Fee', due: 80, paid: cleared ? 80 : 0 },
-      { fee: 'Daily Dues (semester)', due: 400, paid: Math.round(400 * payFactor) },
-      { fee: 'IT Days / Panagmaya', due: 280, paid: cleared ? 280 : Math.round(280 * payFactor) },
-      { fee: 'Society Shirt', due: 150, paid: cleared ? 150 : 150 },
-      { fee: 'Community Project Share', due: 120, paid: cleared ? 120 : Math.round(120 * payFactor) },
-    ];
-    return raw.map((row) => {
-      const paid = Math.min(row.paid, row.due);
-      const balance = Math.max(0, row.due - paid);
-      let status = 'Paid';
-      if (balance >= row.due && row.due > 0) status = 'Unpaid';
-      else if (balance > 0) status = 'Partial';
-      return { ...row, paid, balance, status };
-    });
-  }
-
-  function resolvePaymentRows(studentId, clearanceStatus) {
-    const custom = STUDENT_PAYMENTS[studentId];
-    const cleared = clearanceStatus === 'cleared';
-    if (custom) {
-      return custom.map((row) => {
-        const paid = Math.min(row.paid, row.due);
-        const balance = Math.max(0, row.due - paid);
-        let status = 'Paid';
-        if (balance >= row.due && row.due > 0) status = 'Unpaid';
-        else if (balance > 0) status = 'Partial';
-        return { fee: row.fee, due: row.due, paid, balance, status };
-      });
-    }
-    return feeRowsFromTemplate(cleared);
+  function getFD() {
+    return window.TreasurerFeeDataset;
   }
 
   function statusPillClass(status) {
@@ -65,12 +13,17 @@
   }
 
   function renderRosterTable(tbody, students) {
+    const FD = getFD();
+    if (!FD) return;
+    const { totalOutstanding, peso } = FD;
     tbody.textContent = '';
     students.forEach((s) => {
       const tr = document.createElement('tr');
       tr.dataset.name = s.name;
       tr.dataset.id = s.id;
       tr.dataset.status = s.status;
+      const total = totalOutstanding(s.id, s.status);
+      tr.dataset.balanceTotal = String(total);
       tr.setAttribute('role', 'button');
       tr.setAttribute('tabindex', '0');
       tr.setAttribute('aria-label', `View payment details for ${s.name}`);
@@ -78,8 +31,9 @@
       const tdName = document.createElement('td');
       tdName.textContent = s.name;
 
-      const tdId = document.createElement('td');
-      tdId.textContent = s.id;
+      const tdBal = document.createElement('td');
+      tdBal.className = 'roster-balance-cell';
+      tdBal.textContent = peso(total);
 
       const tdStatus = document.createElement('td');
       const span = document.createElement('span');
@@ -88,13 +42,13 @@
       tdStatus.appendChild(span);
 
       tr.appendChild(tdName);
-      tr.appendChild(tdId);
+      tr.appendChild(tdBal);
       tr.appendChild(tdStatus);
       tbody.appendChild(tr);
     });
   }
 
-  function updateCounts(table, resultCount, totalId, clearedId, notClearedId) {
+  function updateCounts(table, resultCountId, totalId, clearedId, notClearedId) {
     const rows = Array.from(table.querySelectorAll('tbody tr')).filter((r) => r.style.display !== 'none');
     const cleared = rows.filter((r) => r.dataset.status === 'cleared').length;
     const notCleared = rows.filter((r) => r.dataset.status === 'not-cleared').length;
@@ -102,7 +56,7 @@
     const totalEl = document.getElementById(totalId);
     const clearedEl = document.getElementById(clearedId);
     const notClearedEl = document.getElementById(notClearedId);
-    const resultEl = document.getElementById(resultCount);
+    const resultEl = document.getElementById(resultCountId);
 
     if (totalEl) totalEl.textContent = String(rows.length);
     if (clearedEl) clearedEl.textContent = String(cleared);
@@ -112,59 +66,139 @@
     }
   }
 
+  /** @returns {(() => void) | null} */
   function setupSearch(searchInputId, tableId, resultCountId, totalId, clearedId, notClearedId) {
+    const FD = getFD();
+    if (!FD) return null;
+    const { peso } = FD;
     const searchInput = document.getElementById(searchInputId);
     const table = document.getElementById(tableId);
-    if (!searchInput || !table) return;
+    if (!searchInput || !table) return null;
 
     function applyFilter() {
       const q = (searchInput.value || '').trim().toLowerCase();
       table.querySelectorAll('tbody tr').forEach((row) => {
         const name = (row.dataset.name || '').toLowerCase();
-        const id = (row.dataset.id || '').toLowerCase();
-        row.style.display = !q || name.includes(q) || id.includes(q) ? '' : 'none';
+        const bal = (row.dataset.balanceTotal || '').toLowerCase();
+        const balFormatted = peso(Number(row.dataset.balanceTotal || 0)).toLowerCase();
+        row.style.display =
+          !q || name.includes(q) || bal.includes(q) || balFormatted.includes(q) ? '' : 'none';
       });
       updateCounts(table, resultCountId, totalId, clearedId, notClearedId);
     }
 
     searchInput.addEventListener('input', applyFilter);
     applyFilter();
+    return applyFilter;
   }
 
-  function fillStudentPaymentsModal(name, studentId, clearanceStatus, classLabel) {
+  function syncRosterRowBalance(tbody, studentId, clearanceStatus) {
+    const FD = getFD();
+    if (!FD) return;
+    const { totalOutstanding, peso } = FD;
+    const tr = tbody.querySelector(`tr[data-id="${CSS.escape(studentId)}"]`);
+    if (!tr) return;
+    const total = totalOutstanding(studentId, clearanceStatus);
+    tr.dataset.balanceTotal = String(total);
+    const cell = tr.querySelector('.roster-balance-cell');
+    if (cell) cell.textContent = peso(total);
+  }
+
+  function updateSubtitleTotal(subEl, classLabel, studentId, clearanceStatus) {
+    const FD = getFD();
+    if (!FD || !subEl) return;
+    const { totalOutstanding, peso } = FD;
+    const total = totalOutstanding(studentId, clearanceStatus);
+    const prefix = classLabel ? `${classLabel} · ` : '';
+    subEl.textContent = `${prefix}Total outstanding: ${peso(total)}`;
+  }
+
+  function fillStudentPaymentsModal(name, studentId, clearanceStatus, classLabel, rosterTbody, subEl) {
+    const FD = getFD();
+    if (!FD) return;
+    const { resolvePaymentRows, persistFeeBalance, peso } = FD;
+
     const titleEl = document.getElementById('studentPaymentsTitle');
-    const subEl = document.getElementById('studentPaymentsSubtitle');
-    const payTbody = document.querySelector('#studentPaymentsTable tbody');
-
     if (titleEl) titleEl.textContent = name;
-    if (subEl) {
-      subEl.textContent = `${classLabel ? `${classLabel} · ` : ''}School ID ${studentId}`;
-    }
+    updateSubtitleTotal(subEl, classLabel, studentId, clearanceStatus);
 
-    const rows = resolvePaymentRows(studentId, clearanceStatus);
+    const payTbody = document.querySelector('#studentPaymentsTable tbody');
     if (!payTbody) return;
     payTbody.textContent = '';
-    rows.forEach((row) => {
-      const tr = document.createElement('tr');
-      const cells = [
-        row.fee,
-        peso(row.due),
-        peso(row.paid),
-        peso(row.balance),
-      ];
-      cells.forEach((text) => {
-        const td = document.createElement('td');
-        td.textContent = text;
-        tr.appendChild(td);
+
+    function renderRows() {
+      const rows = resolvePaymentRows(studentId, clearanceStatus);
+      payTbody.textContent = '';
+      rows.forEach((row) => {
+        const tr = document.createElement('tr');
+        tr.dataset.fee = row.fee;
+
+        const tdFee = document.createElement('td');
+        tdFee.textContent = row.fee;
+        tr.appendChild(tdFee);
+
+        const tdDue = document.createElement('td');
+        tdDue.textContent = peso(row.due);
+        tr.appendChild(tdDue);
+
+        const tdPaid = document.createElement('td');
+        tdPaid.className = 'fee-paid-cell';
+        tdPaid.textContent = peso(row.paid);
+        tr.appendChild(tdPaid);
+
+        const tdBal = document.createElement('td');
+        const input = document.createElement('input');
+        input.type = 'number';
+        input.className = 'form-input fee-balance-input';
+        input.min = '0';
+        input.max = String(row.due);
+        input.step = '1';
+        input.value = String(row.balance);
+        input.setAttribute('aria-label', `Balance for ${row.fee}`);
+        input.addEventListener('change', () => onBalanceInput(input));
+        input.addEventListener('input', () => onBalanceInput(input));
+        tdBal.appendChild(input);
+        tr.appendChild(tdBal);
+
+        const tdStat = document.createElement('td');
+        const span = document.createElement('span');
+        span.className = statusPillClass(row.status);
+        span.textContent = row.status;
+        tdStat.appendChild(span);
+        tr.appendChild(tdStat);
+
+        payTbody.appendChild(tr);
       });
-      const tdStat = document.createElement('td');
-      const span = document.createElement('span');
-      span.className = statusPillClass(row.status);
-      span.textContent = row.status;
-      tdStat.appendChild(span);
-      tr.appendChild(tdStat);
-      payTbody.appendChild(tr);
-    });
+    }
+
+    function onBalanceInput(input) {
+      const tr = input.closest('tr');
+      const feeName = tr?.dataset.fee;
+      if (!feeName) return;
+      const due = Number(input.max);
+      const stored = persistFeeBalance(studentId, feeName, due, input.value);
+      input.value = String(stored);
+
+      const paidCell = tr.querySelector('.fee-paid-cell');
+      if (paidCell) paidCell.textContent = peso(due - stored);
+
+      const rows = resolvePaymentRows(studentId, clearanceStatus);
+      const updated = rows.find((r) => r.fee === feeName);
+      const statSpan = tr.querySelector('td:last-child span');
+      if (statSpan && updated) {
+        statSpan.className = statusPillClass(updated.status);
+        statSpan.textContent = updated.status;
+      }
+
+      updateSubtitleTotal(subEl, classLabel, studentId, clearanceStatus);
+      syncRosterRowBalance(rosterTbody, studentId, clearanceStatus);
+      const table = rosterTbody.closest('table');
+      if (table) {
+        updateCounts(table, 'resultCount', 'totalStudents', 'clearedCount', 'notClearedCount');
+      }
+    }
+
+    renderRows();
   }
 
   function openModal(overlay) {
@@ -180,6 +214,10 @@
   }
 
   function initTreasurerRosterPage() {
+    if (!window.TreasurerFeeDataset) {
+      console.error('treasurer-fee-dataset.js must load before treasurer-roster.js');
+      return;
+    }
     if (!window.StudentSession?.requireClassTreasurer('index.html')) {
       return;
     }
@@ -187,6 +225,9 @@
     const classKey = window.StudentSession.getTreasurerClassKey();
     const label = window.StudentSession.getTreasurerClassLabel();
     const students = window.ClassRosters?.getRosterForClass(classKey) || [];
+    const baseStudents = [...students];
+    const sortSelect = document.getElementById('rosterSort');
+    let sortMode = sortSelect?.value || 'default';
 
     const sectionTitle = document.getElementById('sectionTitle');
     const rosterHeading = document.getElementById('rosterSectionHeading');
@@ -209,11 +250,32 @@
     const tbody = table.querySelector('tbody');
     if (!tbody) return;
 
-    renderRosterTable(tbody, students);
-    setupSearch('studentSearch', 'studentsTable', 'resultCount', 'totalStudents', 'clearedCount', 'notClearedCount');
+    function applySortAndRender() {
+      const sorted = window.TreasurerFeeDataset.sortStudents(baseStudents, sortMode);
+      renderRosterTable(tbody, sorted);
+    }
+
+    applySortAndRender();
+    const applyFilter = setupSearch(
+      'studentSearch',
+      'studentsTable',
+      'resultCount',
+      'totalStudents',
+      'clearedCount',
+      'notClearedCount',
+    );
+
+    if (sortSelect) {
+      sortSelect.addEventListener('change', () => {
+        sortMode = sortSelect.value;
+        applySortAndRender();
+        if (applyFilter) applyFilter();
+      });
+    }
 
     const overlay = document.getElementById('studentPaymentsModal');
     if (!overlay) return;
+    const subEl = document.getElementById('studentPaymentsSubtitle');
 
     overlay.querySelectorAll('[data-close-modal]').forEach((el) => {
       el.addEventListener('click', () => closeModal(overlay));
@@ -227,7 +289,7 @@
 
     function activateRow(tr) {
       if (!tr || tr.parentElement !== tbody) return;
-      fillStudentPaymentsModal(tr.dataset.name, tr.dataset.id, tr.dataset.status, label);
+      fillStudentPaymentsModal(tr.dataset.name, tr.dataset.id, tr.dataset.status, label, tbody, subEl);
       openModal(overlay);
     }
 

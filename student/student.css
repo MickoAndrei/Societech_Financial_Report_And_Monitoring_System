@@ -527,6 +527,14 @@ body[data-page="dashboard"] .student-grid-stats .student-card .student-meta {
   letter-spacing: 0.04em;
 }
 
+/* Editable balance (treasurer fee modal) */
+.fee-balance-input {
+  width: 100%;
+  max-width: 7.5rem;
+  padding: 0.35rem 0.5rem;
+  font-size: var(--font-size-sm, 0.875rem);
+}
+
 .student-table tbody tr:hover {
   background: #f8fafc;
 }
@@ -945,9 +953,41 @@ body[data-page="settings"] .settings-grid {
   margin-bottom: 12px;
 }
 
+.treasurer-roster-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  width: 100%;
+  max-width: 520px;
+}
+
+.treasurer-sort-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--student-muted, #6b7280);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  min-width: 160px;
+}
+
+.treasurer-sort-select {
+  text-transform: none;
+  font-weight: 500;
+  letter-spacing: normal;
+  font-size: 14px;
+  padding: 8px 10px;
+  min-width: 180px;
+}
+
 .treasurer-roster-search {
   min-width: 260px;
   margin-bottom: 0;
+  flex: 1 1 220px;
 }
 
 .roster-result-meta {
@@ -1136,6 +1176,37 @@ body[data-page="settings"] .settings-grid {
   flex-wrap: wrap;
   gap: 12px;
   margin-bottom: 16px;
+}
+
+/* Manage Payments (Societech treasurer): lede + table sit over photo background —
+   give the main block a solid surface so muted text is readable */
+body[data-page="societech-payments"] .student-content-overlay {
+  background: #f1f5f9;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  border-radius: 12px;
+  padding: 20px 22px 28px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+body[data-page="societech-payments"] .st-page-toolbar {
+  align-items: flex-start;
+}
+
+body[data-page="societech-payments"] .st-payments-lede {
+  color: #0f172a;
+  font-size: 15px;
+  line-height: 1.5;
+  font-weight: 500;
+  margin: 0;
+  max-width: 52ch;
+}
+
+body[data-page="societech-payments"] #paymentsTable {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--student-border);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
 }
 
 .btn-sm {

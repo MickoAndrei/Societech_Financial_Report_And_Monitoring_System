@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../assets/css/main.css" />
   <!-- Student-specific layout and component styles -->
   <link rel="stylesheet" href="student.css" />
+  <link rel="stylesheet" href="../assets/css/responsive-breakpoints.css" />
 </head>
 <body class="student-layout" data-page="notifications">
   <div class="page-background" aria-hidden="true"></div>
@@ -38,11 +39,11 @@
         <div class="header-actions">
 
           <!-- Notification bell with unread badge -->
-          <button class="notification-btn" type="button" onclick="alert('You have 3 new Societech notifications')">
+          <button class="notification-btn" type="button" aria-label="View announcements">
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
             </svg>
-            <span class="notification-badge">3</span>
+            <span class="notification-badge" hidden>0</span>
           </button>
 
           <!-- Profile avatar — toggles the dropdown menu on click -->
@@ -108,8 +109,8 @@
                   </svg>
                 </div>
               </div>
-              <div class="stat-value">1</div>
-              <div class="stat-trend">New system notice</div>
+              <div class="stat-value" id="announcementStatCount">0</div>
+              <div class="stat-trend">Ongoing from admin</div>
             </div>
             <!-- Verification status stat card -->
             <div class="stat-card green">
@@ -149,10 +150,7 @@
           ──────────────────────────────────────────────────────── -->
           <section class="student-section">
             <h2 class="section-title">Announcements</h2>
-            <div class="student-card">
-              <h4>Treasurer receipt upload reminder</h4>
-              <p class="student-meta">Societech moderators now require GCash reference on all IT Days payments (effective March 20, 2026).</p>
-            </div>
+            <div id="announcementsFeed"></div>
           </section>
           <!-- ── End Announcements ───────────────────────────── -->
 
@@ -197,10 +195,12 @@
   <!-- ── End Shell ─────────────────────────────────────────── -->
 
   <!-- student.js: Handles search, profile menu toggle, logout -->
+  <script src="../assets/js/announcements-loader.js"></script>
   <script src="student-session.js"></script>
   <script src="student.js"></script>
-  <!-- student-bar.js: Dynamically injects the student sidebar -->
   <script src="student-bar.js"></script>
+  <script src="../assets/js/societech-announcements.js"></script>
+  <script src="notifications-feed.js"></script>
 
 </body>
 </html>

@@ -1,8 +1,13 @@
 function toggleNotifications() {
-  const dropdown = document.getElementById('notificationDropdown');
-  if (dropdown) {
-    dropdown.classList.toggle('show');
+  if (window.AnnouncementBell) {
+    const btn = document.querySelector('.notification-btn');
+    if (btn) {
+      btn.click();
+      return;
+    }
   }
+  const dropdown = document.getElementById('notificationDropdown');
+  if (dropdown) dropdown.classList.toggle('show');
 }
 
 function toggleProfileMenu() {
@@ -13,7 +18,7 @@ function toggleProfileMenu() {
 }
 
 window.logout = function () {
-  window.location.href = '../auth/login.html';
+  window.location.href = '../auth/admin-login.html';
 };
 
 // Single unified click-outside handler for both profile menu and notification dropdown
@@ -24,9 +29,11 @@ document.addEventListener('click', function (event) {
     menu.style.display = 'none';
   }
 
-  const notifBtn = document.querySelector('.notification-btn');
+  const notifWrap = document.querySelector('.notification-wrapper');
   const dropdown = document.getElementById('notificationDropdown');
-  if (notifBtn && dropdown && !notifBtn.contains(event.target) && !dropdown.contains(event.target)) {
+  if (notifWrap && dropdown && !notifWrap.contains(event.target)) {
     dropdown.classList.remove('show');
+    const btn = notifWrap.querySelector('.notification-btn');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
   }
 });

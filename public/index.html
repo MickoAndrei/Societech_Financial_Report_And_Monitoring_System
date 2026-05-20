@@ -95,6 +95,7 @@
             margin-top: 2rem;
         }
     </style>
+  <link rel="stylesheet" href="../assets/css/responsive-breakpoints.css" />
 </head>
 <body>
     <!-- Navigation -->
@@ -182,16 +183,7 @@
         <div class="container">
             <div class="announcements">
                 <h2 style="margin-bottom: 1.5rem; color: var(--gray-900);">Latest Announcements</h2>
-                <div class="announcement-item">
-                    <h4 style="margin-bottom: 0.5rem; color: var(--primary-color);">System Update</h4>
-                    <p style="color: var(--gray-600);">New features have been added to the dashboard. Check out the updated interface!</p>
-                    <small style="color: var(--gray-500);">Posted on March 1, 2026</small>
-                </div>
-                <div class="announcement-item">
-                    <h4 style="margin-bottom: 0.5rem; color: var(--primary-color);">Payment Deadline Reminder</h4>
-                    <p style="color: var(--gray-600);">Please ensure all payments are completed before the end of the semester.</p>
-                    <small style="color: var(--gray-500);">Posted on February 28, 2026</small>
-                </div>
+                <div id="publicAnnouncementsList"></div>
             </div>
         </div>
     </section>
@@ -226,5 +218,7 @@
             <p>&copy; 2026 Societech Financial and Monitoring System. All rights reserved.</p>
         </div>
     </footer>
+    <script src="../assets/js/societech-announcements.js"></script>
+  <script src="../assets/js/announcements-public-feed.js"></script>
 </body>
 </html>
