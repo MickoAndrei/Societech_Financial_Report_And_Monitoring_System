@@ -1,0 +1,33 @@
+/* Shared Blurred Background for All Pages (except homepage) */
+
+.pageBackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../images/d6d628d6-1548-4d35-8176-5656c91409f5.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    filter: blur(8px);
+    z-index: 0;
+}
+
+.pageBackground::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+.pageContent {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+}
