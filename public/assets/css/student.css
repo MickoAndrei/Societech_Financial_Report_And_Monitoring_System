@@ -1,0 +1,1302 @@
+/* ============================================================
+   student.css
+   Scoped styles for the student portal (/student pages).
+   Depends on ../assets/css/main.css for global variables
+   like --gray-100, --shadow-sm, --shadow-lg, etc.
+============================================================ */
+
+/* ── CSS Variables ───────────────────────────────────────────
+   Local overrides/additions on top of main.css variables
+──────────────────────────────────────────────────────────── */
+:root {
+  --student-topbar-bg: #ffffff;
+  --student-surface:   #ffffff;
+  --student-border:    #e5e7eb;
+  --student-muted:     #6b7280;
+}
+
+
+/* ── Shell & Layout ──────────────────────────────────────────
+   Full-height flex container: sidebar fixed on the left,
+   main content filling the remaining width on the right
+──────────────────────────────────────────────────────────── */
+body.studentLayout {
+  background: var(--gray-100);
+  position: relative;
+}
+
+.pageBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('../assets/images/d6d628d6-1548-4d35-8176-5656c91409f5.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  filter: blur(8px);
+  z-index: 0;
+}
+
+.pageBackground::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.studentShell {
+  min-height: 100vh;
+  display: flex;
+  position: relative;
+  z-index: 2;
+}
+
+
+/* ── Sidebar ─────────────────────────────────────────────────
+   Fixed dark sidebar injected by student-bar.js.
+   Shares the same visual style as the admin sidebar
+   (admin-shared-styles.css) for consistency.
+──────────────────────────────────────────────────────────── */
+.sidebar {
+  width: 280px;
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  color: white;
+  position: fixed;
+  height: 100vh;
+  overflow-y: auto;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+/* Sidebar top block: logo + app title + role label */
+.sidebarHeader {
+  padding: 24px;
+  background: rgba(96, 165, 250, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+/* Logo image — white pill background to work on dark sidebar */
+.societechLogo {
+  display: block;
+  margin: 0 auto 14px;
+  height: 56px;
+  width: auto;
+  background: rgba(255, 255, 255, 0.94);
+  padding: 8px 12px;
+  border-radius: 14px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+}
+
+.sidebarTitle {
+  font-size: 22px;
+  font-weight: bold;
+  color: #60a5fa;
+  letter-spacing: -0.5px;
+}
+
+.sidebarSubtitle {
+  font-size: 13px;
+  color: #94a3b8;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* Nav wrapper with top/bottom padding */
+.sidebarNav {
+  padding: 16px 0;
+}
+
+/* Each labeled group of nav links (Main, Finance, Account) */
+.navSection {
+  margin-bottom: 24px;
+}
+
+/* Small uppercase label above each nav group */
+.navSectionTitle {
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  padding: 8px 24px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Individual nav link row */
+.navItem {
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  color: #cbd5e1;
+  text-decoration: none;
+  transition: all 0.2s;
+  font-size: 14px;
+  border-left: 3px solid transparent;
+}
+
+.navItem:hover {
+  background-color: rgba(51, 65, 85, 0.5);
+  color: white;
+}
+
+/* Blue left border + tinted background for the current page */
+.navItem.active {
+  background-color: rgba(96, 165, 250, 0.15);
+  color: #60a5fa;
+  border-left: 3px solid #60a5fa;
+}
+
+.navIcon {
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+
+/* ── Main Content Area ───────────────────────────────────────
+   Offset by the sidebar width so it doesn't sit underneath it
+──────────────────────────────────────────────────────────── */
+.studentContent {
+  flex: 1;
+  margin-left: 280px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 22px 22px 34px;
+  gap: 24px;
+}
+
+
+/* ── Top Bar ─────────────────────────────────────────────────
+   Sticky white bar at the top of the content area.
+   Contains the notification bell and profile dropdown.
+──────────────────────────────────────────────────────────── */
+.studentTopbar {
+  background: #ffffff;
+  border: 1px solid rgba(229, 231, 235, 0.95);
+  border-radius: 12px;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 22px;
+  z-index: 10;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.headerTitle {
+  margin-right: auto;
+  text-align: left;
+}
+
+.headerTitle h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.headerBreadcrumb {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+
+/* ── Notification Button ─────────────────────────────────────
+   Round icon button with a red badge showing unread count
+──────────────────────────────────────────────────────────── */
+.notificationBtn {
+  position: relative;
+  background: #f3f4f6;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.notificationBtn:hover {
+  background: #e5e7eb;
+}
+
+.notificationBadge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: #ef4444;
+  color: white;
+  font-size: 10px;
+  padding: 2px 5px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+
+/* ── Profile Widget ──────────────────────────────────────────
+   Avatar + name/role in the top bar. Clicking it opens
+   the dropdown menu (#profileMenu) via toggleProfileMenu()
+──────────────────────────────────────────────────────────── */
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.profile:hover {
+  background: #f3f4f6;
+}
+
+/* Circular avatar with gradient background and initials */
+.profileImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.profileName {
+  font-weight: 600;
+  font-size: 14px;
+  color: #1f2937;
+}
+
+.profileRole {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* Dropdown menu — hidden by default, shown via student.js */
+.profileWrapper {
+  position: relative;
+}
+
+.profileMenu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  background: #ffffff;
+  border: 1px solid var(--student-border);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  min-width: 160px;
+  display: none;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.profileMenu button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  color: #374151;
+}
+
+.profileMenu button:hover {
+  background: #f3f4f6;
+}
+
+
+/* ── Page Body ───────────────────────────────────────────────
+   Padded scrollable area that wraps all dashboard sections
+──────────────────────────────────────────────────────────── */
+.studentMain {
+  padding: 0 0 34px;
+}
+
+/* Frosted glass card that wraps all content sections */
+.studentContentOverlay {
+  padding: 0;
+  min-height: 100%;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-radius: 0;
+}
+
+.studentContentOverlay > .studentSection + .studentSection {
+  margin-top: 24px;
+}
+
+.studentDashboardGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+
+/* ── Sections ────────────────────────────────────────────────
+   Each dashboard block (Uncleared, Cleared, Overview, etc.)
+──────────────────────────────────────────────────────────── */
+.studentSection {
+  margin-bottom: 0;
+  background: #ffffff;
+  border: 1px solid var(--student-border);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+}
+
+.studentSectionWide {
+  grid-column: 1 / -1;
+}
+
+.studentSectionHalf {
+  grid-column: 1 / -1;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+}
+
+.sectionSubtitle {
+  color: var(--student-muted);
+  margin: -8px 0 0;
+  font-size: 14px;
+}
+
+
+/* ── Summary Cards & Grid ────────────────────────────────────
+   Responsive grid of info cards (Overview, Balance Summary)
+──────────────────────────────────────────────────────────── */
+.studentGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+body[data-page="dashboard"] .studentGridStats {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-bottom: 0;
+}
+
+.studentCard {
+  background: var(--student-surface);
+  border: 1px solid var(--student-border);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+body[data-page="dashboard"] .studentGridStats .studentCard {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-left: 4px solid transparent;
+}
+
+body[data-page="dashboard"] .studentGridStats .studentCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+body[data-page="dashboard"] .studentGridStats .studentCard:nth-child(1) {
+  border-left-color: #3b82f6;
+}
+
+body[data-page="dashboard"] .studentGridStats .studentCard:nth-child(2) {
+  border-left-color: #f59e0b;
+}
+
+body[data-page="dashboard"] .studentGridStats .studentCard:nth-child(3) {
+  border-left-color: #10b981;
+}
+
+body[data-page="dashboard"] .studentGridStats .studentCard h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+body[data-page="dashboard"] .studentGridStats .studentCard .studentMeta {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.studentSection > .studentCard + .studentCard {
+  margin-top: 1rem;
+}
+
+.studentList {
+  display: flex;
+  flex-direction: column;
+}
+
+.studentListItem {
+  padding: 16px 0;
+}
+
+.studentListItem:first-child {
+  padding-top: 0;
+}
+
+.studentListItem:last-child {
+  padding-bottom: 0;
+}
+
+.studentListItem + .studentListItem {
+  border-top: 1px solid #e5e7eb;
+}
+
+.studentListItem h4 {
+  margin: 0 0 0.25rem 0;
+}
+
+.studentCard h4 {
+  margin: 0 0 4px 0;
+  color: #1f2937;
+}
+
+.studentMeta {
+  color: var(--student-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
+/* ── Data Tables ─────────────────────────────────────────────
+   Used for Uncleared Items, Cleared Items, Transactions
+──────────────────────────────────────────────────────────── */
+.studentTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--student-border);
+}
+
+.studentTable th,
+.studentTable td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--student-border);
+  text-align: left;
+}
+
+.studentTable th {
+  background: #f9fafb;
+  font-weight: 600;
+  font-size: 13px;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Editable paid amount (treasurer fee modal) */
+.feePaidInput,
+.feeBalanceInput {
+  width: 100%;
+  max-width: 7.5rem;
+  padding: 0.35rem 0.5rem;
+  font-size: var(--font-size-sm, 0.875rem);
+}
+
+#studentPaymentsTable th:nth-child(2),
+#studentPaymentsTable th:nth-child(3),
+#studentPaymentsTable th:nth-child(4),
+#studentPaymentsTable th:nth-child(5),
+#studentPaymentsTable td:nth-child(2),
+#studentPaymentsTable td:nth-child(3),
+#studentPaymentsTable td:nth-child(4),
+#studentPaymentsTable td:nth-child(5) {
+  text-align: center;
+}
+
+#studentPaymentsTable .feePaidInput {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.studentTable tbody tr:hover {
+  background: #f8fafc;
+}
+
+.tableEmptyRow td {
+  padding: 34px 16px;
+}
+
+.tableEmptyState {
+  min-height: 86px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #6b7280;
+  font-weight: 600;
+  text-align: center;
+}
+
+.tableEmptyState svg {
+  color: #9ca3af;
+}
+
+
+/* ── Search Bar ──────────────────────────────────────────────
+   Inline search input above the Uncleared Items table.
+   Calls studentSearchTable() on each keystroke via student.js
+──────────────────────────────────────────────────────────── */
+.studentSearch {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid var(--student-border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: #ffffff;
+  margin-bottom: 8px;
+}
+
+.studentSearch input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+  color: #374151;
+}
+
+
+/* ── Status Pills ────────────────────────────────────────────
+   Colored badge labels used in table Status columns
+──────────────────────────────────────────────────────────── */
+.statusPill {
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.statusPending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.statusCleared {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.statusWarning {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+
+/* ── Settings Page ───────────────────────────────────────────
+   Used by settings.html — two-column card grid with forms
+──────────────────────────────────────────────────────────── */
+.settingsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 24px;
+  margin-top: 0;
+}
+
+body[data-page="settings"] .studentSection {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+body[data-page="settings"] .settingsGrid {
+  margin-top: 0;
+}
+
+.settingsCard {
+  background: var(--student-surface);
+  border: 1px solid var(--student-border);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.cardHeader {
+  padding: 24px 24px 16px;
+  border-bottom: 1px solid var(--student-border);
+}
+
+.cardHeader h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.cardHeader p {
+  margin: 0;
+  color: var(--student-muted);
+  font-size: 0.9rem;
+}
+
+.cardContent {
+  padding: 24px;
+}
+
+/* Form fields used in settings cards */
+.formGroup {
+  margin-bottom: 1.25rem;
+}
+
+.formLabel {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.formInput {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--student-border);
+  border-radius: 10px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.formSelect {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--student-border);
+  border-radius: 10px;
+  font-size: 14px;
+  background: #ffffff;
+}
+
+.formInput:focus {
+  outline: none;
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+}
+
+/* Custom styled checkbox used in notification preferences */
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  font-weight: 500;
+  color: #374151;
+}
+
+.checkboxLabel input[type="checkbox"] {
+  display: none;
+}
+
+.checkmark {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--student-border);
+  border-radius: 4px;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.checkboxLabel input[type="checkbox"]:checked + .checkmark {
+  background: #60a5fa;
+  border-color: #60a5fa;
+}
+
+.checkboxLabel input[type="checkbox"]:checked + .checkmark::after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Primary action button used in settings forms */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btnPrimary {
+  background: #60a5fa;
+  color: white;
+}
+
+.btnPrimary:hover {
+  background: #3b82f6;
+}
+
+.btnPrimary:active {
+  background: #2563eb;
+}
+
+.profilePreview {
+  margin-top: 0.5rem;
+}
+
+
+/* ── Responsive ──────────────────────────────────────────────
+   On smaller screens the sidebar stacks above content
+   and the main content drops its left offset
+──────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .studentShell {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .studentContent {
+    margin-left: 0;
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .studentTopbar {
+    top: 16px;
+    padding: 16px 18px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .headerActions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 768px) {
+  .studentContentOverlay {
+    padding: 0;
+  }
+
+  .studentMain {
+    padding: 0 0 24px;
+  }
+
+  .headerTitle h1 {
+    font-size: 24px;
+  }
+
+  .studentDashboardGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .studentSectionWide,
+  .studentSectionHalf {
+    grid-column: auto;
+  }
+
+  .settingsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .cardContent {
+    padding: 1rem;
+  }
+}
+
+
+/* =============================================================================
+   ADMIN-MATCHING STAT CARD STYLES
+   Brings the admin's icon-equipped stat cards into the student portal.
+   Font sizes, icon badges, color variants, and trend indicators mirror
+   the admin panel (admin-shared-styles.css) for visual consistency.
+   ============================================================================= */
+
+/* Stat cards grid — mirrors admin .statsGrid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin-bottom: 0;
+}
+
+/* Base stat card — same as admin's .statCard */
+.statCard {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-left: 4px solid transparent;
+}
+
+.statCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Color-coded left border variants */
+.statCard.blue   { border-left-color: #3b82f6; }
+.statCard.green  { border-left-color: #10b981; }
+.statCard.orange { border-left-color: #f59e0b; }
+.statCard.purple { border-left-color: #8b5cf6; }
+.statCard.red    { border-left-color: #ef4444; }
+.statCard.indigo { border-left-color: #6366f1; }
+
+/* Top row: label on left, icon on right */
+.statHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+/* Stat label — e.g. "Total Balance" */
+.statTitle {
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+/* Colored icon badge — rounded square with SVG inside */
+.statIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Icon background/color per card variant */
+.statCard.blue   .statIcon { background: #dbeafe; color: #2563eb; }
+.statCard.green  .statIcon { background: #d1fae5; color: #059669; }
+.statCard.orange .statIcon { background: #fed7aa; color: #ea580c; }
+.statCard.purple .statIcon { background: #e9d5ff; color: #9333ea; }
+.statCard.red    .statIcon { background: #fee2e2; color: #dc2626; }
+.statCard.indigo .statIcon { background: #ddd6fe; color: #7c3aed; }
+
+/* Large bold value — e.g. "₱14,650" */
+.statValue {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 6px;
+}
+
+/* Subtitle/trend row below the value */
+.statTrend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.statTrend.trendUp   { color: #10b981; }
+.statTrend.trendDown { color: #ef4444; }
+
+/* Section title font-size aligned with admin (h1 = 28px, section = 20px) */
+.sectionTitle {
+  font-size: 20px !important;
+}
+
+/* Header h1 font-size matching admin */
+.studentTopbar .headerTitle h1 {
+  font-size: 28px;
+}
+
+/* ── Classroom treasurer: section class list ───────────────── */
+.treasurerRosterSection {
+  max-width: 100%;
+}
+
+.treasurerRosterAlert {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 10px;
+  color: #1e40af;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.treasurerRosterCard {
+  background: var(--student-surface);
+  border: 1px solid var(--student-border);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+}
+
+.treasurerRosterHeader {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.treasurerRosterToolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  width: 100%;
+  max-width: 520px;
+}
+
+.treasurerSortLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--student-muted, #6b7280);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  min-width: 160px;
+}
+
+.treasurerSortSelect {
+  text-transform: none;
+  font-weight: 500;
+  letter-spacing: normal;
+  font-size: 14px;
+  padding: 8px 10px;
+  min-width: 180px;
+}
+
+.treasurerRosterSearch {
+  min-width: 260px;
+  margin-bottom: 0;
+  flex: 1 1 220px;
+}
+
+.rosterResultMeta {
+  font-size: 13px;
+  color: var(--student-muted);
+  margin: 0 0 12px;
+}
+
+.countCleared { color: #059669; }
+.countNotCleared { color: #dc2626; }
+
+.treasurerRosterTable tbody tr {
+  cursor: pointer;
+}
+
+.treasurerRosterTable tbody tr:hover {
+  background: #f9fafb;
+}
+
+.studentModalOverlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.studentModalOverlay.show {
+  display: flex;
+}
+
+.studentModal {
+  background: #fff;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 720px;
+  max-height: 90vh;
+  overflow: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.studentModalWide {
+  max-width: 900px;
+}
+
+.studentModalHeader {
+  padding: 24px 24px 12px;
+  border-bottom: 1px solid var(--student-border);
+}
+
+.studentModalHeader h2 {
+  margin: 0 0 4px;
+  font-size: 1.25rem;
+}
+
+.studentModalHeader p {
+  margin: 0;
+  color: var(--student-muted);
+  font-size: 14px;
+}
+
+.studentModalFooter {
+  padding: 16px 24px 24px;
+  text-align: right;
+}
+
+/* ── Societech treasurer ───────────────────────────────────── */
+.stDashboardStats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stStatCard {
+  background: var(--student-surface);
+  border: 1px solid var(--student-border);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.stStatCard h4 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--student-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.stStatCard .stStatValue {
+  font-size: 26px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.stSearchFilterBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.stSearchFilterBar .studentSearch {
+  flex: 1;
+  min-width: 220px;
+  margin-bottom: 0;
+}
+
+.stFilterSelect {
+  padding: 10px 14px;
+  border: 1px solid var(--student-border);
+  border-radius: 10px;
+  font-size: 14px;
+  background: #fff;
+}
+
+.stClassesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.stClassCardLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.stClassCard {
+  background: var(--student-surface);
+  border: 1px solid var(--student-border);
+  border-radius: 12px;
+  padding: 20px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+}
+
+.stClassCardLink:hover .stClassCard {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.stClassName {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #1e293b;
+}
+
+.stClassInfo {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #4b5563;
+}
+
+.stClassInfo .textSuccess { color: #059669; }
+.stClassInfo .textPrimary { color: #2563eb; }
+
+.rosterBackLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+  color: #2563eb;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.rosterBackLink:hover {
+  text-decoration: underline;
+}
+
+.stPageToolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/* Manage Payments (Societech treasurer): lede + table sit over photo background —
+   give the main block a solid surface so muted text is readable */
+body[data-page="societech-payments"] .studentContentOverlay {
+  background: #f1f5f9;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  border-radius: 12px;
+  padding: 20px 22px 28px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+body[data-page="societech-payments"] .stPageToolbar {
+  align-items: flex-start;
+}
+
+body[data-page="societech-payments"] .stPaymentsLede {
+  color: #0f172a;
+  font-size: 15px;
+  line-height: 1.5;
+  font-weight: 500;
+  margin: 0;
+  max-width: 52ch;
+}
+
+body[data-page="societech-payments"] #paymentsTable {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--student-border);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+}
+
+.btnSm {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+.btnDanger {
+  background: #dc2626;
+  color: #fff;
+  border: none;
+}
+
+.btnDanger:hover {
+  background: #b91c1c;
+}
+
+.stActionsCell {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+#sectionsQuickList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#sectionsQuickList li {
+  margin-bottom: 8px;
+}
+
+#sectionsQuickList a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+#sectionsQuickList a:hover {
+  text-decoration: underline;
+}
+
+.stFormModal .studentModal {
+  max-width: 480px;
+}
+
+.stFormModal .formGroup {
+  margin-bottom: 1rem;
+}
+
+.stFormModal label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 14px;
+}

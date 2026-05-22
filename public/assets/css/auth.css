@@ -1,0 +1,261 @@
+/* ================================================================
+   forgot-password.css
+   Styles for the Forgot Password page of Socitech FRMS
+   ================================================================ */
+
+
+/* ---------------------------------------------------------------
+   Reset & Box Model
+   Removes default browser margins/padding and enforces
+   border-box sizing so padding doesn't expand element widths
+   --------------------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* ---------------------------------------------------------------
+   Page Body
+   Full-viewport dark navy gradient background, centered layout
+   using flexbox, and a light base text color for readability
+   --------------------------------------------------------------- */
+body {
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #001f3f 0%, #0a2545 40%, #1e3a5f 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #f8f9fa;
+}
+
+
+/* ---------------------------------------------------------------
+   Outer Container
+   Constrains the card to a readable max-width of 420px and
+   adds horizontal padding so it doesn't touch screen edges
+   on small devices. z-index keeps it above any bg effects.
+   --------------------------------------------------------------- */
+.container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 420px;
+  padding: 1.5rem;
+}
+
+
+/* ---------------------------------------------------------------
+   Card / Login Box
+   Frosted-glass card using semi-transparent background and
+   backdrop blur. Gold inset border and deep shadow give depth.
+   --------------------------------------------------------------- */
+.loginBox {
+  background: rgba(15, 28, 50, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 2.8rem 2.2rem;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,202,40,0.12) inset;
+  border: 1px solid rgba(255,202,40,0.10);
+  text-align: center;
+}
+
+
+/* ---------------------------------------------------------------
+   Logo Container
+   Adds spacing below the logo image before the title block
+   --------------------------------------------------------------- */
+.logoContainer {
+  margin-bottom: 2rem;
+}
+
+
+/* ---------------------------------------------------------------
+   Logo Image
+   Fixed width with a drop shadow for visual lift.
+   Bottom margin separates it from the heading below.
+   --------------------------------------------------------------- */
+.logo {
+  width: 110px;
+  height: auto;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+  margin-bottom: 1.2rem;
+}
+
+
+/* ---------------------------------------------------------------
+   Page Heading (h1)
+   Large gold title. The nested <small> tag renders the
+   system subtitle in a smaller, muted style below.
+   --------------------------------------------------------------- */
+h1 {
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: #ffca28;
+  letter-spacing: 0.5px;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+
+h1 small {
+  display: block;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #d1d8e0;
+  margin-top: 0.5rem;
+  opacity: 0.92;
+}
+
+
+/* ---------------------------------------------------------------
+   Form Group
+   Wraps each label + input pair. Bottom margin keeps fields
+   visually separated. text-align: left overrides the card's
+   center alignment so labels and inputs are left-aligned.
+   --------------------------------------------------------------- */
+.formGroup {
+  margin-bottom: 1.6rem;
+  text-align: left;
+}
+
+
+/* ---------------------------------------------------------------
+   Field Labels
+   Muted light color to contrast against the dark card without
+   competing with the input text itself.
+   --------------------------------------------------------------- */
+label {
+  display: block;
+  margin-bottom: 0.6rem;
+  color: #d1d8e0;
+  font-size: 0.96rem;
+  font-weight: 500;
+}
+
+
+/* ---------------------------------------------------------------
+   Text & Password Inputs
+   Semi-transparent background blends into the card. Gold border
+   tint keeps the form on-brand. Smooth transition prepares
+   the focus animation.
+   --------------------------------------------------------------- */
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 1rem 1.3rem;
+  border: 1px solid rgba(255,202,40,0.22);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  color: white;
+  font-size: 1.02rem;
+  transition: all 0.22s ease;
+}
+
+
+/* ---------------------------------------------------------------
+   Input Placeholder Text
+   Dimmed so it doesn't compete with real user input
+   --------------------------------------------------------------- */
+input::placeholder {
+  color: rgba(209, 216, 224, 0.55);
+}
+
+
+/* ---------------------------------------------------------------
+   Input Focus State
+   Highlights the active field with a gold border glow and
+   a subtle background tint to signal keyboard focus clearly
+   --------------------------------------------------------------- */
+input:focus {
+  outline: none;
+  border-color: #ffca28;
+  background: rgba(255,202,40,0.08);
+  box-shadow: 0 0 0 3px rgba(255,202,40,0.18);
+}
+
+
+/* ---------------------------------------------------------------
+   Submit Button
+   Full-width gold gradient button with navy text for contrast.
+   Bold weight and letter spacing reinforce the CTA feel.
+   --------------------------------------------------------------- */
+.btnLogin {
+  width: 100%;
+  padding: 1.05rem;
+  background: linear-gradient(90deg, #ffca28, #ffc107, #ffca28);
+  color: #001f3f;
+  font-weight: 700;
+  font-size: 1.08rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.28s ease;
+  box-shadow: 0 5px 18px rgba(255,202,40,0.35);
+  letter-spacing: 0.4px;
+}
+
+/* Lifts the button slightly on hover for a tactile feel */
+.btnLogin:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(255,202,40,0.5);
+}
+
+/* Presses the button back down on click to simulate a real press */
+.btnLogin:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 14px rgba(255,202,40,0.3);
+}
+
+
+/* ---------------------------------------------------------------
+   Bottom Options / Links
+   Centers the "Back to Login" link below the submit button.
+   Indigo-tinted color distinguishes it from body text.
+   --------------------------------------------------------------- */
+.options {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.6rem;
+  font-size: 0.94rem;
+}
+
+.options a {
+  color: #a5b4fc;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+/* Gold highlight on hover matches the overall brand accent */
+.options a:hover {
+  color: #ffca28;
+  text-decoration: underline;
+}
+
+
+/* ---------------------------------------------------------------
+   Responsive — Small Screens (max-width: 480px)
+   Tightens padding and reduces font/logo sizes on mobile so
+   the card fits comfortably without horizontal scrolling
+   --------------------------------------------------------------- */
+@media (max-width: 480px) {
+  .loginBox {
+    padding: 2.2rem 1.6rem;
+    margin: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .logo {
+    width: 95px;
+  }
+
+  .btnLogin {
+    padding: 0.95rem;
+    font-size: 1.02rem;
+  }
+}
