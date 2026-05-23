@@ -63,14 +63,25 @@
     document.title = 'Societech Treasurer Dashboard • Societech Student';
   }
 
-  // FIX: also init when session loads asynchronously (the fetch('/auth/me') in
-  // student-session.js completes after DOMContentLoaded, so the guard was always
-  // seeing role='guest' and redirecting to /student).
-  window.addEventListener('societech-session-ready', function () {
-    // Only run if we haven't already successfully initialised
-    if (!document.getElementById('statSections')?.textContent) {
+  // Wait for BOTH auth/me (societech-session-ready) AND class rosters API
+  // (societech-rosters-changed) before initialising — both are async fetches.
+  let sessionReady = false;
+  let rostersReady = false;
+
+  function tryInit() {
+    if (sessionReady && rostersReady && !document.getElementById('statSections')?.textContent) {
       initDashboard();
     }
+  }
+
+  window.addEventListener('societech-session-ready', function () {
+    sessionReady = true;
+    tryInit();
+  });
+
+  window.addEventListener('societech-rosters-changed', function () {
+    rostersReady = true;
+    tryInit();
   });
 
   global.SocietechTreasurer = { guard, initDashboard };

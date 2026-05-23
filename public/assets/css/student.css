@@ -31,7 +31,7 @@ body.studentLayout {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('../assets/images/d6d628d6-1548-4d35-8176-5656c91409f5.jpg');
+  background-image: url('../images/d6d628d6-1548-4d35-8176-5656c91409f5.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -575,6 +575,17 @@ body[data-page="dashboard"] .studentGridStats .studentCard .studentMeta {
 .tableEmptyState svg {
   color: #9ca3af;
 }
+
+/* Table loader and empty state */
+.tableLoader { display:flex; flex-direction:column; align-items:center; gap:8px; padding:18px 0; }
+.tableLoader .spinner { animation: rotate 1s linear infinite; }
+.tableLoader .spinner .path { stroke: #60a5fa; stroke-linecap: round; stroke-dasharray: 90; stroke-dashoffset: 0; animation: dash 1.2s ease-in-out infinite; }
+@keyframes rotate { 100% { transform: rotate(360deg);} }
+@keyframes dash { 0% { stroke-dasharray: 1,200; stroke-dashoffset: 0; } 50% { stroke-dasharray: 90,200; stroke-dashoffset: -35px; } 100% { stroke-dasharray: 90,200; stroke-dashoffset: -124px; } }
+.tableLoader .loaderText { color: var(--student-muted); font-weight:600; }
+.tableEmpty { display:flex; flex-direction:column; align-items:center; gap:10px; padding:18px 0; color:var(--student-muted); }
+.tableEmpty svg { color:#9ca3af; }
+.tableEmpty .emptyText { font-weight:600; }
 
 
 /* ── Search Bar ──────────────────────────────────────────────

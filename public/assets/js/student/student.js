@@ -1,197 +1,159 @@
-(function () {
-  const body = document.body;
-  const page = body.getAttribute('data-page');
-  const pageMeta = {
-    dashboard: {
-      title: 'Dashboard',
-      breadcrumb: 'Societech and BSIT class balances, dues, and updates'
-    },
-    records: {
-      title: 'My Financial Records',
-      breadcrumb: 'Membership, dues, IT Days (Panagmaya), and Societech assessments'
-    },
-    contributions: {
-      title: 'Cash Contributions',
-      breadcrumb: 'BSIT class fund and Societech society assessments'
-    },
-    notifications: {
-      title: 'Notifications',
-      breadcrumb: 'Treasurer reminders, Societech news, and verification status'
-    },
-    settings: {
-      title: 'Settings',
-      breadcrumb: 'Societech Student Portal preferences and security'
-    },
-    profile: {
-      title: 'Profile',
-      breadcrumb: 'BSIT class roster and Societech contact details'
-    },
-    'class-roster': {
-      title: 'My Section Class List',
-      breadcrumb: 'Classroom treasurer view — your assigned section only'
-    },
-    'societech-dashboard': {
-      title: 'Societech Treasurer Dashboard',
-      breadcrumb: 'Society-wide collections, sections, and assessments'
-    },
-    'societech-all-classes': {
-      title: 'All Classes',
-      breadcrumb: 'Every BSIT section — view class lists and treasurers'
-    },
-    'societech-section-roster': {
-      title: 'Section Class List',
-      breadcrumb: 'Student roster for the selected section'
-    },
-    'societech-payments': {
-      title: 'Manage Payments',
-      breadcrumb: 'Add and edit Societech fees with amount and deadline'
-    }
-  };
-  const navLinks = document.querySelectorAll('.studentNav a');
-  const topbar = document.querySelector('.studentTopbar');
+﻿/**
+ * Student Portal Utilities
+ * 
+ * This file is loaded on all student pages.
+ * Additional functionality is provided by:
+ * - student-bar.js (sidebar, profile menu, logout)
+ * - student-session.js (session management, role detection)
+ * 
+ * CSS styling is loaded separately from assets/css/student.css
+ */
 
-  if (topbar && !topbar.querySelector('.headerTitle')) {
-    const meta = pageMeta[page] || { title: 'Societech Student', breadcrumb: 'Manage your Societech assessments and class finances' };
-    const heading = document.createElement('div');
-    heading.className = 'headerTitle';
-    heading.innerHTML = `<h1>${meta.title}</h1><div class="headerBreadcrumb">${meta.breadcrumb}</div>`;
-    topbar.prepend(heading);
-  }
+console.log('Student portal page loaded');
 
-  navLinks.forEach((link) => {
-    if (link.dataset.page === page) {
-      link.classList.add('active');
-    }
-  });
+// Generic table loader and empty-state helpers
+window.StudentUI = (function () {
+	function makeLoaderRow(colspan) {
+		const tr = document.createElement('tr');
+		const td = document.createElement('td');
+		td.colSpan = colspan || 6;
+		td.style.textAlign = 'center';
+		td.innerHTML = `
+			<div class="tableLoader">
+				<svg class="spinner" width="40" height="40" viewBox="0 0 50 50">
+					<circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="4"></circle>
+				</svg>
+				<div class="loaderText">Loading…</div>
+			</div>`;
+		tr.appendChild(td);
+		return tr;
+	}
 
-  // Load profile image from localStorage
-  loadProfileImage();
+	function makeEmptyRow(message, colspan) {
+		const tr = document.createElement('tr');
+		const td = document.createElement('td');
+		td.colSpan = colspan || 6;
+		td.style.textAlign = 'center';
+		td.innerHTML = `
+			<div class="tableEmpty">
+				<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+					<path d="M3 7h18M8 7v10a1 1 0 001 1h6a1 1 0 001-1V7" stroke-linecap="round" stroke-linejoin="round"></path>
+					<path d="M12 11v4" stroke-linecap="round" stroke-linejoin="round"></path>
+				</svg>
+				<div class="emptyText">${message || 'No data available'}</div>
+			</div>`;
+		tr.appendChild(td);
+		return tr;
+	}
 
-  // Profile menu toggle functionality
-  window.toggleProfileMenu = function() {
-    const menu = document.getElementById('profileMenu');
-    if (menu) {
-      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-    }
-  };
+	function showLoading(tableSelector) {
+		const table = document.querySelector(tableSelector);
+		if (!table) return;
+		const tbody = table.querySelector('tbody') || table;
+		tbody.dataset.loading = '1';
+		tbody.innerHTML = '';
+		const cols = table.querySelectorAll('thead th').length || 6;
+		tbody.appendChild(makeLoaderRow(cols));
+	}
 
-  // Close profile menu and announcement dropdown when clicking outside
-  document.addEventListener('click', (event) => {
-    const profileWrap = document.querySelector('.profileWrapper');
-    const menu = document.getElementById('profileMenu');
-    if (profileWrap && menu && !profileWrap.contains(event.target)) {
-      menu.style.display = 'none';
-    }
+	function showEmpty(tableSelector, message) {
+		const table = document.querySelector(tableSelector);
+		if (!table) return;
+		const tbody = table.querySelector('tbody') || table;
+		delete tbody.dataset.loading;
+		tbody.innerHTML = '';
+		const cols = table.querySelectorAll('thead th').length || 6;
+		tbody.appendChild(makeEmptyRow(message, cols));
+	}
 
-    const notifWrap = document.querySelector('.notificationWrapper');
-    const dropdown = document.getElementById('notificationDropdown');
-    if (notifWrap && dropdown && !notifWrap.contains(event.target)) {
-      const btn = notifWrap.querySelector('.notificationBtn');
-      if (btn && window.AnnouncementBell?.setDropdownOpen) {
-        window.AnnouncementBell.setDropdownOpen(btn, dropdown, false);
-      } else {
-        dropdown.classList.remove('show');
-        dropdown.style.display = 'none';
-        if (btn) btn.setAttribute('aria-expanded', 'false');
-      }
-    }
-  });
+	function clearState(tableOrSelector) {
+		const table = typeof tableOrSelector === 'string' ? document.querySelector(tableOrSelector) : tableOrSelector;
+		if (!table) return;
+		const tbody = table.querySelector('tbody') || table;
+		delete tbody.dataset.loading;
+		tbody.innerHTML = '';
+	}
 
-  // Logout function
-  window.logout = function() {
-    if (window.StudentSession?.clearStudentSession) {
-      window.StudentSession.clearStudentSession();
-    }
-    const base = window.location.pathname.includes('/public/')
-      ? window.location.pathname.replace(/\/public\/.*$/, '/public')
-      : '/Societech_Financial_And_Monitoring/public';
-    window.location.href = `${window.location.origin}${base}/auth/logout`;
-  };
+	// Wire to known events
+	function findTablesByKeyword(keyword) {
+		const tables = Array.from(document.querySelectorAll('.studentTable'));
+		return tables.filter((t) => {
+			const id = (t.id || '').toLowerCase();
+			const classes = (t.className || '').toLowerCase();
+			return id.includes(keyword) || classes.includes(keyword);
+		});
+	}
 
-  // Load profile image from localStorage
-  function loadProfileImage() {
-    const profilePicture = localStorage.getItem('studentProfilePicture');
-    if (profilePicture) {
-      const profileImg = document.querySelector('.profileImg');
-      if (profileImg) {
-        profileImg.innerHTML = `<img src="${profilePicture}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
-      }
-    }
-  }
+	function showLoadingForKeyword(keyword) {
+		const tables = findTablesByKeyword(keyword);
+		if (tables.length === 0) return;
+		tables.forEach((tbl) => {
+			const tbody = tbl.querySelector('tbody') || tbl;
+			tbody.dataset.loading = '1';
+			tbody.innerHTML = '';
+			const cols = tbl.querySelectorAll('thead th').length || (tbl.querySelector('tbody tr td') ? tbl.querySelector('tbody tr td').cellIndex + 1 : 6);
+			tbody.appendChild(makeLoaderRow(cols));
+		});
+	}
 
-  window.studentSearchTable = function (tableId, inputId) {
-    const input = document.getElementById(inputId);
-    const filter = input.value.toLowerCase();
-    const table = document.getElementById(tableId);
-    if (!table) {
-      return;
-    }
-    const rows = table.getElementsByTagName('tr');
+	function showEmptyForKeyword(keyword, message) {
+		const tables = findTablesByKeyword(keyword);
+		if (tables.length === 0) return;
+		tables.forEach((tbl) => {
+			const tbody = tbl.querySelector('tbody') || tbl;
+			delete tbody.dataset.loading;
+			tbody.innerHTML = '';
+			const cols = tbl.querySelectorAll('thead th').length || 6;
+			tbody.appendChild(makeEmptyRow(message, cols));
+		});
+	}
 
-    for (let i = 1; i < rows.length; i += 1) {
-      if (rows[i].hasAttribute('data-empty-state')) {
-        rows[i].style.display = '';
-        continue;
-      }
-      const firstCell = rows[i].getElementsByTagName('td')[0];
-      if (!firstCell) {
-        continue;
-      }
-      const text = (firstCell.textContent || firstCell.innerText).toLowerCase();
-      rows[i].style.display = text.indexOf(filter) > -1 ? '' : 'none';
-    }
-  };
+	window.addEventListener('societech-payments-loading', function () {
+		showLoadingForKeyword('payment');
+	});
 
-  function tableHasRealRows(tbody) {
-    return Array.from(tbody.children).some((row) => !row.hasAttribute('data-empty-state'));
-  }
+	window.addEventListener('societech-payments-changed', function () {
+		setTimeout(function () {
+			const paymentsExist = (window.SocietechPayments && window.SocietechPayments.getPayments().length > 0) || false;
+			if (!paymentsExist) {
+				showEmptyForKeyword('payment', 'No payments found');
+			} else {
+				findTablesByKeyword('payment').forEach((t) => clearState(t));
+			}
+		}, 50);
+	});
 
-  function renderEmptyTableState(table) {
-    const tbody = table.querySelector('tbody');
-    if (!tbody || tableHasRealRows(tbody) || tbody.querySelector('[data-empty-state]')) {
-      return;
-    }
+	window.addEventListener('societech-rosters-loading', function () {
+		showLoadingForKeyword('roster');
+		showLoadingForKeyword('section');
+	});
 
-    const columnCount = Math.max(1, table.querySelectorAll('thead th').length);
-    const row = document.createElement('tr');
-    row.setAttribute('data-empty-state', 'true');
-    row.className = 'tableEmptyRow';
-    row.innerHTML =
-      `<td colspan="${columnCount}">` +
-      '<div class="tableEmptyState">' +
-      '<svg width="26" height="26" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">' +
-      '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h10"></path>' +
-      '</svg>' +
-      '<span>No data available</span>' +
-      '</div>' +
-      '</td>';
-    tbody.appendChild(row);
-  }
+	window.addEventListener('societech-rosters-changed', function () {
+		setTimeout(function () {
+			const anySections = (window.ClassRosters && window.ClassRosters.getAllSections().length > 0) || false;
+			if (!anySections) {
+				showEmptyForKeyword('section', 'No sections found');
+				showEmptyForKeyword('roster', 'No students in this section');
+			} else {
+				findTablesByKeyword('section').forEach((t) => clearState(t));
+				findTablesByKeyword('roster').forEach((t) => clearState(t));
+			}
+		}, 50);
+	});
 
-  function setupEmptyTableStates() {
-    document.querySelectorAll('table').forEach((table) => {
-      const tbody = table.querySelector('tbody');
-      if (!tbody || tbody.dataset.emptyStateReady === '1') {
-        return;
-      }
+	// On initial load, ensure empty tables render an empty-state row so they don't collapse
+	function ensureEmptyTables() {
+		Array.from(document.querySelectorAll('.studentTable')).forEach((tbl) => {
+			const tbody = tbl.querySelector('tbody') || tbl;
+			if (!tbody) return;
+			if (tbody.children.length === 0) {
+				const cols = tbl.querySelectorAll('thead th').length || 6;
+				tbody.appendChild(makeEmptyRow('No data', cols));
+			}
+		});
+	}
 
-      tbody.dataset.emptyStateReady = '1';
-      renderEmptyTableState(table);
-      const observer = new MutationObserver(() => {
-        const emptyRow = tbody.querySelector('[data-empty-state]');
-        if (tableHasRealRows(tbody)) {
-          emptyRow?.remove();
-          return;
-        }
-        renderEmptyTableState(table);
-      });
-      observer.observe(tbody, { childList: true });
-    });
-  }
+	document.addEventListener('DOMContentLoaded', function () { ensureEmptyTables(); });
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupEmptyTableStates);
-  } else {
-    setupEmptyTableStates();
-  }
+	return { showLoading, showEmpty, clearState };
 })();

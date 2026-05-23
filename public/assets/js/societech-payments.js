@@ -2,7 +2,20 @@
  * Societech-wide fee assessments backed by the CI4 API.
  */
 (function (global) {
-  const apiUrl = `${global.location.origin}${global.location.pathname.replace(/\/(?:public\/?)?[^/]*$/, '')}/api/fees`;
+  function appBase() {
+    if (global.location.pathname.includes('/public/')) {
+      return `${global.location.origin}${global.location.pathname.replace(/\/public\/.*$/, '/public')}`;
+    }
+
+    const marker = '/Societech_Financial_Report_And_Monitoring';
+    if (global.location.pathname.includes(marker)) {
+      return `${global.location.origin}${marker}/public`;
+    }
+
+    return global.location.origin;
+  }
+
+  const apiUrl = `${appBase()}/api/fees`;
   let cache = [];
 
   function toViewModel(row) {
@@ -45,11 +58,14 @@
 
   async function refresh() {
     try {
+      // notify listeners that payments fetch is starting
+      global.dispatchEvent(new CustomEvent('societech-payments-loading'));
       const result = await request();
       cache = (result.data || []).map(toViewModel);
       global.dispatchEvent(new CustomEvent('societech-payments-changed'));
     } catch {
       cache = [];
+      global.dispatchEvent(new CustomEvent('societech-payments-changed'));
     }
 
     return cache;

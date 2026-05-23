@@ -3,6 +3,7 @@
  */
 (function (global) {
   let cachedSession = { role: 'guest', classKey: '', fullName: '', email: '' };
+  let sessionLoaded = false; // FIX: guard against redirecting before auth/me has returned
 
   function normalizeClassKey(raw) {
     if (!raw || typeof raw !== 'string') return '';
@@ -17,7 +18,6 @@
   }
 
   function normalizeRole(role) {
-    if (role === 'treasurer') return 'classTreasurer';
     return role || 'student';
   }
 
@@ -38,25 +38,29 @@
     };
   }
 
+  function appBase() {
+    if (global.location.pathname.includes('/public/')) {
+      return `${global.location.origin}${global.location.pathname.replace(/\/public\/.*$/, '/public')}`;
+    }
+
+    const marker = '/Societech_Financial_Report_And_Monitoring';
+    if (global.location.pathname.includes(marker)) {
+      return `${global.location.origin}${marker}/public`;
+    }
+
+    return global.location.origin;
+  }
+
   async function refresh() {
     try {
-      // FIX: Use appBase() so the auth/me URL is always correct regardless of the
-      // current page path. The old inline pathname regex produced a wrong URL on
-      // some routes (e.g. /student/class-roster -> /student/auth/me instead of
-      // /auth/me), which returned a redirect or 403 and triggered the forbidden popup.
       const response = await fetch(`${appBase()}/auth/me`);
-      // FIX: Treat 401 silently - user is a guest, not an error.
-      if (response.status === 401) {
-        cachedSession = { role: 'guest', classKey: '', fullName: '', email: '' };
-        global.dispatchEvent(new CustomEvent('societech-session-ready', { detail: cachedSession }));
-        return cachedSession;
-      }
       if (!response.ok) throw new Error('Session unavailable');
       cachedSession = normalizeSession(await response.json());
     } catch {
       cachedSession = { role: 'guest', classKey: '', fullName: '', email: '' };
     }
 
+    sessionLoaded = true; // FIX: mark session as loaded before firing the event
     applyProfileToPage();
     global.dispatchEvent(new CustomEvent('societech-session-ready', { detail: cachedSession }));
     return cachedSession;
@@ -98,6 +102,7 @@
   }
 
   function requireClassTreasurer(redirectTo) {
+    if (!sessionLoaded) return false; // FIX: session still loading, don't redirect yet
     if (!isClassroomTreasurer()) {
       window.location.replace(redirectTo || `${appBase()}/student`);
       return false;
@@ -106,6 +111,7 @@
   }
 
   function requireSocietechTreasurer(redirectTo) {
+    if (!sessionLoaded) return false; // FIX: session still loading, don't redirect yet
     if (!isSocietechTreasurer()) {
       window.location.replace(redirectTo || `${appBase()}/student`);
       return false;
@@ -118,7 +124,7 @@
       return `${window.location.origin}${window.location.pathname.replace(/\/public\/.*$/, '/public')}`;
     }
 
-    const marker = '/Societech_Financial_And_Monitoring';
+    const marker = '/Societech_Financial_Report_And_Monitoring';
     if (window.location.pathname.includes(marker)) {
       return `${window.location.origin}${marker}/public`;
     }
@@ -178,4 +184,3 @@
 
   refresh();
 })(window);
-

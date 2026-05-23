@@ -73,8 +73,14 @@
     document.title = 'All Classes • Societech Treasurer';
   }
 
-  // FIX: wait for the async session fetch to complete before guarding.
-  // DOMContentLoaded fires before auth/me returns, so isSocietechTreasurer()
-  // was always false at that point, causing an immediate redirect to /student.
-  window.addEventListener('societech-session-ready', initAllClasses);
+  // Wait for BOTH session (auth/me) AND rosters (api/sections) before running.
+  let sessionReady = false;
+  let rostersReady = false;
+
+  function tryInit() {
+    if (sessionReady && rostersReady) initAllClasses();
+  }
+
+  window.addEventListener('societech-session-ready', function () { sessionReady = true; tryInit(); });
+  window.addEventListener('societech-rosters-changed', function () { rostersReady = true; tryInit(); });
 })();
