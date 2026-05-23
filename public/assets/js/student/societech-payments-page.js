@@ -59,11 +59,13 @@
 
   async function refresh() {
     try {
+      global.dispatchEvent(new CustomEvent('societech-payments-loading'));
       const result = await request();
       cache = (result.data || []).map(toViewModel);
       global.dispatchEvent(new CustomEvent('societech-payments-changed'));
     } catch {
       cache = [];
+      global.dispatchEvent(new CustomEvent('societech-payments-changed'));
     }
 
     return cache;

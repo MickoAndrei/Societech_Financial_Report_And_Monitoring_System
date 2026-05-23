@@ -81,12 +81,15 @@
 
   async function refresh() {
     try {
+      // notify listeners that rosters fetch is starting
+      global.dispatchEvent(new CustomEvent('societech-rosters-loading'));
       const result = await request();
       sections = result.data || [];
       await refreshRosters();
       global.dispatchEvent(new CustomEvent('societech-rosters-changed'));
     } catch {
       sections = [];
+      global.dispatchEvent(new CustomEvent('societech-rosters-changed'));
     }
 
     return getAllSections();

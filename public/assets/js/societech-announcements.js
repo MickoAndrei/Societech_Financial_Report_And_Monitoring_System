@@ -62,11 +62,13 @@
 
   async function refresh() {
     try {
+      global.dispatchEvent(new CustomEvent('societech-announcements-loading'));
       const result = await request();
       cache = (result.data || []).map(toViewModel);
       global.dispatchEvent(new CustomEvent('societech-announcements-changed'));
     } catch {
       cache = [];
+      global.dispatchEvent(new CustomEvent('societech-announcements-changed'));
     }
 
     return cache;

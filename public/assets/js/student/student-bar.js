@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
       return `${window.location.origin}${window.location.pathname.replace(/\/public\/.*$/, '/public')}`;
     }
 
-    const marker = '/Societech_Financial_And_Monitoring';
+    const marker = '/Societech_Financial_Report_And_Monitoring';
     if (window.location.pathname.includes(marker)) {
       return `${window.location.origin}${marker}/public`;
     }
@@ -18,6 +18,25 @@ document.addEventListener('DOMContentLoaded', function () {
   function route(path) {
     return `${appBase()}${path}`;
   }
+
+  function toggleProfileMenu() {
+    const menu = document.getElementById('profileMenu');
+    if (!menu) return;
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  }
+
+  window.toggleProfileMenu = toggleProfileMenu;
+  window.logout = function () {
+    window.location.href = `${appBase()}/auth/logout`;
+  };
+
+  document.addEventListener('click', function (event) {
+    const profile = document.querySelector('.profileWrapper');
+    const menu = document.getElementById('profileMenu');
+    if (profile && menu && !profile.contains(event.target)) {
+      menu.style.display = 'none';
+    }
+  });
 
   function renderSidebar() {
     const currentPath = window.location.pathname.replace(/\/$/, '').split('/').pop() || 'student';
@@ -80,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
           <div class="navSectionTitle">Main</div>
           <a href="${route('/student')}" class="navItem ${mainDashboardActive ? 'active' : ''}">
             <svg class="navIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-            ${isSocietechTreasurer ? 'My Student View' : 'Dashboard'}
+            Dashboard
           </a>
         </div>
         <div class="navSection">
@@ -115,6 +134,27 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  renderSidebar();
+  // Show a lightweight skeleton so the sidebar isn't blank while auth/me loads
+  function renderSkeleton() {
+    sidebarContainer.innerHTML = `
+      <div class="sidebarHeader">
+        <div class="sidebarTitle">SOCIETECH</div>
+        <div class="sidebarSubtitle" style="opacity:0.4">Loading…</div>
+      </div>
+      <nav class="sidebarNav" aria-busy="true" style="opacity:0.35">
+        <div class="navSection"><div class="navSectionTitle">Main</div>
+          <a class="navItem" style="pointer-events:none">Dashboard</a></div>
+        <div class="navSection"><div class="navSectionTitle">Finance</div>
+          <a class="navItem" style="pointer-events:none">My Financial Records</a>
+          <a class="navItem" style="pointer-events:none">Cash Contributions</a></div>
+        <div class="navSection"><div class="navSectionTitle">Account</div>
+          <a class="navItem" style="pointer-events:none">Notifications</a>
+          <a class="navItem" style="pointer-events:none">Settings</a></div>
+      </nav>`;
+  }
+
+  renderSkeleton();
+  // Only do the real render once the session is known — avoids the flash where
+  // the Societech Treasurer nav section appears missing then snaps in late.
   window.addEventListener('societech-session-ready', renderSidebar);
 });
