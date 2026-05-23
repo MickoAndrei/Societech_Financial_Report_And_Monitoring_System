@@ -14,7 +14,7 @@
       return `${window.location.origin}${window.location.pathname.replace(/\/public\/.*$/, '/public')}/assets/js/`;
     }
 
-    return `${window.location.origin}/Societech_Financial_And_Monitoring/public/assets/js/`;
+    return `${window.location.origin}/Societech_Financial_Report_And_Monitoring/public/assets/js/`;
   })();
 
   const cssHref = assetBase.replace(/\/js\/$/, '/css/announcement-notifications.css');

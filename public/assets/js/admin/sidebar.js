@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
       return `${window.location.origin}${window.location.pathname.replace(/\/public\/.*$/, '/public')}`;
     }
 
-    const marker = '/Societech_Financial_And_Monitoring';
+    const marker = '/Societech_Financial_Report_And_Monitoring';
     if (window.location.pathname.includes(marker)) {
       return `${window.location.origin}${marker}/public`;
     }

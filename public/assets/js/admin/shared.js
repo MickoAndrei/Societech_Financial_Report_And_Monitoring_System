@@ -23,7 +23,7 @@ function toggleProfileMenu() {
 window.logout = function () {
   const base = window.location.pathname.includes('/public/')
     ? window.location.pathname.replace(/\/public\/.*$/, '/public')
-    : '/Societech_Financial_And_Monitoring/public';
+    : '/Societech_Financial_Report_And_Monitoring/public';
   window.location.href = `${window.location.origin}${base}/auth/logout`;
 };
 

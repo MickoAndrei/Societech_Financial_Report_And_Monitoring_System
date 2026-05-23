@@ -11,7 +11,7 @@
     const path = window.location.pathname.replace(/\\/g, '/');
     const base = path.includes('/public/')
       ? `${window.location.origin}${path.replace(/\/public\/.*$/, '/public')}`
-      : `${window.location.origin}/Societech_Financial_And_Monitoring/public`;
+      : `${window.location.origin}/Societech_Financial_Report_And_Monitoring/public`;
     if (path.includes('/admin/')) return `${base}/admin/announcements`;
     return `${base}/student/notifications`;
   }
