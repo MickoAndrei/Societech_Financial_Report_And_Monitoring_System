@@ -36,21 +36,21 @@ new-files/
 
 
 # Ignore CodeIgniter 4 writable contents
-cache/*
-!cache/index.html
+/writable/cache/*
+!/writable/cache/index.html
 
-debugbar/*
-!debugbar/index.html
+/writable/debugbar/*
+!/writable/debugbar/index.html
 
-logs/*
-!logs/index.html
+/writable/logs/*
+!/writable/logs/index.html
 
-session/*
-!session/index.html
+/writable/session/*
+!/writable/session/index.html
 
-uploads/*
-!uploads/index.html
+/writable/uploads/*
+!/writable/uploads/index.html
 
-# Keep main security files tracked
-!.htaccess
-!index.html 
+# Ignore framework json/html files in writable root
+/writable/*.json
+/writable/*.html
