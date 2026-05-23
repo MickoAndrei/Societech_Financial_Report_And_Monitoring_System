@@ -33,3 +33,24 @@ new-files/
 !*.svg
 !*.ico
 !*.xml
+
+
+# Ignore CodeIgniter 4 writable contents
+cache/*
+!cache/index.html
+
+debugbar/*
+!debugbar/index.html
+
+logs/*
+!logs/index.html
+
+session/*
+!session/index.html
+
+uploads/*
+!uploads/index.html
+
+# Keep main security files tracked
+!.htaccess
+!index.html 
