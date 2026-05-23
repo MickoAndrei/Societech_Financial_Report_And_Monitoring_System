@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Section Class List • Societech Student</title>
   <link rel="stylesheet" href="<?= base_url('assets/css/main.css') ?>" />
-  <link rel="stylesheet" href="student.css" />
+  <link rel="stylesheet" href="<?= base_url('assets/css/student.css') ?>" />
   <link rel="stylesheet" href="<?= base_url('assets/css/responsive-breakpoints.css') ?>" />
 </head>
 <body class="studentLayout" data-page="class-roster">
@@ -142,14 +142,11 @@
 
   <script src="<?= base_url('assets/js/class-rosters.js') ?>"></script>
   <script src="<?= base_url('assets/js/societech-payments.js') ?>"></script>
-  <script src="treasurer-fee-dataset.js"></script>
-  <script src="student-session.js"></script>
-  <script src="student.js"></script>
+  <script src="<?= base_url('assets/js/student/treasurer-fee-dataset.js') ?>"></script>
+  <script src="<?= base_url('assets/js/student/student-session.js') ?>"></script>
+  <script src="<?= base_url('assets/js/student/student.js') ?>"></script>
   <script src="<?= base_url('assets/js/announcements-loader.js') ?>"></script>
-  <script src="student-bar.js"></script>
-  <script src="treasurer-roster.js"></script>
+  <script src="<?= base_url('assets/js/student/student-bar.js') ?>"></script>
+  <script src="<?= base_url('assets/js/student/treasurer-roster.js') ?>"></script>
 </body>
 </html>
-
-
-
